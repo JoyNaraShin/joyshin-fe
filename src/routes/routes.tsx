@@ -1,15 +1,18 @@
 import { RootLayout } from "@/layouts/RootLayout";
+import { HomePage } from "@/pages/HomePage";
+import { NotFoundPage } from "@/pages/NotFoundPage";
 import { RouteError } from "@/routes/RouteError";
-import { RouteFallback } from "@/routes/RouteFallback";
 import type { RouteObject } from "react-router-dom";
-import { lazyComponent } from "./lazyComponent";
 
 /**
- * 라우트 트리. 페이지는 lazyComponent로 코드 스플리팅한다.
- * 신규 페이지: children에 { path, lazy, HydrateFallback } 추가.
- * errorElement: 루트에 단 1개. 자식 렌더/로더 예외는 여기로 버블링되어 복구 UI를 보여준다.
- * HydrateFallback: 루트가 아니라 자식에 단다. 루트에 달면 하이드레이션 동안
- * RootLayout 자리에 대신 그려져 헤더·푸터가 사라진다.
+ * 라우트 트리. 화면이 하나뿐이라 코드 스플리팅을 걷어냈다.
+ *
+ * 홈을 lazy 로 두면 첫 방문자가 반드시 받는 청크를 굳이 한 왕복 뒤로 미루게 된다.
+ * 그리고 `<ScrollRestoration>` 은 useLayoutEffect 한 번만 돌기 때문에, 그 시점에
+ * 청크가 아직 안 와 있으면 `#career` 같은 딥링크가 최상단으로 떨어진다.
+ * 즉 스플리팅이 벌어 주는 것은 없고 잃는 것만 둘이었다.
+ *
+ * errorElement: 루트에 단 1개. 자식 렌더 예외는 여기로 버블링된다.
  */
 export const routes: RouteObject[] = [
   {
@@ -17,22 +20,8 @@ export const routes: RouteObject[] = [
     element: <RootLayout />,
     errorElement: <RouteError />,
     children: [
-      {
-        index: true,
-        HydrateFallback: RouteFallback,
-        lazy: lazyComponent(
-          () => import("@/pages/HomePage"),
-          (m) => m.HomePage,
-        ),
-      },
-      {
-        path: "*",
-        HydrateFallback: RouteFallback,
-        lazy: lazyComponent(
-          () => import("@/pages/NotFoundPage"),
-          (m) => m.NotFoundPage,
-        ),
-      },
+      { index: true, element: <HomePage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ];
