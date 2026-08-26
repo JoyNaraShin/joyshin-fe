@@ -1,4 +1,4 @@
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteFooter } from "@/features/portfolio";
 import { SiteHeader } from "@/components/SiteHeader";
 import { RouteFallback } from "@/routes/RouteFallback";
 import { Suspense } from "react";

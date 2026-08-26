@@ -1,7 +1,8 @@
 import { type RefObject, useEffect, useRef } from "react";
 
-const reduced = () =>
-  typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+const QUERY = "(prefers-reduced-motion: reduce)";
+const mq = () => (typeof matchMedia === "function" ? matchMedia(QUERY) : null);
+const reduced = () => mq()?.matches === true;
 
 /**
  * 화면에 들어올 때 한 번 `in` 을 붙이고 콜백을 부른다.
@@ -16,30 +17,52 @@ export function useReveal(
 ) {
   // 콜백은 렌더마다 새로 만들어질 수 있다. ref 에 담아 두면 관찰을 한 번만 걸고도
   // 항상 최신 콜백을 부를 수 있다 — 의존성에 넣으면 관찰이 매 렌더 다시 걸린다.
+  // 렌더 본문이 아니라 이펙트에서 담는다. 렌더 중에 ref 를 쓰는 것은 React 가 금지하는 패턴이다.
   const enter = useRef(onEnter);
-  enter.current = onEnter;
+  useEffect(() => {
+    enter.current = onEnter;
+  });
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (reduced()) {
+
+    // 모션을 끈 상태면 관찰하지 않고 바로 보인다.
+    const settle = () => {
       el.classList.add("in");
       enter.current?.();
+    };
+    if (reduced()) {
+      settle();
       return;
     }
+
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
           io.disconnect();
-          el.classList.add("in");
-          enter.current?.();
+          settle();
         }
       },
       { rootMargin: margin },
     );
     io.observe(el);
-    return () => io.disconnect();
+
+    // 설정은 보는 중에 바뀔 수 있다. 마운트 시점 한 번만 읽으면, 페이지를 열어 둔 채
+    // 모션을 끈 사람에게는 아직 나타나지 않은 구간이 영영 감춰진 채로 남는다.
+    const m = mq();
+    const onChange = (e: MediaQueryListEvent) => {
+      if (!e.matches) return;
+      io.disconnect();
+      settle();
+    };
+    m?.addEventListener("change", onChange);
+
+    return () => {
+      io.disconnect();
+      m?.removeEventListener("change", onChange);
+    };
   }, [ref, margin]);
 }
 

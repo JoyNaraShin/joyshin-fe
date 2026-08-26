@@ -1,4 +1,4 @@
-import { prefersReducedMotion, useReveal } from "@/lib/useReveal";
+import { prefersReducedMotion, useReveal } from "../hooks/useReveal";
 import { useCallback, useRef } from "react";
 
 type Row = {
