@@ -1,233 +1,286 @@
-/*
- * 포트폴리오 지면 — 와이어프레임 v5에서 승인된 스타일을 그대로 옮긴 것이다.
- * 토큰 이름과 값을 바꾸지 않았다. 디자인을 다시 정하는 자리가 아니라 옮기는 자리다.
- *
- * 그림 2(라이브 데모) 규칙만 빠져 있다. 그쪽은 React 컴포넌트가 되면서
- * 도판 전용 규칙은 index.css 아래쪽에 따로 모아 둔다.
- */
 :root{
-  --paper:#FBFBFC;
-  --ink:#111214;
-  --mute:#6A6E76;
-  --rule:#E3E5E9;
-  --mark:#0A5C5C;
-  --onmark:#5FB0AC;
-  --sans:"IBM Plex Sans KR",system-ui,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,monospace;
-  /* sticky 헤더 높이. 앵커 착지 여백이 이 값을 쓴다 — 헤더가 줄바꿈되는 폭에서는 아래에서 덮어쓴다. */
-  --header-h:52px;
+  /* 색·서체·타입 스케일은 index.css 의 `@theme` 한 곳에 있다. 여기에는 유틸리티로
+     만들 수 없는 레이아웃 상수만 둔다 — 값이 계산식(calc)에 들어가거나 미디어쿼리로 바뀐다. */
+  --header-h:0px;   /* 앵커 착지 여백. 좁은 폭에서 레일이 상단 띠가 될 때만 아래에서 덮어쓴다 */
+  --rail-w:252px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+/* 리셋은 base 레이어에 둔다. 레이어 밖에 두면 뒤에 오는 어떤 규칙보다도 세져서,
+   여백을 지정한 쪽이 이유 없이 지는 일이 생긴다(오류 화면 padding 이 그렇게 죽었다). */
+@layer base{
+  *{box-sizing:border-box;margin:0;padding:0}
+}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 16px)}
 /* 앵커로 뛰면 sticky 헤더가 섹션 제목을 덮는다. 목적지마다 헤더 높이만큼 여유를 준다. */
 [id]{scroll-margin-top:calc(var(--header-h) + 16px)}
 /* 긴 거리 스무스 스크롤은 전정기관 장애에서 가장 문제가 되는 모션이다. 끄기를 택한 사람에게는 걸지 않는다. */
 @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;
+body{background:var(--color-paper);color:var(--color-ink);font-family:var(--font-sans);font-weight:400;
   font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased;
   word-break:keep-all;overflow-x:hidden}
-.wrap{width:min(1080px,100% - 44px);margin-inline:auto}
-a{color:inherit}
-
-header{position:sticky;top:0;z-index:20;background:rgba(251,251,252,.9);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
-.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;
-  padding:13px 0;flex-wrap:wrap}
-.who{font-size:14px;font-weight:600}
-.who span{font-weight:400;color:var(--mute);margin-left:7px}
-nav{display:flex;gap:20px;font-size:13px}
-nav a{color:var(--mute);text-decoration:none}
-nav a:hover,nav a:focus-visible{color:var(--ink)}
-/* 연락처는 스크롤 없이 닿는 자리에 둔다 — 조사한 포폴 3곳 중 2곳이 상단에도 뒀다 */
-nav a.navmail{font-family:var(--mono);font-size:12px;color:var(--mark);
-  border-bottom:1px solid rgba(10,92,92,.42);padding-bottom:1px}
-nav a.navmail:hover,nav a.navmail:focus-visible{color:var(--mark);border-color:var(--mark)}
-@media (max-width:520px){
-  :root{--header-h:88px} /* .bar 가 로고행 + 내비행으로 접힌다 */
-  nav a.navmail{display:none}
+@layer base{
+  a{color:inherit}
 }
+:focus-visible{outline:2px solid var(--color-mark);outline-offset:3px;border-radius:3px}
+/* 화면에서만 감추고 보조기술에는 남긴다 */
+/* 스킵 링크 — 초점을 받기 전에는 화면 밖에 둔다.
+   색을 여기서 직접 준다. base 레이어의 a{color:inherit} 에 지면 대비가 2.41:1 로 떨어진다. */
+.skip-link{position:absolute;top:0;left:-999px;z-index:200;
+  background:var(--color-mark);color:#FFFFFF;font-weight:600;
+  padding:10px 16px;border-bottom-right-radius:var(--radius-sm);text-decoration:none}
+.skip-link:focus{left:0}
 
-/* 본문 안의 링크 — 회색으로 흘리지 않는다 */
-.item .body a,.fignote a{color:var(--mark);text-decoration:none;
-  border-bottom:1px solid rgba(10,92,92,.34)}
-.item .body a:hover,.fignote a:hover{border-color:var(--mark)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ───── 셸 — 왼쪽 작업 인덱스 + 오른쪽 본문 한 단 ─────
+   상단 고정 바를 따로 두지 않는다. 같은 내비게이션이 두 군데 있으면 둘 다 약해진다. */
+.shell{display:grid;grid-template-columns:var(--rail-w) minmax(0,1fr);min-height:100vh}
+.col{min-width:0;display:flex;flex-direction:column}
+.wrap{width:min(860px,100% - 48px);margin-inline:auto}
+
+.rail{position:sticky;top:0;height:100vh;overflow-y:auto;overscroll-behavior:contain;
+  background:var(--color-surface);border-right:1px solid var(--color-rule);padding:32px 20px 24px;
+  display:flex;flex-direction:column;gap:30px}
+.rail-me{display:block;text-decoration:none;padding-left:12px}
+.rail-name{display:block;font-size:19px;font-weight:700;letter-spacing:-.03em}
+.rail-role{display:block;font-size:12px;color:var(--color-mute);margin-top:2px}
+
+.rail-nav ul{list-style:none}
+.rail-nav a{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  text-decoration:none;border-radius:var(--radius-sm);
+  transition:background .16s ease,color .16s ease}
+.rail-top{padding:7px 11px;font-size:14px;font-weight:500;color:#3C4048}
+.rail-top:hover{background:rgba(17,18,20,.045)}
+/* 지금 읽고 있는 구간. 색만으로 알리지 않는다 — 왼쪽 표시자가 같은 말을 한 번 더 한다. */
+.rail-top[data-on="true"]{background:var(--color-mark-soft);color:var(--color-mark);
+  box-shadow:inset 2px 0 0 var(--color-mark)}
+.rail-meta{font-family:var(--font-mono);font-size:var(--text-t1);letter-spacing:.06em;color:var(--color-mute);flex:none}
+.rail-sub{margin:1px 0 6px;padding-left:11px;border-left:1px solid var(--color-rule)}
+.rail-sub a{padding:5px 11px;font-size:13px;color:var(--color-mute)}
+.rail-sub a:hover{background:rgba(17,18,20,.04);color:var(--color-ink)}
+.rail-sub a[data-on="true"]{color:var(--color-mark);font-weight:500;background:var(--color-mark-soft)}
+
+.rail-foot{margin-top:auto;padding-left:11px;display:flex;flex-direction:column;gap:16px}
+.rail-mail{font-family:var(--font-mono);font-size:11.5px;color:var(--color-mark);text-decoration:none;
+  border-bottom:1px solid rgba(10,92,92,.35);padding-bottom:2px;align-self:flex-start;
+  word-break:break-all}
+.rail-mail:hover{border-color:var(--color-mark)}
+
+/* 좁은 폭에서는 레일이 상단 가로 띠가 된다. 세로로 접으면 본문이 화면 밖으로 밀린다. */
+@media (max-width:1000px){
+  /* grid item 의 기본 min-width 는 auto 라, 가로 스크롤 띠가 되는 레일이 내용 최소폭만큼
+     칸을 벌려 지면 전체를 화면 밖으로 밀어낸다. 두 칸 모두 0 까지 줄어들 수 있게 둔다. */
+  :root{--header-h:54px} /* 레일이 상단 sticky 띠가 된다 — 앵커가 그 아래로 내려앉아야 한다 */
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{min-width:0;position:sticky;top:0;height:auto;z-index:30;flex-direction:row;align-items:center;
+    gap:14px;padding:9px 16px;border-right:0;border-bottom:1px solid var(--color-rule);
+    background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow:visible}
+  .rail-me{padding-left:0;flex:none}
+  .rail-name{font-size:15px}
+  .rail-role{display:none}
+  .rail-nav{min-width:0;flex:1;overflow-x:auto;scrollbar-width:none}
+  .rail-nav::-webkit-scrollbar{display:none}
+  .rail-nav > ul{display:flex;gap:4px}
+  .rail-top{white-space:nowrap;padding:12px 10px;font-size:13px;min-height:44px;align-items:center}
+  .rail-top[data-on="true"]{box-shadow:inset 0 -2px 0 var(--color-mark)}
+  .rail-meta{display:none}
+  /* 하위 내비를 숨기면 사례 4건이 탭 순서에서까지 사라진다. 같은 줄에 펴서 남긴다. */
+  .rail-sub{display:contents}
+  .rail-sub a{white-space:nowrap;padding:12px 10px;font-size:12.5px;min-height:44px;align-items:center}
+  .rail-sub a[data-on="true"]{box-shadow:inset 0 -2px 0 var(--color-mark)}
+  /* 연락처가 가로 스크롤 뒤에 숨는다. 스크롤이 가능하다는 신호를 오른쪽 끝에 둔다. */
+  .rail-nav{position:relative;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent)}
+}
 
 /* 연락처 */
 .clead{font-weight:400;color:#3A3D44;max-width:46ch;font-size:16.5px}
-.mail{display:inline-block;margin-top:22px;font-family:var(--mono);
-  font-size:clamp(20px,3.2vw,32px);letter-spacing:-.02em;color:var(--ink);
+.mail{display:inline-block;margin-top:22px;font-family:var(--font-mono);
+  font-size:clamp(20px,3.2vw,32px);letter-spacing:-.02em;color:var(--color-ink);
   text-decoration:none;border-bottom:2px solid rgba(10,92,92,.34);padding-bottom:4px}
-.mail:hover,.mail:focus-visible{color:var(--mark);border-color:var(--mark)}
-.clinks{list-style:none;margin-top:38px;border-top:1px solid var(--rule)}
-.clinks li{padding:16px 0;border-bottom:1px solid var(--rule)}
-.clinks a{font-size:15px;font-weight:500;color:var(--ink);text-decoration:none;
+.mail:hover,.mail:focus-visible{color:var(--color-mark);border-color:var(--color-mark)}
+.clinks{list-style:none;margin-top:38px;border-top:1px solid var(--color-rule)}
+.clinks li{padding:16px 0;border-bottom:1px solid var(--color-rule)}
+.clinks a{font-size:15px;font-weight:500;color:var(--color-ink);text-decoration:none;
   border-bottom:1px solid rgba(10,92,92,.4);padding-bottom:2px}
-.clinks a:hover,.clinks a:focus-visible{color:var(--mark);border-color:var(--mark)}
-.clinks .cdesc{display:block;margin-top:7px;font-size:13px;color:var(--mute);font-weight:400}
+.clinks a:hover,.clinks a:focus-visible{color:var(--color-mark);border-color:var(--color-mark)}
+
+/* 눌린 상태. hover 만 있고 :active 가 한 곳도 없었다 — 마우스를 올리면 반응하는데
+   누르는 순간에는 아무 일도 일어나지 않아서, 클릭이 먹었는지가 화면으로 확인되지 않았다.
+   터치에서는 hover 자체가 없으므로 여기가 유일한 피드백이다. */
+.rail-top:active,.rail-sub a:active{background:rgba(17,18,20,.09)}
+.rail-me:active{opacity:.7}
+.rail-mail:active,.mail:active,.clinks a:active{color:#084848;border-color:#084848}
+.clinks .cdesc{display:block;margin-top:7px;font-size:13px;color:var(--color-mute);font-weight:400}
 
 /* ───── 히어로 — 3~15초 구간. 한 줄 + 키워드 3 + 수치 4 ─────
-   조사한 채용 포폴·이력서가 공통으로 두는 순서다. 근거는 바로 아래 강점 섹션이 진다. */
-.hero{padding:96px 0 52px}
-.hero h1{font-size:clamp(30px,4.8vw,54px);font-weight:700;line-height:1.2;
-  letter-spacing:-.042em}
+   조사한 채용 포폴·이력서가 공통으로 두는 순서다. 근거는 아래 작업 섹션의 사례가 진다. */
+.hero{padding:88px 0 46px}
+.hero h1{font-size:clamp(32px,4.4vw,52px);font-weight:700;line-height:1.18;
+  letter-spacing:-.045em;max-width:16ch}
 .hero h1 b{font-weight:700;box-shadow:inset 0 -.1em 0 rgba(10,92,92,.32)}
 .hero .lede{margin-top:22px;max-width:42ch;font-size:clamp(17px,1.9vw,21px);
   font-weight:400;color:#2C2F35;line-height:1.72;letter-spacing:-.01em}
 .chips{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin-top:24px}
-.chip{font-size:12.5px;color:var(--mark);border:1px solid rgba(10,92,92,.3);
+.chip{font-size:12.5px;color:var(--color-mark);border:1px solid rgba(10,92,92,.3);
   border-radius:2px;padding:5px 11px;background:rgba(10,92,92,.045)}
 /* 수치는 지면 전체 폭을 쓰는 띠로 둔다. 스크롤 없이 닿아야 하는 것이 여기까지다. */
-.stats{margin-top:38px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.stats > div{background:var(--paper);padding:15px 17px 17px}
-.stats dt{font-size:11.5px;letter-spacing:.01em;color:#8A8F97;font-weight:500}
-.stats .n{font-family:var(--mono);font-size:clamp(21px,2.5vw,31px);font-weight:500;
-  color:var(--mark);letter-spacing:-.025em;margin-top:7px;font-variant-numeric:tabular-nums}
-.stats .d{font-size:12px;color:var(--mute);font-weight:400;margin-top:4px}
-.n.ko{font-family:var(--sans);font-weight:600;letter-spacing:-.03em}
-.statnote{margin-top:10px;font-size:12px;color:var(--mute);font-weight:400}
-.hero .meta{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap;
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--mute)}
-@media (min-width:900px){ .hero .lede,.hero .chips,.hero .meta{margin-left:200px} }
+.stats{margin-top:34px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stats > div{background:var(--color-surface);border:1px solid var(--color-rule);
+  border-radius:var(--radius-sm);padding:15px 16px 17px}
+.stats dt{font-size:var(--text-t2);letter-spacing:.01em;color:var(--color-mute);font-weight:500}
+.stats .n{font-family:var(--font-mono);font-size:clamp(21px,2.5vw,31px);font-weight:500;
+  color:var(--color-mark);letter-spacing:-.025em;margin-top:7px;font-variant-numeric:tabular-nums}
+.stats .d{font-size:12px;color:var(--color-mute);font-weight:400;margin-top:4px}
+.n.ko{font-family:var(--font-sans);font-weight:600;letter-spacing:-.03em}
+.statnote{margin-top:10px;font-size:12px;color:var(--color-mute);font-weight:400}
 @media (max-width:700px){ .stats{grid-template-columns:repeat(2,minmax(0,1fr))} }
 
-section.doc{padding:76px 0}
-section.doc + section.doc{border-top:1px solid var(--rule)}
-.sec{display:grid;grid-template-columns:184px minmax(0,1fr);gap:38px;align-items:start}
-.head h2{font-size:15px;font-weight:600;letter-spacing:.01em}
-.head p{font-size:13px;color:var(--mute);font-weight:400;margin-top:7px;line-height:1.6}
-.head{position:sticky;top:78px}
-.secbody{min-width:0}
+section.doc{padding:52px 0 0}
+section.doc:last-of-type{padding-bottom:64px}
 
-.item{padding:34px 0;border-top:1px solid var(--rule)}
-.item:first-of-type{border-top:0;padding-top:0}
-.item h3{font-size:21px;font-weight:600;letter-spacing:-.02em;line-height:1.5}
-.item .src{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mute);
+
+/* ───── 섹션 머리 ─────
+   이전에는 184px sticky 왼쪽 칸에 15px 제목이 떠 있었다. 섹션 제목(15px)이 그 안의
+   사례 제목(19px)보다 작아 위계가 뒤집혀 있었고, 본문 폭도 그만큼 좁아졌다.
+   제목을 지면 폭으로 올리고 29px 로 키워 층을 만든다. 왼쪽 키라인이 섹션의 시작을 잡는다. */
+.sec{display:block}
+.shead{position:relative;padding-left:19px;display:flex;flex-wrap:wrap;
+  justify-content:space-between;align-items:flex-end;gap:8px 28px}
+.shead::before{content:"";position:absolute;left:0;top:.2em;bottom:.14em;width:3px;
+  background:var(--color-mark)}
+.shead h2{font-size:var(--text-t6);font-weight:700;letter-spacing:-.035em;line-height:1.25}
+/* 한글이 섞이므로 mono 를 쓰지 않는다 — 서체에 한글이 없어 자간이 벌어진다. */
+.smeta{font-size:var(--text-t2);color:var(--color-mute);font-weight:400;letter-spacing:.02em;
+  padding-bottom:.5em}
+.secbody{min-width:0;margin-top:16px}
+
+/* 내용 한 단위 = 흰 카드 하나. 회색 지면이 카드 사이를 갈라 주므로 구분선을 따로 두지 않는다. */
+.item{background:var(--color-surface);border:1px solid var(--color-rule);border-radius:var(--radius-card);
+  padding:30px 32px 32px;margin-top:12px}
+.item h3{font-size:var(--text-t5);font-weight:600;letter-spacing:-.028em;line-height:1.4}
+.item .src{font-family:var(--font-mono);font-size:var(--text-t2);letter-spacing:.08em;color:var(--color-mute);
   margin-bottom:6px}
 .item .body{margin-top:16px;max-width:60ch;font-weight:400;color:#2E3138}
 .item .body p + p{margin-top:11px}
 
-/* ───── 도판 넷의 공통 골격 ─────
-   같은 테두리, 같은 여백, 같은 캡션 규칙. 채움만 다르다.
-   어두운 것은 그림 2 하나뿐이고, 그것이 화면(UI)이기 때문이지 강조하려는 게 아니다. */
+/* ───── 도판 다섯의 공통 골격 ─────
+   같은 테두리, 같은 여백, 같은 캡션 규칙. 채움만 다르다. */
 figure{margin:32px 0 0}
 /* 여백이 실제로 있을 때만 도판을 본문 밖으로 내보낸다.
    컨테이너 1080 기준 한쪽 여백이 72px 이 되는 지점이 뷰포트 1224px 이다. */
-@media (min-width:1224px){ figure{margin-right:-72px} }
-figcaption{display:flex;gap:11px;margin-bottom:12px;font-size:12.5px;color:var(--mute);
+figcaption{display:flex;gap:11px;margin-bottom:12px;font-size:var(--text-t2);color:var(--color-mute);
   font-weight:400;line-height:1.6}
-figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color:#8A8F97;
+figcaption b{font-family:var(--font-mono);font-size:var(--text-t1);letter-spacing:.11em;color:var(--color-mute);
   font-weight:400;flex:none;padding-top:3px}
-.frame{border:1px solid var(--rule);border-radius:2px;background:#fff;padding:24px 26px}
-.frame--dark{background:#101216;border-color:#23252A;color:#EDEEF0;padding:0;overflow:hidden}
-.fignote{margin-top:12px;font-size:12.5px;color:var(--mute);font-weight:400;
+.frame{border:1px solid var(--color-rule);border-radius:var(--radius-sm);background:var(--color-inset);
+  padding:24px 26px}
+.fignote{margin-top:12px;font-size:12.5px;color:var(--color-mute);font-weight:400;
   line-height:1.7;max-width:54ch}
 
 /* 그림 1 — 로딩 계측 막대 */
 .chart svg{display:block;width:100%;height:auto}
 .chart .ax{stroke:#EAECEF;stroke-width:1}
-.chart .axt{font-family:var(--mono);font-size:9.5px;fill:#A2A7AF}
-.chart .rk{font-family:var(--mono);font-size:12px;fill:var(--ink);font-weight:500}
-.chart .rl{font-size:11px;fill:var(--mute);font-weight:400}
+.chart .axt{font-family:var(--font-mono);font-size:11px;fill:var(--color-mute)}
+.chart .rk{font-family:var(--font-mono);font-size:12px;fill:var(--color-ink);font-weight:500}
+.chart .rl{font-size:11px;fill:var(--color-mute);font-weight:400}
 /* '이전' 막대는 0에서 자라고, '이후' 막대는 이전 길이에서 줄어든다.
    막대와 숫자가 같은 이야기를 하게 하려는 것이다. */
 .chart .gbar{transform:scaleX(var(--from,0));transform-box:fill-box;transform-origin:left center;
   transition:transform .9s cubic-bezier(.22,.8,.3,1)}
 .chart.in .gbar{transform:scaleX(1)}
 .chart .b-old{fill:#C9CDD4}
-.chart .b-new{fill:var(--mark)}
-.chart .vo{font-family:var(--mono);font-size:12px;fill:#8A8F97}
-.chart .vn{font-family:var(--mono);font-size:13px;fill:var(--mark);font-weight:500}
+.chart .b-new{fill:var(--color-mark)}
+.chart .vo{font-family:var(--font-mono);font-size:12px;fill:var(--color-mute)}
+.chart .vn{font-family:var(--font-mono);font-size:13px;fill:var(--color-mark);font-weight:500}
 @media (prefers-reduced-motion:reduce){ .chart .gbar{transform:scaleX(1);transition:none} }
 
 /* 그림 3 — 자동완성 요청 타임라인 */
 .keys svg{display:block;width:100%;max-width:560px;height:auto;margin-inline:auto}
-.keys .tl{font-family:var(--mono);font-size:11px;fill:var(--mute)}
-.keys .ki{font-family:var(--mono);font-size:12px;fill:#33363C}
+.keys .tl{font-family:var(--font-mono);font-size:11px;fill:var(--color-mute)}
+.keys .ki{font-family:var(--font-mono);font-size:12px;fill:#33363C}
 .keys .sep{stroke:#EEEFF2;stroke-width:1}
 .keys .dot-on{fill:#C0554A}
-.keys .dot-on.hit{fill:var(--mark)}
+.keys .dot-on.hit{fill:var(--color-mark)}
 .keys .dot-off{fill:none;stroke:#CDD1D8;stroke-width:1}
 .keys .drop{stroke:#C0554A;stroke-width:1}
-.keys .drop.hit{stroke:var(--mark)}
-.keys .cnt{font-family:var(--mono);font-size:12px;font-weight:500}
+.keys .drop.hit{stroke:var(--color-mark)}
+.keys .cnt{font-family:var(--font-mono);font-size:12px;font-weight:500}
 .keys .cnt-bad{fill:#C0554A}
-.keys .cnt-good{fill:var(--mark)}
+.keys .cnt-good{fill:var(--color-mark)}
 
-/* 그림 4 — 상태를 두는 자리 */
+/* 그림 5 — 상태를 두는 자리 */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .split > div{padding:2px 22px}
-.split > div:first-child{border-right:1px solid var(--rule)}
-.split .k{font-family:var(--mono);font-size:10px;letter-spacing:.11em;color:#8A8F97;
+.split > div:first-child{border-right:1px solid var(--color-rule)}
+.split .k{font-family:var(--font-mono);font-size:var(--text-t1);letter-spacing:.11em;color:var(--color-mute);
   margin-bottom:12px}
-.box{border:1px solid var(--rule);border-radius:2px;padding:11px 13px;font-size:13px;
+.box{background:var(--color-surface);border:1px solid var(--color-rule);border-radius:6px;
+  padding:11px 13px;font-size:13px;
   font-weight:400;color:#33363C;line-height:1.6}
 .box + .box{margin-top:8px}
-.box b{display:block;font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--ink);
+.box b{display:block;font-family:var(--font-mono);font-size:11.5px;font-weight:500;color:var(--color-ink);
   margin-bottom:2px}
-.split .no{margin-top:10px;font-size:12px;color:var(--mute);font-weight:400;line-height:1.65}
-.urlbar{margin-top:20px;border-top:1px solid var(--rule);padding-top:18px}
-.urlbar .k{font-family:var(--mono);font-size:10px;letter-spacing:.11em;color:#8A8F97;
+.split .no{margin-top:10px;font-size:12px;color:var(--color-mute);font-weight:400;line-height:1.65}
+.urlbar{margin-top:20px;border-top:1px solid var(--color-rule);padding-top:18px}
+.urlbar .k{font-family:var(--font-mono);font-size:var(--text-t1);letter-spacing:.11em;color:var(--color-mute);
   margin-bottom:9px}
-.url{font-family:var(--mono);font-size:13px;background:#F4F5F7;border:1px solid var(--rule);
-  border-radius:2px;padding:10px 13px;overflow-x:auto;white-space:nowrap;color:#5A5E66}
-.url em{font-style:normal;color:var(--mark);font-weight:500}
+.url{font-family:var(--font-mono);font-size:13px;background:var(--color-surface);border:1px solid var(--color-rule);
+  border-radius:6px;padding:10px 13px;overflow-x:auto;white-space:nowrap;color:#5A5E66}
+.url em{font-style:normal;color:var(--color-mark);font-weight:500}
 @media (max-width:640px){
   .split{grid-template-columns:1fr}
-  .split > div:first-child{border-right:0;border-bottom:1px solid var(--rule);
+  .split > div:first-child{border-right:0;border-bottom:1px solid var(--color-rule);
     padding-bottom:20px;margin-bottom:20px}
   .split > div{padding:2px 0}
 }
 
-/* 그림 4 — 리뷰 파이프라인 */
+/* 그림 6 — 리뷰 파이프라인 */
 .flow svg{display:block;width:100%;max-width:620px;height:auto;margin-inline:auto}
 .flow .nd{fill:#fff;stroke:#D6D9DF}
-.flow .nd-acc{fill:#fff;stroke:var(--mark)}
-.flow .tx{font-family:var(--mono);font-size:12px;fill:#33363C}
-.flow .tx-acc{font-family:var(--mono);font-size:12px;fill:var(--mark)}
+.flow .nd-acc{fill:#fff;stroke:var(--color-mark)}
+.flow .tx{font-family:var(--font-mono);font-size:12px;fill:#33363C}
+.flow .tx-acc{font-family:var(--font-mono);font-size:12px;fill:var(--color-mark)}
 .flow .arrow{stroke:#C2C6CD;stroke-width:1;fill:none}
 .flow .blocked{stroke:#C0554A;stroke-width:1;fill:none;stroke-dasharray:4 3;opacity:.85}
 .flow .xmark{stroke:#C0554A;stroke-width:1.6}
-.flow .cap{font-family:var(--sans);font-size:12.5px;fill:var(--mute);font-weight:400}
-.flow-alt{display:none;font-size:13px;color:var(--mute);font-weight:400;
-  border-left:2px solid var(--rule);padding-left:13px;line-height:1.75}
+.flow .cap{font-family:var(--font-sans);font-size:12.5px;fill:var(--color-mute);font-weight:400}
+.flow-alt{display:none;font-size:13px;color:var(--color-mute);font-weight:400;
+  border-left:2px solid var(--color-rule);padding-left:13px;line-height:1.75}
 @media (max-width:620px){
   .flow svg{display:none}
   .flow-alt{display:block}
 }
 
 /* 구성 표 */
-.spec{margin-top:30px;border-top:1px solid var(--rule)}
+.spec{margin-top:30px;border-top:1px solid var(--color-rule)}
 .spec div{display:grid;grid-template-columns:118px 62px minmax(0,1fr);gap:14px;
-  padding:11px 0;border-bottom:1px solid var(--rule);align-items:baseline}
-.spec dt{font-size:11.5px;font-weight:500;letter-spacing:.01em;color:var(--mute)}
-.spec .q{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--ink);
+  padding:11px 0;border-bottom:1px solid var(--color-rule);align-items:baseline}
+.spec dt{font-size:11.5px;font-weight:500;letter-spacing:.01em;color:var(--color-mute)}
+.spec .q{font-family:var(--font-mono);font-size:19px;font-weight:500;color:var(--color-ink);
   letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .spec dd{font-size:13.5px;color:#4A4E56;font-weight:400;line-height:1.7}
-.spec dd a{color:var(--mark);text-decoration:none;border-bottom:1px solid rgba(10,92,92,.3)}
+.spec dd a{color:var(--color-mark);text-decoration:none;border-bottom:1px solid rgba(10,92,92,.3)}
 @media (max-width:560px){
   .spec div{grid-template-columns:96px 1fr;gap:6px 12px}
   .spec dd{grid-column:1 / -1}
 }
 
-/* ───── 강점 카드 — 요약 층 ───── */
-.scards{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.scard{background:var(--paper);padding:24px 24px 22px;display:flex;flex-direction:column}
-.slabel{font-size:11.5px;letter-spacing:.05em;color:var(--mark);font-weight:500}
-.sclaim{margin-top:9px;font-size:17px;font-weight:600;line-height:1.55;letter-spacing:-.02em}
-.sproof{margin-top:10px;font-size:13.5px;font-weight:400;color:#4A4E56;line-height:1.78;flex:1}
-.sto{margin-top:16px;align-self:flex-start;font-size:12.5px;color:var(--mark);
-  text-decoration:none;border-bottom:1px solid rgba(10,92,92,.34);padding-bottom:2px}
-.sto:hover,.sto:focus-visible{border-color:var(--mark)}
-
-/* ───── 케이스 요약 — 역할 / 문제 / 한 것 / 결과 ───── */
-.ov{margin-top:16px;max-width:62ch;border-top:1px solid var(--ink)}
-.ov > div{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:10px 0;
-  border-bottom:1px solid var(--rule);align-items:baseline}
-.ov dt{font-size:11.5px;letter-spacing:.01em;color:#8A8F97;font-weight:400}
-.ov dd{font-size:14.5px;font-weight:400;color:#2C2F35;line-height:1.65}
-.n{font-family:var(--mono);font-weight:500;color:var(--mark);
+/* ───── 케이스 요약 — 두괄식 STAR ─────
+   결론(Result)을 제목 밑 리드로 올리고, 박스가 상황(S) · 과제(T) · 한 것(A)으로 근거를 댄다.
+   고른 이유 · 다시 한다면은 STAR 밖이지만 면접에서 사례마다 따라오는 질문이라 같은 박스에 둔다.
+   요약 층을 따로 두지 않는다 — 사례 위에 얹은 요약은 같은 말을 두 번 하게 된다. */
+.ovlead{margin-top:12px;max-width:50ch;font-size:var(--text-t4);font-weight:500;line-height:1.6;
+  letter-spacing:-.022em;color:var(--color-ink)}
+.ovlead .n{font-size:var(--text-t3);letter-spacing:-.01em}
+.ov{margin-top:22px;max-width:64ch;border-top:2px solid var(--color-ink)}
+.ov > div{display:grid;grid-template-columns:74px minmax(0,1fr);gap:18px;padding:11px 0;
+  border-bottom:1px solid var(--color-rule);align-items:baseline}
+.ov dt{font-size:var(--text-t2);letter-spacing:.01em;color:var(--color-mute);font-weight:500;
+  white-space:nowrap}
+.ov dd{font-size:var(--text-t3);font-weight:400;color:#2C2F35;line-height:1.65}
+.n{font-family:var(--font-mono);font-weight:500;color:var(--color-mark);
   font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 
 /* ───── 병렬 사실은 문단이 아니라 목록으로 ───── */
@@ -236,57 +289,76 @@ figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color
   line-height:1.8;margin-top:9px}
 .blist li::before{content:"";position:absolute;left:0;top:.85em;width:6px;height:1px;
   background:#A9AEB6}
-.blist li b{font-weight:600;color:var(--ink)}
-.blist code{font-family:var(--mono);font-size:13px;background:#F4F5F7;
-  border:1px solid var(--rule);border-radius:2px;padding:1px 5px}
-.sub{margin-top:28px;font-size:13px;font-weight:600;color:var(--ink);letter-spacing:-.01em;
-  padding-left:11px;border-left:2px solid var(--mark);line-height:1.5}
+.blist li b{font-weight:600;color:var(--color-ink)}
+.blist code{font-family:var(--font-mono);font-size:13px;background:#F4F5F7;
+  border:1px solid var(--color-rule);border-radius:2px;padding:1px 5px}
+.sub{margin-top:28px;font-size:13px;font-weight:600;color:var(--color-ink);letter-spacing:-.01em;
+  padding-left:11px;border-left:2px solid var(--color-mark);line-height:1.5}
 
 /* ───── 그 외 맡은 것 ───── */
-.wcards{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.wcard{background:var(--paper);padding:22px 22px 24px}
-.wtag{font-size:11px;letter-spacing:.05em;color:var(--mark);font-weight:500}
-.wcard h3{margin-top:7px;font-size:16.5px;font-weight:600;letter-spacing:-.02em;line-height:1.5}
-.wcard p{margin-top:9px;font-size:13.5px;font-weight:400;color:#4A4E56;line-height:1.8}
+.wcards{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.wcard{background:var(--color-surface);border:1px solid var(--color-rule);border-radius:var(--radius-card);
+  padding:22px 24px 24px}
+.wtag{font-size:var(--text-t2);letter-spacing:.02em;color:var(--color-mark);font-weight:500}
+.wcard h3{margin-top:8px;font-size:var(--text-t3);font-weight:600;letter-spacing:-.01em;line-height:1.55}
+.wcard p{margin-top:9px;font-size:var(--text-t3);font-weight:400;color:#4A4E56;line-height:1.7}
 
-.job{padding:26px 0;border-top:1px solid var(--rule)}
-.job:first-of-type{border-top:0;padding-top:0}
-.job .when{font-family:var(--mono);font-size:12px;color:var(--mute);margin-bottom:5px}
-.job h3{font-size:17px;font-weight:600}
-.job .role{font-size:14px;color:var(--mute);font-weight:400;margin-top:2px}
-.job .jlead{margin-top:11px;font-size:15px;font-weight:400;color:#2E3138;line-height:1.75;
+.job{background:var(--color-surface);border:1px solid var(--color-rule);border-radius:var(--radius-card);
+  padding:26px 28px 28px;margin-top:12px}
+.job .when{font-family:var(--font-mono);font-size:var(--text-t2);color:var(--color-mute);margin-bottom:5px}
+.job h3{font-size:var(--text-t4);font-weight:600}
+.job .role{font-size:var(--text-t3);color:var(--color-mute);font-weight:400;margin-top:2px}
+.job .jlead{margin-top:11px;font-size:var(--text-t3);font-weight:400;color:#2E3138;line-height:1.75;
   max-width:60ch}
 .job ul{margin-top:11px;list-style:none;max-width:60ch}
-.job li{position:relative;padding-left:15px;font-weight:400;color:#4A4E56;font-size:14px;
+.job li{position:relative;padding-left:15px;font-weight:400;color:#4A4E56;font-size:var(--text-t3);
   margin-top:7px;line-height:1.75}
 .job li::before{content:"";position:absolute;left:0;top:.82em;width:5px;height:1px;
   background:#A9AEB6}
 /* 스택은 읽는 것이 아니라 훑는 것이라 칩으로 둔다 */
 .job .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;max-width:none}
-.job .stack li{position:static;padding:3px 8px;margin-top:0;font-family:var(--mono);
-  font-size:11px;color:var(--mute);border:1px solid var(--rule);border-radius:2px;
-  background:#fff;line-height:1.5}
+.job .stack li{position:static;padding:3px 8px;margin-top:0;font-family:var(--font-mono);
+  font-size:11px;color:var(--color-mute);border:1px solid var(--color-rule);border-radius:2px;
+  background:var(--color-inset);line-height:1.5}
 .job .stack li::before{display:none}
 
-footer{padding:34px 0 56px;border-top:1px solid var(--rule)}
-footer .fine{font-size:12px;color:#9BA0A8;font-weight:400;line-height:1.9}
+footer{margin-top:auto;padding:30px 0 46px;border-top:1px solid var(--color-rule)}
+footer .fine{font-size:12px;color:var(--color-mute);font-weight:400;line-height:1.9}
 
-.rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-.rise.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){ .rise{opacity:1;transform:none;transition:none} }
+/* 등장은 빼기가 아니라 더하기로 건다.
+   기본값을 opacity:0 으로 두면 JS 가 안 뜬 환경과 인쇄에서 본문이 통째로 백지가 된다
+   — 실제로 스크롤 없이 인쇄하면 경력과 연락처가 사라졌다.
+   그래서 JS 가 살아 있음을 확인한 뒤(:root.js) 에만 감춘다. */
+:root.js .rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+:root.js .rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  :root.js .rise{opacity:1;transform:none;transition:none}
+}
+
+/* ───── 인쇄 ─────
+   PDF 로 떠서 넘기는 것이 이 문서의 두 번째 소비 조건이다.
+   등장 애니메이션을 전부 풀고, 화면 전용 장치(레일·sticky)를 걷는다. */
+@media print{
+  :root.js .rise{opacity:1 !important;transform:none !important;transition:none !important}
+  .shell{display:block}
+  .rail{display:none}
+  .wrap{width:100%}
+  body{background:#fff}
+  .item,.job,.wcard,.stats > div{border-color:#CCC;break-inside:avoid}
+  a{text-decoration:none}
+  .hero{padding:0 0 24px}
+  section.doc{padding:24px 0 0}
+}
 
 @media (max-width:760px){
-  .sec{grid-template-columns:1fr;gap:20px}
-  .head{position:static}
+  .shead h2{font-size:var(--text-t5)}
+  .secbody{margin-top:22px;padding-top:20px}
   .hero{padding:56px 0 56px}
   .frame{padding:18px 16px}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(46px,1fr));padding:12px}
-  .scards,.wcards{grid-template-columns:1fr}
+  .wcards{grid-template-columns:1fr}
 }
 @media (max-width:560px){
-  .ov > div{grid-template-columns:44px minmax(0,1fr);gap:12px}
+  .ov > div{grid-template-columns:1fr;gap:2px;padding:9px 0}
   .ov dd{font-size:14px}
-  .scard{padding:20px}
   .wcard{padding:19px 20px 21px}
 }

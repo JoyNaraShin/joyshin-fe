@@ -4,7 +4,11 @@
 
 ## 스택
 
-React 19 · TypeScript 5.7 · Vite 6 · react-router · Biome
+React 19 · TypeScript 5.7 · Vite 6 · Tailwind v4 · react-router 7 · Biome
+
+런타임 의존성은 react · react-dom · react-router-dom 셋뿐이다. 디자인 토큰은
+`index.css` 의 `@theme` 한 곳에 있고, 화면 조각은 외부 UI 라이브러리 없이
+`components/ui/` 에 직접 만든다.
 
 ## 실행
 

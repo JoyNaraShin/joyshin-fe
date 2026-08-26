@@ -2,66 +2,72 @@
 @import "./styles/fonts.css";
 @import "./styles/site.css";
 
-
 /*
- * 프로젝트별 디자인 시작점 — 색/토큰을 프로젝트 브랜드에 맞게 덮어쓴다.
- * components/ui/* 는 아래 토큰(--color-*, --radius-*, --shadow-card, --maxw-page)에 의존한다.
+ * 디자인 토큰 단일 출처. Tailwind v4 는 `@theme` 의 값을 :root 커스텀 프로퍼티로 내보내면서
+ * 동시에 유틸리티를 만든다 — `--color-mark` 하나로 `text-mark` `bg-mark` `border-mark` 가 생긴다.
+ * 그래서 토큰을 여기 두면 마크업(유틸리티)과 CSS(var) 가 같은 값을 본다.
+ *
+ * 전에는 여기와 site.css 에 이름만 다른 두 벌(--color-brand / --mark)이 돌아서
+ * 색을 고칠 때 어느 쪽을 고칠지가 매번 문제였다. 이 파일 한 곳으로 합쳤다.
  */
 @theme {
-  --font-sans: "IBM Plex Sans KR", ui-sans-serif, system-ui, "Apple SD Gothic Neo", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "IBM Plex Sans KR", system-ui, sans-serif;
+  /* mono 서체에는 한글이 없다. 스택에 한글 서체를 끼워 두지 않으면 mono 칸에 섞인 한글이
+     OS 기본 고정폭으로 떨어져 지면에서 혼자 다른 글꼴이 된다(실측 77자). */
+  --font-mono: "IBM Plex Mono", "IBM Plex Sans KR", ui-monospace, monospace;
 
-  /* 와이어프레임 v5에서 확정한 팔레트. 색은 거의 쓰지 않고 --color-brand 하나만 쓴다. */
-  --color-bg: #fbfbfc;
+  /* 지면 3층 — 회색 지면(구조) → 흰 카드(내용 단위) → 회색 인셋(도판). 더 만들지 않는다. */
+  --color-paper: #f1f2f4;
   --color-surface: #ffffff;
-  --color-elevated: #f3f4f6;
+  --color-inset: #f5f6f8;
+
+  /* 잉크 5단. 이전에는 #2C2F35·#2E3138·#33363C 처럼 서로 1.02:1 인 값이 따로 돌았다. */
   --color-ink: #111214;
-  --color-muted: #6a6e76;
-  --color-faint: #8b9099;
-  --color-border: #e3e5e9;
-  --color-brand: #0a5c5c;
-  --color-brand-strong: #084848;
-  --color-brand-fg: #ffffff;
+  --color-ink-2: #2c2f35;
+  --color-ink-3: #4a4e56;
+  /* 흰 카드 5.96:1 · 회색 지면 5.32:1 — 둘 다 AA(4.5:1) 통과.
+     이전에는 #8A8F97(3.25)·#9AA0A8(2.64)·#9BA0A8(2.63)·#A2A7AF(2.42)가 섞여 전부 미달이었다. */
+  --color-mute: #5f646c;
+  --color-faint: #8a8f97; /* 도판 안 비활성 표시 전용. 본문 글자에는 쓰지 않는다 */
 
-  /* 어두운 구간은 도판 하나뿐이다. 강조가 아니라 그것이 화면(UI)이기 때문이다. */
-  --color-plate: #101216;
-  --color-plate-border: #23252a;
-  --color-plate-ink: #edeef0;
-  --color-plate-faint: #8b9099;
-  --color-on-brand: #5fb0ac;
-  --color-over: #e4756a;
+  --color-rule: #e3e5e9;
+  --color-rule-2: #cdd1d8;
 
-  --radius-md: 0.25rem;
-  --radius-lg: 0.5rem;
-  --shadow-card: none;
-  --maxw-page: 67.5rem;
-}
+  --color-mark: #0a5c5c;
+  --color-mark-deep: #084848; /* hover */
+  --color-mark-press: #063a3a; /* active */
+  --color-mark-soft: #e8f0ef;
+  --color-onmark: #5fb0ac;
+  --color-warn: #c0554a; /* 도판에서 "이전/버려진 요청" 표시 */
 
-@layer base {
-  .skip-link {
-    @apply absolute top-0 left-[-999px] z-[200] rounded-br-lg bg-brand px-4 py-2 font-semibold text-white;
-  }
-  .skip-link:focus {
-    @apply left-0;
-  }
+  /* 타입 스케일 1.25(major third), 본문 15px 기준. 크기는 이 여섯 개만 쓴다. */
+  --text-t1: 11px; /* mono 캡션·인덱스. 이보다 작게 쓰지 않는다 */
+  --text-t2: 12px; /* 라벨·보조 */
+  --text-t3: 15px; /* 본문 */
+  --text-t4: 19px; /* 사례 제목 */
+  --text-t5: 23px; /* 카드 제목 */
+  --text-t6: 29px; /* 섹션 제목 */
+
+  --radius-card: 14px;
+  --radius-sm: 8px;
 }
 
 /* ─── 그림 2 · 4 — 검색 케이스에서 새로 쓰는 조각들 ───
    `.k` / `.no` 는 site.css 에서 `.split` 아래로만 정의돼 있어, 그 밖에서 쓰려면 여기서 푼다. */
 .frame > .k,
 .ac-cols .k {
-  font-family: var(--font-mono);
-  font-size: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
   letter-spacing: 0.11em;
-  color: #8a8f97;
+  color: var(--mute);
   margin-bottom: 12px;
 }
 .frame > .no,
 .ac-cols .no {
   margin-top: 10px;
   font-size: 12px;
-  color: var(--color-muted);
-  font-weight: 300;
+  color: var(--mute);
+  font-weight: 400;
   line-height: 1.65;
 }
 .url-no {
@@ -76,40 +82,40 @@
   padding: 2px 22px;
 }
 .ac-cols > div:first-child {
-  border-right: 1px solid var(--color-border);
+  border-right: 1px solid var(--rule);
 }
 .ac-input {
   display: flex;
   align-items: center;
   gap: 2px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--rule);
   border-radius: 2px;
   padding: 9px 12px;
   font-size: 14px;
-  color: var(--color-ink);
+  color: var(--ink);
 }
 .ac-caret {
   width: 1px;
   height: 15px;
-  background: var(--color-brand);
+  background: var(--mark);
 }
 .ac-focus {
   margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-family: var(--mono);
+  font-size: 11px;
   letter-spacing: 0.08em;
-  color: var(--color-brand);
+  color: var(--mark);
 }
 .ac-list {
   list-style: none;
   margin: 6px 0 0;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--rule);
   border-radius: 2px;
 }
 .ac-list li {
   padding: 7px 12px;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   color: #4a4e56;
   border-bottom: 1px solid #f0f1f4;
 }
@@ -118,8 +124,8 @@
 }
 .ac-list li[data-on="true"] {
   background: #f1f5f5;
-  color: var(--color-ink);
-  box-shadow: inset 2px 0 0 var(--color-brand);
+  color: var(--ink);
+  box-shadow: inset 2px 0 0 var(--mark);
 }
 .ac-keys {
   margin: 0;
@@ -130,14 +136,14 @@
   gap: 12px;
   align-items: baseline;
   padding: 7px 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--rule);
 }
 .ac-keys dt {
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 11px;
-  color: var(--color-ink);
+  color: var(--ink);
   background: #f7f8fa;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--rule);
   border-radius: 2px;
   padding: 2px 0;
   text-align: center;
@@ -145,7 +151,7 @@
 .ac-keys dd {
   margin: 0;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   color: #4a4e56;
 }
 .ac-second {
@@ -164,26 +170,26 @@
 .ac-ime-cap {
   display: block;
   margin-top: 6px;
-  font-family: var(--font-mono);
-  font-size: 9px;
+  font-family: var(--mono);
+  font-size: 11px;
   letter-spacing: 0.09em;
-  color: #a2a7af;
+  color: var(--mute);
 }
 .ac-ime-cap-done {
-  color: var(--color-brand);
+  color: var(--mark);
 }
 .ac-ime span {
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 14px;
   padding: 5px 10px;
   border: 1px dashed #cdd1d8;
   border-radius: 2px;
-  color: #8a8f97;
+  color: var(--mute);
 }
 .ac-ime .ac-ime-done {
   border-style: solid;
-  border-color: var(--color-brand);
-  color: var(--color-brand);
+  border-color: var(--mark);
+  color: var(--mark);
   font-weight: 500;
 }
 
@@ -193,7 +199,7 @@
   }
   .ac-cols > div:first-child {
     border-right: 0;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--rule);
     padding-bottom: 20px;
     margin-bottom: 20px;
   }
