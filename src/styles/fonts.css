@@ -1,0 +1,50 @@
+/*
+ * 자체 호스팅 폰트.
+ *
+ * 전에는 Google Fonts CDN 을 링크로 걸었다. 한글 폰트가 unicode-range 로 100 조각 넘게
+ * 쪼개져 오기 때문에 웨이트 4개 × 조각들 = 서드파티 요청 63건이었고, 스타일시트 요청 자체가
+ * 렌더를 막았다. 성능 이야기를 하는 지면에서 이건 반례였다.
+ *
+ * 지금은 KS X 1001 완성형 2350자 + 라틴 + 문장부호로 미리 잘라 둔 woff2 를 같은 출처에서
+ * 준다. 요청 5건, 384KB. 본문 굵기(400)만 preload 하고 나머지는 `swap` 으로 뒤따라온다.
+ * 잘라 둔 범위 밖의 글자를 쓰면 대체 글꼴로 떨어진다 — 지면 한글은 전부 이 범위 안이다.
+ * 다시 만드는 명령은 README 의 "폰트" 항목에 적어 뒀다.
+ *
+ * IBM Plex — SIL Open Font License 1.1. 전문은 public/fonts/OFL.txt.
+ */
+
+@font-face {
+  font-family: "IBM Plex Sans KR";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/sans-400.woff2) format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans KR";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/sans-600.woff2) format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans KR";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/sans-700.woff2) format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/mono-400.woff2) format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/mono-500.woff2) format("woff2");
+}

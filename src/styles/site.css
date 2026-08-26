@@ -53,7 +53,7 @@ nav a.navmail:hover,nav a.navmail:focus-visible{color:var(--mark);border-color:v
 .item .body a:hover,.fignote a:hover{border-color:var(--mark)}
 
 /* 연락처 */
-.clead{font-weight:300;color:#3A3D44;max-width:46ch;font-size:16.5px}
+.clead{font-weight:400;color:#3A3D44;max-width:46ch;font-size:16.5px}
 .mail{display:inline-block;margin-top:22px;font-family:var(--mono);
   font-size:clamp(20px,3.2vw,32px);letter-spacing:-.02em;color:var(--ink);
   text-decoration:none;border-bottom:2px solid rgba(10,92,92,.34);padding-bottom:4px}
@@ -63,7 +63,7 @@ nav a.navmail:hover,nav a.navmail:focus-visible{color:var(--mark);border-color:v
 .clinks a{font-size:15px;font-weight:500;color:var(--ink);text-decoration:none;
   border-bottom:1px solid rgba(10,92,92,.4);padding-bottom:2px}
 .clinks a:hover,.clinks a:focus-visible{color:var(--mark);border-color:var(--mark)}
-.clinks .cdesc{display:block;margin-top:7px;font-size:13px;color:var(--mute);font-weight:300}
+.clinks .cdesc{display:block;margin-top:7px;font-size:13px;color:var(--mute);font-weight:400}
 
 /* ───── 히어로 — 3~15초 구간. 한 줄 + 키워드 3 + 수치 4 ─────
    조사한 채용 포폴·이력서가 공통으로 두는 순서다. 근거는 바로 아래 강점 섹션이 진다. */
@@ -83,9 +83,9 @@ nav a.navmail:hover,nav a.navmail:focus-visible{color:var(--mark);border-color:v
 .stats dt{font-size:11.5px;letter-spacing:.01em;color:#8A8F97;font-weight:500}
 .stats .n{font-family:var(--mono);font-size:clamp(21px,2.5vw,31px);font-weight:500;
   color:var(--mark);letter-spacing:-.025em;margin-top:7px;font-variant-numeric:tabular-nums}
-.stats .d{font-size:12px;color:var(--mute);font-weight:300;margin-top:4px}
+.stats .d{font-size:12px;color:var(--mute);font-weight:400;margin-top:4px}
 .n.ko{font-family:var(--sans);font-weight:600;letter-spacing:-.03em}
-.statnote{margin-top:10px;font-size:12px;color:var(--mute);font-weight:300}
+.statnote{margin-top:10px;font-size:12px;color:var(--mute);font-weight:400}
 .hero .meta{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--mute)}
 @media (min-width:900px){ .hero .lede,.hero .chips,.hero .meta{margin-left:200px} }
@@ -95,7 +95,7 @@ section.doc{padding:76px 0}
 section.doc + section.doc{border-top:1px solid var(--rule)}
 .sec{display:grid;grid-template-columns:184px minmax(0,1fr);gap:38px;align-items:start}
 .head h2{font-size:15px;font-weight:600;letter-spacing:.01em}
-.head p{font-size:13px;color:var(--mute);font-weight:300;margin-top:7px;line-height:1.6}
+.head p{font-size:13px;color:var(--mute);font-weight:400;margin-top:7px;line-height:1.6}
 .head{position:sticky;top:78px}
 .secbody{min-width:0}
 
@@ -115,12 +115,12 @@ figure{margin:32px 0 0}
    컨테이너 1080 기준 한쪽 여백이 72px 이 되는 지점이 뷰포트 1224px 이다. */
 @media (min-width:1224px){ figure{margin-right:-72px} }
 figcaption{display:flex;gap:11px;margin-bottom:12px;font-size:12.5px;color:var(--mute);
-  font-weight:300;line-height:1.6}
+  font-weight:400;line-height:1.6}
 figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color:#8A8F97;
   font-weight:400;flex:none;padding-top:3px}
 .frame{border:1px solid var(--rule);border-radius:2px;background:#fff;padding:24px 26px}
 .frame--dark{background:#101216;border-color:#23252A;color:#EDEEF0;padding:0;overflow:hidden}
-.fignote{margin-top:12px;font-size:12.5px;color:var(--mute);font-weight:300;
+.fignote{margin-top:12px;font-size:12.5px;color:var(--mute);font-weight:400;
   line-height:1.7;max-width:54ch}
 
 /* 그림 1 — 로딩 계측 막대 */
@@ -128,7 +128,7 @@ figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color
 .chart .ax{stroke:#EAECEF;stroke-width:1}
 .chart .axt{font-family:var(--mono);font-size:9.5px;fill:#A2A7AF}
 .chart .rk{font-family:var(--mono);font-size:12px;fill:var(--ink);font-weight:500}
-.chart .rl{font-size:11px;fill:var(--mute);font-weight:300}
+.chart .rl{font-size:11px;fill:var(--mute);font-weight:400}
 /* '이전' 막대는 0에서 자라고, '이후' 막대는 이전 길이에서 줄어든다.
    막대와 숫자가 같은 이야기를 하게 하려는 것이다. */
 .chart .gbar{transform:scaleX(var(--from,0));transform-box:fill-box;transform-origin:left center;
@@ -161,11 +161,11 @@ figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color
 .split .k{font-family:var(--mono);font-size:10px;letter-spacing:.11em;color:#8A8F97;
   margin-bottom:12px}
 .box{border:1px solid var(--rule);border-radius:2px;padding:11px 13px;font-size:13px;
-  font-weight:300;color:#33363C;line-height:1.6}
+  font-weight:400;color:#33363C;line-height:1.6}
 .box + .box{margin-top:8px}
 .box b{display:block;font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--ink);
   margin-bottom:2px}
-.split .no{margin-top:10px;font-size:12px;color:var(--mute);font-weight:300;line-height:1.65}
+.split .no{margin-top:10px;font-size:12px;color:var(--mute);font-weight:400;line-height:1.65}
 .urlbar{margin-top:20px;border-top:1px solid var(--rule);padding-top:18px}
 .urlbar .k{font-family:var(--mono);font-size:10px;letter-spacing:.11em;color:#8A8F97;
   margin-bottom:9px}
@@ -188,8 +188,8 @@ figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color
 .flow .arrow{stroke:#C2C6CD;stroke-width:1;fill:none}
 .flow .blocked{stroke:#C0554A;stroke-width:1;fill:none;stroke-dasharray:4 3;opacity:.85}
 .flow .xmark{stroke:#C0554A;stroke-width:1.6}
-.flow .cap{font-family:var(--sans);font-size:12.5px;fill:var(--mute);font-weight:300}
-.flow-alt{display:none;font-size:13px;color:var(--mute);font-weight:300;
+.flow .cap{font-family:var(--sans);font-size:12.5px;fill:var(--mute);font-weight:400}
+.flow-alt{display:none;font-size:13px;color:var(--mute);font-weight:400;
   border-left:2px solid var(--rule);padding-left:13px;line-height:1.75}
 @media (max-width:620px){
   .flow svg{display:none}
@@ -203,7 +203,7 @@ figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color
 .spec dt{font-size:11.5px;font-weight:500;letter-spacing:.01em;color:var(--mute)}
 .spec .q{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--ink);
   letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.spec dd{font-size:13.5px;color:#4A4E56;font-weight:300;line-height:1.7}
+.spec dd{font-size:13.5px;color:#4A4E56;font-weight:400;line-height:1.7}
 .spec dd a{color:var(--mark);text-decoration:none;border-bottom:1px solid rgba(10,92,92,.3)}
 @media (max-width:560px){
   .spec div{grid-template-columns:96px 1fr;gap:6px 12px}
@@ -254,7 +254,7 @@ figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color
 .job:first-of-type{border-top:0;padding-top:0}
 .job .when{font-family:var(--mono);font-size:12px;color:var(--mute);margin-bottom:5px}
 .job h3{font-size:17px;font-weight:600}
-.job .role{font-size:14px;color:var(--mute);font-weight:300;margin-top:2px}
+.job .role{font-size:14px;color:var(--mute);font-weight:400;margin-top:2px}
 .job .jlead{margin-top:11px;font-size:15px;font-weight:400;color:#2E3138;line-height:1.75;
   max-width:60ch}
 .job ul{margin-top:11px;list-style:none;max-width:60ch}
@@ -270,7 +270,7 @@ figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color
 .job .stack li::before{display:none}
 
 footer{padding:34px 0 56px;border-top:1px solid var(--rule)}
-footer .fine{font-size:12px;color:#9BA0A8;font-weight:300;line-height:1.9}
+footer .fine{font-size:12px;color:#9BA0A8;font-weight:400;line-height:1.9}
 
 .rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
 .rise.in{opacity:1;transform:none}
