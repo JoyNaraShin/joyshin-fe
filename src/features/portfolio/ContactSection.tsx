@@ -1,4 +1,4 @@
-import { LINKS, MAIL } from "@/content/profile";
+import { LINKS, MAIL } from "./content/profile";
 import { DocSection } from "./layout/DocSection";
 
 export function ContactSection() {
