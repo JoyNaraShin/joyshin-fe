@@ -1,17 +1,9 @@
+import { KEYWORDS, STATS } from "./content/hero";
+
 /**
  * 히어로 — 채용 담당자가 스크롤 없이 3~15초 안에 보는 구간.
  * 소개는 전 경력을 걸치고, 아래 네 칸은 대표 작업 네 개를 이름으로 세운다.
  */
-const KEYWORDS = ["유연한 대응", "합의로 만드는 협업", "능동적 책임"];
-
-/** ko = 값에 한글이 섞인 칸. 모노 서체에 한글이 없어 자간이 벌어지므로 본문 서체로 둔다. */
-const STATS = [
-  { k: "로딩 성능 개선", n: "−46%", d: "DCL 2.47s → 1.33s · LCP −44%", ko: false },
-  { k: "목록·검색 렌더링", n: "수만 건", d: "가상화로 DOM 상주 수 고정", ko: true },
-  { k: "디자인 시스템", n: "3버전", d: "서비스 3버전과 병행 유지보수", ko: true },
-  { k: "배포 구조 전환", n: "정적 배포", d: "GitHub Actions · Cloudflare Pages", ko: true },
-];
-
 export function Hero() {
   return (
     <section className="hero">

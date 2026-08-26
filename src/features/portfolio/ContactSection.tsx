@@ -1,19 +1,5 @@
-import { MAIL } from "@/components/SiteHeader";
-import { DocSection } from "./Section";
-
-const LINKS = [
-  { href: "https://github.com/JoyNaraShin", label: "GitHub", desc: "github.com/JoyNaraShin" },
-  {
-    href: "https://www.linkedin.com/in/joynarashin/",
-    label: "LinkedIn",
-    desc: "linkedin.com/in/joynarashin",
-  },
-  {
-    href: "https://joyshin-proto-lab.vercel.app/",
-    label: "프로토타입 모음",
-    desc: "직접 만든 웹앱 프로토타입을 한 곳에 모아 배포해 둔 자리입니다.",
-  },
-];
+import { LINKS, MAIL } from "@/content/profile";
+import { DocSection } from "./layout/DocSection";
 
 export function ContactSection() {
   return (

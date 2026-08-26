@@ -1,4 +1,4 @@
-export const MAIL = "joyshin.dev@gmail.com";
+import { MAIL } from "@/content/profile";
 
 export function SiteHeader() {
   return (

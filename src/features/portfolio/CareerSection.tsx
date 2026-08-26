@@ -1,49 +1,5 @@
-import { DocSection } from "./Section";
-
-/**
- * 경력 — 사실 층. 무엇을 어떻게 했는지는 위의 작업·그 외 섹션이 진다.
- * 여기 남는 것은 기간·회사·역할·한 줄 요약·일하는 방식·스택뿐이다.
- */
-const JOBS = [
-  {
-    when: "2022.04 – 2026.04",
-    company: "클로버추얼패션",
-    role: "CLO-SET · 프론트엔드 개발자",
-    lead: "3D 뷰어를 감싸는 웹 화면을 맡았습니다. 3D 엔진은 그래픽 엔지니어들이 따로 맡았습니다.",
-    bullets: [
-      "설계 리뷰와 코드 리뷰, 단위 테스트 작성은 계속 했습니다.",
-      "기획·정책 리뷰에도 처음부터 들어가 PO, 디자이너와 직접 만들 범위를 정했고 수치를 근거로 방향을 바꾼 적도 있습니다.",
-      "배포 뒤에 생기는 문제는 에러 모니터링 알림으로 감지했습니다. API 응답이 바뀌거나 서버 쪽 이슈로 화면이 깨진 건은 백엔드와 함께 원인을 좁혔습니다.",
-    ],
-    stack: [
-      "React",
-      "TypeScript",
-      "Next.js",
-      "TanStack Query",
-      "Jotai",
-      "Emotion",
-      "Mobx",
-      "Yarn workspaces",
-      "Rollup",
-    ],
-  },
-  {
-    when: "2021.07 – 2022.04",
-    company: "쓰리아이",
-    role: "Pivo · Beamo · 프론트엔드 개발자",
-    lead: "3D 도면 투어 서비스에서 새 기능을 만들고 유지보수했습니다.",
-    bullets: ["app, viewer, editor가 나뉜 구조 안에서 작업했고 다국어를 지원했습니다."],
-    stack: ["Vue 3", "lerna"],
-  },
-  {
-    when: "2019.05 – 2021.05",
-    company: "노스스타컨설팅",
-    role: "Java 개발자",
-    lead: "업무 관리 프로그램과 회원 시스템을 풀스택으로 만들고 오픈한 뒤에는 유지보수를 맡았습니다.",
-    bullets: [],
-    stack: ["Java"],
-  },
-];
+import { JOBS } from "./content/jobs";
+import { DocSection } from "./layout/DocSection";
 
 export function CareerSection() {
   return (
