@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-/** 도판. note는 캡션이 아니라 측정 조건·한계처럼 본문에 섞으면 흐름을 끊는 것만 받는다. */
+/* note 는 측정 조건·한계처럼 본문에 섞으면 흐름을 끊는 것만 받는다. 캡션과 다른 칸이다. */
 export function Figure({
   index,
   caption,

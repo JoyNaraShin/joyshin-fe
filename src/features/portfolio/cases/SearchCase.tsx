@@ -6,20 +6,20 @@ import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 import { Overview } from "../layout/Overview";
 
-/** 서비스 전체 검색. */
 export function SearchCase() {
   return (
     <Item id="case-search" source="CLO-SET" title="서비스 전체 검색">
       <Overview
-        owned="검색 UI 전반의 클라이언트 구현. 색인과 질의 처리, 결과 순위는 서버가 맡았습니다."
-        problem="에셋·파일과 프로젝트·폴더가 흩어져 있어 한 번에 찾을 수 없었습니다."
-        did="자동완성 입력 · 요청 줄이기 · 이미지 업로드 · 화면 상태 · 대용량 결과"
-        result={
+        lead={
           <>
-            조건에 따라 <b className="n ko">수만 건</b>까지 가는 결과를 목록 케이스의 가상화 구조로
+            흩어져 있던 에셋·파일과 프로젝트·폴더를 한 곳에서 찾게 하고, 조건에 따라{" "}
+            <b className="n ko">수만 건</b>까지 가는 결과를 목록 케이스의 가상화 구조로
             렌더했습니다.
           </>
         }
+        situation="에셋·파일과 프로젝트·폴더가 흩어져 있어 한 번에 찾을 수 없었습니다."
+        task="검색 UI 전반의 클라이언트 구현. 색인과 질의 처리, 결과 순위는 서버가 맡았습니다."
+        action="자동완성 입력 · 요청 줄이기 · 이미지 업로드 · 화면 상태 · 대용량 결과"
       />
 
       <h4 className="sub">자동완성 입력</h4>

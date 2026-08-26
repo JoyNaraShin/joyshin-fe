@@ -4,15 +4,15 @@ import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 import { Overview } from "../layout/Overview";
 
-/** 서버 데이터와 화면 상태 분리. */
 export function StateCase() {
   return (
     <Item id="case-state" source="CLO-SET" title="서버 데이터와 화면 상태 분리">
       <Overview
-        owned="뷰어를 감싼 화면의 상태 구조"
-        problem="Mobx 스토어가 모듈 스코프 싱글턴으로 커지면서 여러 도메인의 상태가 한 인스턴스에 누적됐고, 스토어마다 같은 보일러플레이트가 반복됐습니다."
-        did="서버 상태는 TanStack Query 단일 출처로, 화면 상태는 관심사 단위로 분리"
-        result="서버 응답을 전역 스토어로 복사해 두던 중복 상태를 없애고, 화면 상태는 패널 단위로 독립시켰습니다."
+        lead="서버 응답을 전역 스토어로 복사해 두던 중복 상태를 없애고, 화면 상태는 패널 단위로 독립시켰습니다."
+        situation="Mobx 스토어가 모듈 스코프 싱글턴으로 커지면서 여러 도메인의 상태가 한 인스턴스에 누적됐고, 스토어마다 같은 보일러플레이트가 반복됐습니다."
+        task="뷰어를 감싼 화면의 상태 구조"
+        action="서버 상태는 TanStack Query 단일 출처로, 화면 상태는 관심사 단위로 분리"
+        again="Mobx를 전부 걷어내지는 못했습니다. 서버에서 온 값과 화면이 들고 있는 값을 갈라 두는 쪽으로 줄여 나갔습니다."
       />
       <Bullets>
         <li>서버에서 받은 데이터는 TanStack Query에만 두고 전역 상태로 복사하지 않습니다.</li>
@@ -31,7 +31,6 @@ export function StateCase() {
           않습니다.
         </li>
       </Bullets>
-
       <Figure
         index="그림 5"
         caption="상태를 어디에 두었는지 그린 도식입니다."

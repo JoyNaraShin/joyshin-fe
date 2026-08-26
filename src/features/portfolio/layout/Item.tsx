@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-/** 섹션 안의 사례 하나. 앵커로 링크되므로 id를 받는다. */
+/* 레일이 이 id 로 앵커를 건다. id 를 지우면 그 사례가 인덱스에서 사라진다. */
 export function Item({
   id,
   source,

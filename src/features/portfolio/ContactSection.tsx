@@ -13,8 +13,9 @@ export function ContactSection() {
       <ul className="clinks">
         {LINKS.map((l) => (
           <li key={l.href}>
-            <a href={l.href}>
+            <a href={l.href} target="_blank" rel="noreferrer">
               {l.label} <span aria-hidden="true">↗</span>
+              <span className="sr-only"> (새 탭에서 열림)</span>
             </a>
             <span className="cdesc">{l.desc}</span>
           </li>

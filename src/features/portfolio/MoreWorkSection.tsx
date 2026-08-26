@@ -3,7 +3,7 @@ import { DocSection } from "./layout/DocSection";
 
 export function MoreWorkSection() {
   return (
-    <DocSection id="more" title="그 외 맡은 것" meta="CLO-SET · 2022–2026">
+    <DocSection id="more" title="그 외 맡은 것" meta="CLO-SET · 6건 · 2022–2026">
       <ul className="wcards">
         {CARDS.map((c) => (
           <li className="wcard" key={c.title}>

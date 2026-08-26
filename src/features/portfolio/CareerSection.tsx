@@ -3,7 +3,7 @@ import { DocSection } from "./layout/DocSection";
 
 export function CareerSection() {
   return (
-    <DocSection id="career" title="경력" meta="2019 – 2026">
+    <DocSection id="career" title="경력" meta="3곳 · 2019–2026">
       {JOBS.map((job) => (
         <div className="job" key={job.company}>
           <p className="when">{job.when}</p>

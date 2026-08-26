@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section className="hero">
       <h1>
-        프론트엔드 개발자 <b>신나라</b>
+        프론트엔드 개발자 <b>신나라</b> 입니다.
       </h1>
       <p className="lede">
         2019년 Java 풀스택으로 시작해 프론트엔드로 전향했습니다. 주력 스택은 TypeScript · React ·
