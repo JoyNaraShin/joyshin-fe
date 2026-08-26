@@ -33,7 +33,7 @@ export function StateCase() {
       </Bullets>
 
       <Figure
-        index="그림 6"
+        index="그림 5"
         caption="상태를 어디에 두었는지 그린 도식입니다."
         note="서버에서 온 값은 한 곳에만 두고 화면이 들고 있는 값은 화면마다 따로 뒀습니다."
       >

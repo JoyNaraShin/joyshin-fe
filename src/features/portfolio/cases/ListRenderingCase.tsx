@@ -1,6 +1,4 @@
-import { ListRenderingDemo } from "@/features/list-demo/ListRenderingDemo";
 import { Bullets } from "../layout/Bullets";
-import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 import { Overview } from "../layout/Overview";
 
@@ -36,12 +34,6 @@ export function ListRenderingCase() {
       <div className="body">
         <p>두 작업 모두 화면 단위로 단계적으로 옮겼습니다.</p>
       </div>
-      <Figure
-        index="그림 2"
-        caption="1차는 DOM에 쌓인 6,000개를 줄이지 못하고 2차에서야 화면에 보이는 수십 개로 고정됩니다. 실제 화면은 아닙니다. 같은 문제를 가상 데이터 6,000건으로 다시 만들었습니다."
-      >
-        <ListRenderingDemo />
-      </Figure>
     </Item>
   );
 }

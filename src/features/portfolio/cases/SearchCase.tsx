@@ -34,7 +34,7 @@ export function SearchCase() {
         </li>
       </Bullets>
       <Figure
-        index="그림 3"
+        index="그림 2"
         caption="추천을 고르는 동안의 포커스 위치와, 한글이 조합되는 동안 들어오는 입력입니다."
       >
         <AutocompleteKeys />
@@ -46,7 +46,7 @@ export function SearchCase() {
           입력할 때마다 부르던 추천 API를 디바운스로 묶고 앞선 요청이 남아 있으면 취소했습니다.
         </li>
       </Bullets>
-      <Figure index="그림 4" caption="자동완성 요청을 줄인 방식입니다.">
+      <Figure index="그림 3" caption="자동완성 요청을 줄인 방식입니다.">
         <DebounceTimeline />
       </Figure>
 
@@ -87,7 +87,7 @@ export function SearchCase() {
         </li>
         <li>검색어·필터·정렬·페이지는 전부 URL 쿼리스트링에 넣어 단일 출처로 뒀습니다.</li>
       </Bullets>
-      <Figure index="그림 5" caption="검색 조건을 어디에 두었는지입니다.">
+      <Figure index="그림 4" caption="검색 조건을 어디에 두었는지입니다.">
         <SearchUrl />
       </Figure>
     </Item>

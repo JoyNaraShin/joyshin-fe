@@ -50,7 +50,7 @@ export function AiSection() {
             나왔습니다. 그때부터 에이전트의 완료 보고는 통과 근거로 쓰지 않습니다.
           </p>
         </div>
-        <Figure index="그림 7" caption="설계 리뷰부터 재검증까지의 순서입니다.">
+        <Figure index="그림 6" caption="설계 리뷰부터 재검증까지의 순서입니다.">
           <ReviewPipeline />
         </Figure>
       </Item>
