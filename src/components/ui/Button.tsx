@@ -3,13 +3,20 @@ import { Link } from "react-router-dom";
 
 type Variant = "primary" | "ghost";
 
+/**
+ * 자체 버튼 프리미티브. 외부 UI 라이브러리를 쓰지 않으므로 이 파일이 버튼의 정본이다.
+ * 색·반경은 index.css 의 `@theme` 토큰에서 온다 — 여기에 값을 적지 않는다.
+ */
 const VARIANTS: Record<Variant, string> = {
-  primary: "bg-brand text-brand-fg hover:bg-brand-strong",
-  ghost: "border border-border text-ink hover:border-brand hover:text-brand",
+  primary:
+    "bg-mark text-white border-mark hover:bg-mark-deep hover:border-mark-deep active:bg-mark-press active:border-mark-press",
+  ghost:
+    "border-rule text-ink hover:border-mark hover:text-mark active:bg-mark-soft active:text-mark-deep",
 };
 
+// 최소 높이 44px — 손가락 탭 타깃 기준.
 const BASE =
-  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-sm border px-5 text-t3 font-semibold no-underline transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mark disabled:cursor-not-allowed disabled:opacity-50";
 
 type Props = {
   variant?: Variant;
@@ -43,7 +50,7 @@ export function Button({
     );
   }
   return (
-    <button className={cls} {...rest}>
+    <button type="button" className={cls} {...rest}>
       {children}
     </button>
   );

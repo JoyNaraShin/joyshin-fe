@@ -1,5 +1,5 @@
+import { useCallback, useEffect, useRef } from "react";
 import { prefersReducedMotion, useReveal } from "../hooks/useReveal";
-import { useCallback, useRef } from "react";
 
 type Row = {
   key: string;
@@ -23,6 +23,8 @@ export function LoadTimeChart() {
   const ref = useRef<HTMLDivElement>(null);
   const outs = useRef<(SVGTextElement | null)[]>([]);
 
+  // 언마운트 뒤에도 루프가 남지 않도록 프레임 번호를 들고 있다가 정리에서 끊는다.
+  const raf = useRef(0);
   const countUp = useCallback(() => {
     if (prefersReducedMotion()) return;
     let t0: number | null = null;
@@ -34,10 +36,12 @@ export function LoadTimeChart() {
         const el = outs.current[i];
         if (el) el.textContent = `${(row.from + (row.to - row.from) * eased).toFixed(2)}s`;
       });
-      if (k < 1) requestAnimationFrame(step);
+      if (k < 1) raf.current = requestAnimationFrame(step);
     };
-    requestAnimationFrame(step);
+    raf.current = requestAnimationFrame(step);
   }, []);
+
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
 
   useReveal(ref, countUp, "-14% 0px");
 

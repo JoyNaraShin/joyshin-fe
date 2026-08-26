@@ -1,4 +1,3 @@
-/** 그림 5 — 검색어·필터·정렬·페이지를 전부 URL 에 둔다. */
 export function SearchUrl() {
   return (
     <div className="frame">

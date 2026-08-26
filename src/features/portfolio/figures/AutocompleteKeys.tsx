@@ -6,10 +6,7 @@ const KEYS = [
   { cap: "Esc", what: "추천을 닫고 입력으로 돌아갑니다" },
 ];
 
-/**
- * 그림 3 — 자동완성을 마우스 없이 쓰는 동선과, 한글 조합 중 입력.
- * 포커스는 입력창에 그대로 있고 선택만 목록을 오르내린다.
- */
+/* 포커스를 목록으로 옮기지 않는 것이 이 그림의 요점이다 — 옮기면 이어서 타이핑할 수 없다. */
 export function AutocompleteKeys() {
   return (
     <div className="frame ac">

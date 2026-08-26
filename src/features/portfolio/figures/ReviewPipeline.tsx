@@ -7,7 +7,6 @@ const STAGES = [
   { label: "통과", x: 464, w: 58 },
 ];
 
-/** 그림 7 — 리뷰 단계와, 막아 둔 하나의 경로. */
 export function ReviewPipeline() {
   return (
     <div className="frame flow">

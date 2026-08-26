@@ -1,4 +1,3 @@
-/** 그림 6 — 서버에서 온 값과 화면이 들고 있는 값을 어디에 두었는지. */
 export function StateBoundary() {
   return (
     <div className="frame">

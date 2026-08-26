@@ -6,7 +6,6 @@ const KEYS = [
   { x: 390, label: "cloth" },
 ];
 
-/** 그림 4 — 입력마다 요청을 보내면 다섯 번, 디바운스를 걸고 앞선 요청을 취소하면 한 번. */
 export function DebounceTimeline() {
   return (
     <div className="frame keys">
