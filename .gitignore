@@ -13,9 +13,6 @@ dist-ssr
 npm-debug.log*
 pnpm-debug.log*
 
-# supabase
-supabase/.branches
-supabase/.temp
 
 # 작업 문서 — 공개 레포에 올리지 않는다.
 # 지원 회사 목록(job-requirements), 인터뷰 원문·전 직장 내부 사정(content-ledger),

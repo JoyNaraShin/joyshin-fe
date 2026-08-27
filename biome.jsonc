@@ -3,8 +3,7 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
-    // database.types.ts is generated (pnpm gen:types) — linting it only causes churn.
-    "ignore": ["dist", "node_modules", "**/*.css", ".claude", "src/lib/database.types.ts"]
+    "ignore": ["dist", "node_modules", "**/*.css", ".claude"]
   },
   "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2, "lineWidth": 100 },
   "linter": { "enabled": true, "rules": { "recommended": true } },
