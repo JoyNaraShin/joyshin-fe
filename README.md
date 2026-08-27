@@ -24,9 +24,10 @@ pnpm build && pnpm preview
 ```
 src/
   pages/HomePage.tsx          섹션 순서
-  features/portfolio/         히어로 · 강점 · 작업 · 그 외 · AI · 경력 · 연락처
-    figures/                  본문 도판 (전부 손으로 그린 SVG)
-  components/                 헤더 · 푸터
+  features/portfolio/         히어로 · 작업 · 그 외 · AI · 경력 · 연락처
+    figures/                  본문 도판 6개 (SVG 3 · HTML+CSS 3)
+  components/                 왼쪽 레일 · 푸터
+  lib/                        IntersectionObserver 훅 둘
   styles/                     토큰과 레이아웃
 ```
 
@@ -36,9 +37,11 @@ UI 킷, 차트, 애니메이션 라이브러리를 넣지 않았다. 아래는 �
 
 | | |
 |---|---|
-| 도판 6개 | 손으로 좌표를 잡은 SVG (`features/portfolio/figures/`) |
+| 도판 6개 | 손으로 만든 것 (`features/portfolio/figures/`). 좌표를 잡은 SVG 3개, 나머지 3개는 격자와 테두리라 HTML+CSS |
 | 스크롤 리빌 | `IntersectionObserver` 한 곳 (`lib/useReveal.ts`), `prefers-reduced-motion` 존중 |
+| 읽는 구간 표시 | `IntersectionObserver` (`features/portfolio/hooks/useScrollSpy.ts`). CSS 네이티브(`scroll-target-group`·`:target-current`)는 Chrome 전용이라 쓰지 않았다 |
 | 레이아웃 | Grid·Flex와 CSS 변수만 |
+| 스크롤 위치·해시 착지 | 직접 만들지 않고 react-router 의 `<ScrollRestoration>` |
 
 ## 폰트
 
