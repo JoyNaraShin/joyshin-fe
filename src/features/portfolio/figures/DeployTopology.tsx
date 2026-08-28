@@ -8,9 +8,13 @@ import { Frame } from "../layout/Frame";
  * 프로젝트의 public/ 에 있어 그 서버 이미지 안에서 함께 나간다 — 그래서 상자 안에 상자를
  * 그리고, 청크는 상자 밖 한 줄로 따로 적는다.
  */
+/** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
+export const deployTopologyFallback =
+  "전에는 번들 청크를 클라우드에 올리고 index.html 하나를 Next 프로젝트의 public 폴더에 두어 Docker 서버 이미지에 함께 실어 배포했습니다. 제안한 구조에서는 React 앱을 GitHub Actions로 빌드해 Cloudflare Pages의 버전 경로로 올리고, Next 프로젝트는 자기 배포를 따로 갖습니다.";
+
 export function DeployTopology() {
   return (
-    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full max-fig:[&_svg]:hidden">
+    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full">
       <svg
         viewBox="0 0 620 176"
         role="img"
@@ -124,12 +128,6 @@ export function DeployTopology() {
           자기 배포를 따로
         </text>
       </svg>
-
-      <p className="hidden border-l-2 border-rule pl-[13px] text-[13px] font-normal leading-[1.75] text-mute max-fig:block">
-        전에는 번들 청크를 클라우드에 올리고 index.html 하나를 Next 프로젝트의 public 폴더에 두어
-        Docker 서버 이미지에 함께 실어 배포했습니다. 제안한 구조에서는 React 앱을 GitHub Actions로
-        빌드해 Cloudflare Pages의 버전 경로로 올리고, Next 프로젝트는 자기 배포를 따로 갖습니다.
-      </p>
     </Frame>
   );
 }

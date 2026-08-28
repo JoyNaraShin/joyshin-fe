@@ -9,9 +9,13 @@ const STAGES = [
   { label: "통과", x: 464, w: 58 },
 ];
 
+/** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
+export const reviewPipelineFallback =
+  "설계 리뷰 → 구현 → 코드 리뷰 → 수정 → 재검증 → 통과. 수정한 쪽은 자기 수정의 통과 판정을 낼 수 없습니다.";
+
 export function ReviewPipeline() {
   return (
-    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full max-fig:[&_svg]:hidden">
+    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full">
       <svg
         viewBox="0 0 560 132"
         role="img"
@@ -85,10 +89,6 @@ export function ReviewPipeline() {
         </text>
       </svg>
       {/* 좁은 폭에서는 도식 대신 같은 내용을 문장으로 준다 */}
-      <p className="hidden border-l-2 border-rule pl-[13px] text-[13px] font-normal leading-[1.75] text-mute max-fig:block">
-        설계 리뷰 → 구현 → 코드 리뷰 → 수정 → 재검증 → 통과. 수정한 쪽은 자기 수정의 통과 판정을 낼
-        수 없습니다.
-      </p>
     </Frame>
   );
 }

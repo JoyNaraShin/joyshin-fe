@@ -14,9 +14,13 @@ const SCREENS = [
   { name: "사이드 패널", y: 106 },
 ] as const;
 
+/** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
+export const stateBoundaryFallback =
+  "서버에서 온 값은 TanStack Query 한 곳에만 둡니다. 뷰어와 사이드 패널은 각자 자기 화면 상태만 들고 서로 이어지지 않습니다.";
+
 export function StateBoundary() {
   return (
-    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full max-fig:[&_svg]:hidden">
+    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full">
       <svg
         viewBox="0 0 620 186"
         role="img"
@@ -123,11 +127,6 @@ export function StateBoundary() {
           </g>
         ))}
       </svg>
-
-      <p className="hidden border-l-2 border-rule pl-[13px] text-[13px] font-normal leading-[1.75] text-mute max-fig:block">
-        서버에서 온 값은 TanStack Query 한 곳에만 둡니다. 경계 오른쪽의 뷰어와 사이드 패널은 각자
-        자기 화면 상태만 들고 서로 이어지지 않습니다.
-      </p>
     </Frame>
   );
 }

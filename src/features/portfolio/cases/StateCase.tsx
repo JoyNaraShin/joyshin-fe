@@ -1,7 +1,7 @@
 import { Bullets } from "../components/Bullets";
 import { Overview } from "../components/Overview";
 import { SubHead } from "../components/SubHead";
-import { StateBoundary } from "../figures/StateBoundary";
+import { StateBoundary, stateBoundaryFallback } from "../figures/StateBoundary";
 import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 
@@ -48,7 +48,11 @@ export function StateCase() {
           원본을 읽는 한 방향으로만 의존이 생깁니다.
         </li>
       </Bullets>
-      <Figure index="그림 3" caption="상태를 어디에 두었는지 그린 도식입니다.">
+      <Figure
+        index="그림 3"
+        caption="상태를 어디에 두었는지 그린 도식입니다."
+        fallback={stateBoundaryFallback}
+      >
         <StateBoundary />
       </Figure>
     </Item>

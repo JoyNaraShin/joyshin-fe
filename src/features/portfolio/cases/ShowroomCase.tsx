@@ -1,7 +1,7 @@
 import { Bullets } from "../components/Bullets";
 import { Overview } from "../components/Overview";
 import { SubHead } from "../components/SubHead";
-import { ReuseBoundary } from "../figures/ReuseBoundary";
+import { ReuseBoundary, reuseBoundaryFallback } from "../figures/ReuseBoundary";
 import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 
@@ -59,6 +59,7 @@ export function ShowroomCase() {
       <Figure
         index="그림 4"
         caption="재사용 경계를 어디에 뒀는지, 처음과 바꾼 뒤를 나란히 그린 도식입니다."
+        fallback={reuseBoundaryFallback}
       >
         <ReuseBoundary />
       </Figure>

@@ -23,9 +23,13 @@ function ticks(width: number) {
   return Array.from({ length: n }, (_, i) => TRACK.x + i * PITCH);
 }
 
+/** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
+export const listDomGrowthFallback =
+  "이전과 1차는 스크롤한 만큼 DOM 노드가 쌓입니다. 1차가 없앤 것은 위치 재계산이지 노드가 아닙니다. 2차 가상화에서만 노드 수가 화면 크기로 고정됩니다.";
+
 export function ListDomGrowth() {
   return (
-    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full max-fig:[&_svg]:hidden">
+    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full">
       <svg
         viewBox="0 0 620 180"
         role="img"
@@ -81,10 +85,6 @@ export function ListDomGrowth() {
       </svg>
 
       {/* 좁은 폭에서는 트랙이 뭉개진다. 같은 내용을 글로 둔다. */}
-      <p className="hidden border-l-2 border-rule pl-[13px] text-[13px] font-normal leading-[1.75] text-mute max-fig:block">
-        이전과 1차는 스크롤한 만큼 DOM 노드가 쌓입니다. 1차가 없앤 것은 위치 재계산이지 노드가
-        아닙니다. 2차 가상화에서만 노드 수가 화면 크기로 고정됩니다.
-      </p>
     </Frame>
   );
 }

@@ -1,7 +1,7 @@
 import { Bullets } from "../components/Bullets";
 import { Overview } from "../components/Overview";
 import { SubHead } from "../components/SubHead";
-import { ListDomGrowth } from "../figures/ListDomGrowth";
+import { ListDomGrowth, listDomGrowthFallback } from "../figures/ListDomGrowth";
 import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 
@@ -40,7 +40,11 @@ export function ListRenderingCase() {
           <b>공통 훅</b> — 페이지마다 흩어져 있던 목록 로직을 훅 하나로 모으고 뷰와 분리했습니다.
         </li>
       </Bullets>
-      <Figure index="그림 2" caption="세 단계에서 DOM 에 남는 항목 수를 비교한 도식입니다.">
+      <Figure
+        index="그림 2"
+        caption="세 단계에서 DOM 에 남는 항목 수를 비교한 도식입니다."
+        fallback={listDomGrowthFallback}
+      >
         <ListDomGrowth />
       </Figure>
     </Item>

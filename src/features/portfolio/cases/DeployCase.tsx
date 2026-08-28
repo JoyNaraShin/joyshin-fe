@@ -1,7 +1,7 @@
 import { Bullets } from "../components/Bullets";
 import { Overview } from "../components/Overview";
 import { SubHead } from "../components/SubHead";
-import { DeployTopology } from "../figures/DeployTopology";
+import { DeployTopology, deployTopologyFallback } from "../figures/DeployTopology";
 import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 
@@ -55,7 +55,8 @@ export function DeployCase() {
       <Figure
         index="그림 5"
         caption="배포 구조 전과 제안한 구조입니다."
-        note="오른쪽은 제안한 구조입니다. 재직 중 최종 반영까지 가지 않았습니다."
+        note="제안한 구조는 재직 중 최종 반영까지 가지 않았습니다."
+        fallback={deployTopologyFallback}
       >
         <DeployTopology />
       </Figure>

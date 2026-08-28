@@ -7,11 +7,15 @@ import { Frame } from "../layout/Frame";
  *
  * 이 지면의 before/after 관례 = x≈300 점선 divider (DeployTopology 와 같은 축).
  */
+/** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
+export const reuseBoundaryFallback =
+  "처음에는 편집·라이브·프리뷰·툴팁을 한 컴포넌트가 모드 분기로 처리했고, 요구가 늘 때마다 안에 분기가 쌓였습니다. 바꾼 뒤에는 편집 뷰와 라이브 뷰를 따로 두고, 공통에는 데이터와 계산 로직만 남겼습니다.";
+
 export function ReuseBoundary() {
   const CHIPS = ["편집", "라이브", "프리뷰", "툴팁"];
 
   return (
-    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full max-fig:[&_svg]:hidden">
+    <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full">
       <svg
         viewBox="0 0 620 196"
         role="img"
@@ -127,12 +131,6 @@ export function ReuseBoundary() {
           중복이 반복될 때만 공통으로 올린다
         </text>
       </svg>
-
-      <p className="hidden border-l-2 border-rule pl-[13px] text-[13px] font-normal leading-[1.75] text-mute max-fig:block">
-        처음에는 편집·라이브·프리뷰·툴팁을 한 컴포넌트가 모드 분기로 처리했고, 요구가 늘 때마다 안에
-        분기가 쌓였습니다. 바꾼 뒤에는 편집 뷰와 라이브 뷰를 따로 두고, 공통에는 데이터와 계산
-        로직만 남겼습니다.
-      </p>
     </Frame>
   );
 }

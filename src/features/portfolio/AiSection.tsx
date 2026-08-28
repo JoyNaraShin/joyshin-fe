@@ -1,6 +1,6 @@
 import { Bullets } from "./components/Bullets";
 import { Prose } from "./components/Prose";
-import { ReviewPipeline } from "./figures/ReviewPipeline";
+import { ReviewPipeline, reviewPipelineFallback } from "./figures/ReviewPipeline";
 import { DocSection, Hang } from "./layout/DocSection";
 import { Figure } from "./layout/Figure";
 import { Item } from "./layout/Item";
@@ -34,7 +34,11 @@ export function AiSection() {
             있었습니다. AI가 쓴 인증 코드의 권한 상승 결함도 리뷰가 잡았습니다.
           </li>
         </Bullets>
-        <Figure index="그림 6" caption="설계 리뷰부터 재검증까지의 순서입니다.">
+        <Figure
+          index="그림 6"
+          caption="설계 리뷰부터 재검증까지의 순서입니다."
+          fallback={reviewPipelineFallback}
+        >
           <ReviewPipeline />
         </Figure>
       </Item>
