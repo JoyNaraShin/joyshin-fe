@@ -1,14 +1,17 @@
 # joyshin-fe
 
-프론트엔드 개발자 포트폴리오. 경력과 맡았던 작업 네 건을 정리한 한 장짜리 사이트다.
+프론트엔드 개발자 포트폴리오. 경력과 맡았던 작업 열한 건을 한 장에 담은 정적 사이트다.
+앞의 다섯 건은 문제·해결과 도판까지 길게 펴고, 나머지 여섯 건은 두세 줄로 훑는다.
+
+<https://joynarashin.github.io/joyshin-fe/>
 
 ## 스택
 
-React 19 · TypeScript 5.7 · Vite 6 · Tailwind v4 · react-router 7 · Biome
+React 19 · TypeScript 5.7 · Vite 6 · Tailwind v4 · React Router 7 · Biome
 
-런타임 의존성은 react · react-dom · react-router-dom 셋뿐이다. 디자인 토큰은
-`index.css` 의 `@theme` 한 곳에 있고, 화면 조각은 외부 UI 라이브러리 없이
-`components/ui/` 에 직접 만든다.
+읽는 것이 전부인 한 장짜리 사이트라 런타임에 얹는 것을 늘리지 않았다. `dependencies` 는
+`react` · `react-dom` · `react-router-dom` 셋뿐이고 UI 킷도, 차트도, 애니메이션 라이브러리도 없다.
+디자인 토큰은 `src/styles/theme.css` 의 `@theme` 한 곳에 모으고 나머지는 전부 그 변수를 읽는다.
 
 ## 실행
 
@@ -19,72 +22,61 @@ pnpm check            # Biome + tsc
 pnpm build && pnpm preview
 ```
 
+`pnpm build` 는 `dist/index.html` 을 `404.html` 로도 복사한다. GitHub Pages 가 SPA 폴백을
+주지 않아서, 해시 없는 경로로 직접 들어와도 앱이 라우팅을 이어받게 하려는 것이다.
+
 ## 구조
+
+화면은 하나지만 껍데기와 지면을 갈라 뒀다. 포트폴리오 지면은 `features/portfolio/` 안에서
+닫히고, 그 바깥은 라우팅·레이아웃·공용 조각만 진다.
 
 ```
 src/
-  pages/HomePage.tsx          섹션 순서
-  features/portfolio/         히어로 · 작업 · 그 외 · AI · 경력 · 연락처
-    figures/                  본문 도판 6개 (SVG 3 · HTML+CSS 3)
-  components/                 왼쪽 레일 · 푸터
-  lib/                        IntersectionObserver 훅 둘
-  styles/                     토큰과 레이아웃
+  routes/                 라우터 · 경로 상수 · 에러 화면
+  layouts/RootLayout.tsx  스킵 링크 · 스크롤 복원
+  pages/                  HomePage(섹션 순서) · NotFoundPage
+  components/ui/          Button — 404·에러 화면이 쓴다
+  styles/                 theme(토큰) · base(기본 규칙) · fonts(@font-face)
+
+  features/portfolio/
+    Hero · SkillSection · AiSection · CareerSection · ContactSection
+    cases/                01–05. 길게 편 작업 다섯 건
+    content/              화면에 나가는 문장 — hero · moreWork · jobs · nav · profile
+    figures/              본문 도판 6개. 전부 좌표를 직접 잡은 SVG
+    layout/               지면 배치 — DocSection · Item · Figure · Frame
+    components/           내용 조각 — Bullets · Overview · Prose · SubHead · SideRail
+    hooks/                useReveal · useScrollSpy
 ```
 
-## 외부 라이브러리를 쓰지 않은 곳
+`content/` 를 따로 둔 것은 문장이 코드보다 자주 바뀌기 때문이다. 문구만 고칠 때 컴포넌트를
+열지 않아도 된다. `layout/` 과 `components/` 를 가른 기준은 **지면 위 자리를 정하느냐,
+내용을 그리느냐** 다 — `Figure` 는 도판이 앉을 칸을 잡고, `Bullets` 는 항목을 그린다.
 
-UI 킷, 차트, 애니메이션 라이브러리를 넣지 않았다. 아래는 전부 이 저장소 안에 있다.
+## 직접 만든 것
+
+외부 UI 라이브러리를 쓰지 않은 자리들. 아래는 전부 이 저장소 안에 있다.
 
 | | |
 |---|---|
-| 도판 6개 | 손으로 만든 것 (`features/portfolio/figures/`). 좌표를 잡은 SVG 3개, 나머지 3개는 격자와 테두리라 HTML+CSS |
-| 스크롤 리빌 | `IntersectionObserver` 한 곳 (`lib/useReveal.ts`), `prefers-reduced-motion` 존중 |
-| 읽는 구간 표시 | `IntersectionObserver` (`features/portfolio/hooks/useScrollSpy.ts`). CSS 네이티브(`scroll-target-group`·`:target-current`)는 Chrome 전용이라 쓰지 않았다 |
-| 레이아웃 | Grid·Flex와 CSS 변수만 |
-| 스크롤 위치·해시 착지 | 직접 만들지 않고 react-router 의 `<ScrollRestoration>` |
+| 도판 6개 | `features/portfolio/figures/`. 좌표를 직접 잡은 SVG 다. 좁은 폭에서 형체가 남지 않는 다섯 개는 접고 같은 내용의 문단으로 바꾼다. 막대 하나짜리 계측 도판은 접지 않는다 |
+| 스크롤 리빌 | `IntersectionObserver` 한 곳 (`hooks/useReveal.ts`). `prefers-reduced-motion` 존중 |
+| 읽는 구간 표시 | `IntersectionObserver` (`hooks/useScrollSpy.ts`). CSS 네이티브(`scroll-target-group`·`:target-current`)는 Chrome 전용이라 쓰지 않았다 |
+| 레이아웃 | Grid·Flex 와 CSS 변수만 |
+| 스크롤 위치·해시 착지 | 직접 만들지 않고 React Router 의 `<ScrollRestoration>` |
 
 ## 폰트
 
-Google Fonts CDN 을 걷어내고 자체 호스팅한다. 한글 폰트는 CDN 에서 `unicode-range` 로
-100 조각 넘게 쪼개져 오기 때문에 서드파티 요청이 63건이었고, 스타일시트 요청 자체가 렌더를 막았다.
+Google Fonts CDN 대신 자체 호스팅한다. 한글은 CDN 에서 `unicode-range` 로 100 조각 넘게
+쪼개져 오기 때문에 서드파티 요청이 63건이었고, 스타일시트 요청 자체가 렌더를 막았다.
+성능을 이야기하는 지면에서 그건 반례였다.
 
 지금은 KS X 1001 완성형 2350자 + 라틴 + 문장부호로 미리 자른 woff2 를 같은 출처에서 준다.
-
-| | 전 | 후 |
-|---|---|---|
-| 서드파티 요청 | 63건 | 0건 |
-| 폰트 요청 | 63건 | 5건 |
-| 폰트 전송량 | 494KB | 381KB |
-
-본문 굵기(400)만 `preload`, 나머지는 `font-display: swap`. 굵기는 sans 400·600·700,
-mono 400·500 다섯 개다. 전에는 sans 300 을 캡션·주석에 썼는데, 한글 굵기 하나가 통째로
-120KB 라 자체 호스팅하면서 400 으로 합쳤다. 그 자리들은 대비도 미달이던 곳이라 같이 정리됐다.
-
-`--mono` 스택에는 `IBM Plex Sans KR` 을 끼워 뒀다. mono 서체에 한글이 없어서, 스택이 없으면
-mono 칸에 섞인 한글(실측 77자)이 OS 기본 고정폭으로 떨어져 혼자 다른 글꼴이 된다.
-
-다시 만들려면 [fonttools](https://github.com/fonttools/fonttools) 로. `ksx1001.txt` 는
-EUC-KR 한글 영역(`0xB0A1`~`0xC8FE`)을 디코딩해 만든다:
-
-```python
-ks = []
-for hi in range(0xB0, 0xC9):
-    for lo in range(0xA1, 0xFF):
-        try:
-            ks.append(bytes([hi, lo]).decode("euc_kr"))
-        except UnicodeDecodeError:
-            pass
-open("ksx1001.txt", "w").write("".join(c for c in ks if "가" <= c <= "힣"))  # 2350자
-```
-
-```
-pyftsubset IBMPlexSansKR-Regular.ttf --output-file=public/fonts/sans-400.woff2 \
-  --flavor=woff2 --unicodes="U+0000-00FF,U+2000-206F,U+20A0-20BF,U+2190-21FF,U+2212,U+2215,U+25A0-25FF,U+2713,U+2715,U+3000-303F,U+3130-318F,U+FEFF,U+FFFD" \
-  --text-file=ksx1001.txt --layout-features='kern,liga,calt,ccmp,locl' --no-hinting --desubroutinize
-```
+서드파티 요청 63건 → 0건, 폰트 494KB → 381KB. 본문 굵기(400)만 `preload` 하고 나머지는
+`font-display: swap` 으로 뒤따라온다. 다시 자르는 명령은 `src/styles/fonts.css` 주석에 있다.
 
 IBM Plex — SIL Open Font License 1.1 (`public/fonts/OFL.txt`).
 
 ## 접근성
 
-키보드로 전 구간 이동, `prefers-reduced-motion`에서 모션 정지.
+키보드로 전 구간을 이동할 수 있고, `prefers-reduced-motion` 에서는 모션이 멈춘다.
+도판은 `role="img"` 와 `aria-label` 을 갖고, 좁은 폭에서 접힐 때는 같은 내용의 문단이 대신 뜬다.
