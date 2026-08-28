@@ -1,41 +1,54 @@
+import { Bullets } from "../components/Bullets";
+import { Overview } from "../components/Overview";
+import { SubHead } from "../components/SubHead";
 import { StateBoundary } from "../figures/StateBoundary";
-import { Bullets } from "../layout/Bullets";
 import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
-import { Overview } from "../layout/Overview";
 
 export function StateCase() {
   return (
-    <Item id="case-state" source="CLO-SET" title="서버 데이터와 화면 상태 분리">
+    <Item index="03" id="case-state" source="CLO-SET" title="서버 데이터와 화면 상태 분리">
       <Overview
-        lead="서버 응답을 전역 스토어로 복사해 두던 중복 상태를 없애고, 화면 상태는 패널 단위로 독립시켰습니다."
-        situation="Mobx 스토어가 모듈 스코프 싱글턴으로 커지면서 여러 도메인의 상태가 한 인스턴스에 누적됐고, 스토어마다 같은 보일러플레이트가 반복됐습니다."
+        lead="서버 응답을 전역 스토어로 복제하던 중복 상태를 제거하고, 클라이언트 상태는 소유 주체 단위로 분리했습니다."
+        situation="MobX 스토어가 커지면서 여러 도메인의 상태가 한 인스턴스에 누적됐습니다. 스토어마다 같은 보일러플레이트도 반복됐습니다."
         task="뷰어를 감싼 화면의 상태 구조"
-        action="서버 상태는 TanStack Query 단일 출처로, 화면 상태는 관심사 단위로 분리"
-        again="Mobx를 전부 걷어내지는 못했습니다. 서버에서 온 값과 화면이 들고 있는 값을 갈라 두는 쪽으로 줄여 나갔습니다."
+        action="서버 상태는 TanStack Query 단일 출처로, 화면 상태는 atom 단위로 소유 주체별 분리"
+        why="atom 라이브러리는 Recoil 로 시작해 Jotai 로 옮겼습니다. Recoil 이 2025년 1월 아카이브돼 유지보수가 끊겼고, Jotai 는 같은 atomic 모델이라 상태 구조를 다시 짜지 않아도 됐습니다."
+        again="MobX 를 전부 걷어내지는 못했습니다."
       />
+      {/* 사례 공통 형식 — SubHead 로 문제와 해결을 가르고, 항목은 <b>라벨</b> — 문장. */}
+      <SubHead>문제</SubHead>
       <Bullets>
-        <li>서버에서 받은 데이터는 TanStack Query에만 두고 전역 상태로 복사하지 않습니다.</li>
         <li>
-          화면 상태는 관심사 단위로 쪼개, 뷰어와 사이드 패널이 각자 자기 상태만 들고 있게 했습니다.
+          <b>스토어 수명</b> — MobX 스토어가 모듈 스코프 싱글턴이라 인스턴스가 화면 단위로
+          생성·폐기되지 않고, 화면이 늘수록 서로 다른 도메인의 상태가 한 인스턴스에 누적됐습니다.
         </li>
         <li>
-          Mobx 스토어는 모듈 스코프의 싱글턴 인스턴스라, 화면이 늘수록 서로 다른 도메인의 상태가 한
-          인스턴스에 누적됩니다. 구독은 <code>observer</code> 컴포넌트가 렌더 중 읽은 필드에
-          자동으로 걸리기 때문에, 어떤 필드의 변경이 어느 컴포넌트를 리렌더시키는지 호출부만 봐서는
-          추적되지 않습니다.
+          <b>암묵 구독</b> — <code>observer</code> 는 렌더 중 읽은 필드에 구독을 자동으로 겁니다.
+          구독을 손으로 관리하지 않아도 되는 대신, 어떤 필드가 어느 컴포넌트를 리렌더시키는지가
+          호출부에 드러나지 않습니다.
         </li>
         <li>
-          스토어끼리 참조를 주고받기 시작하면 의존이 양방향으로 얽혀 화면 단위로 떼어낼 수 없습니다.
-          도메인 단위로 스토어를 쪼개고 각 화면이 자기 것만 들고 있게 하면 이 결합이 애초에 생기지
-          않습니다.
+          <b>양방향 결합</b> — 스토어가 서로를 참조하면 순환 의존이 생기고, 의존이 전이돼 한 화면만
+          떼어내도 관련 없는 스토어까지 함께 끌려옵니다. 화면 단위로 모듈 경계가 서지 않습니다.
         </li>
       </Bullets>
-      <Figure
-        index="그림 5"
-        caption="상태를 어디에 두었는지 그린 도식입니다."
-        note="서버에서 온 값은 한 곳에만 두고 화면이 들고 있는 값은 화면마다 따로 뒀습니다."
-      >
+
+      <SubHead>해결</SubHead>
+      <Bullets>
+        <li>
+          <b>서버 상태</b> — TanStack Query 캐시 하나만 서버 데이터의 출처로 뒀습니다. 같은 데이터를
+          전역 스토어에도 담아 두면, 저장 뒤 <code>invalidateQueries</code> 로 캐시를 새로 받아와도
+          스토어 값은 그대로입니다. 갱신할 때마다 두 곳을 같이 고쳐야 하고, 한 곳을 빠뜨리면 그
+          데이터를 스토어에서 읽는 화면만 옛 값을 그립니다.
+        </li>
+        <li>
+          <b>화면 상태</b> — 남은 것은 atom 단위로 쪼갰습니다. <code>useAtom(atom)</code> 으로
+          무엇을 읽는지 호출부에 적히고, 리렌더는 그 atom 을 읽는 컴포넌트로만 갑니다. 파생 atom 이
+          원본을 읽는 한 방향으로만 의존이 생깁니다.
+        </li>
+      </Bullets>
+      <Figure index="그림 3" caption="상태를 어디에 두었는지 그린 도식입니다.">
         <StateBoundary />
       </Figure>
     </Item>

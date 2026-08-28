@@ -5,16 +5,15 @@
 export const NAV = [
   {
     id: "skill",
-    label: "작업",
-    meta: "4건",
+    label: "주요 작업",
     children: [
       { id: "case-loading", label: "로딩 속도" },
       { id: "case-list", label: "목록 렌더링" },
-      { id: "case-search", label: "전체 검색" },
       { id: "case-state", label: "상태 분리" },
+      { id: "case-showroom", label: "버추얼 쇼룸" },
+      { id: "case-deploy", label: "배포 구조" },
     ],
   },
-  { id: "more", label: "그 외 맡은 것", meta: "6건", children: [] },
   { id: "ai", label: "AI 파이프라인", meta: "", children: [] },
   { id: "career", label: "경력", meta: "3곳", children: [] },
   { id: "contact", label: "연락처", meta: "", children: [] },

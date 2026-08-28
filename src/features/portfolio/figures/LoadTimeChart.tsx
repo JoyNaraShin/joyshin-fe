@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 import { prefersReducedMotion, useReveal } from "../hooks/useReveal";
+import { Frame } from "../layout/Frame";
 
 type Row = {
   key: string;
@@ -46,7 +47,9 @@ export function LoadTimeChart() {
   useReveal(ref, countUp, "-14% 0px");
 
   return (
-    <div className="frame chart" ref={ref}>
+    /* group + data-in 으로 막대 애니메이션을 건다. 기본 상태(애니메이션 없음)가 곧 정답이라
+       스크롤 없이 렌더되는 경로에서도 '이후' 막대가 정확한 길이로 그려진다. */
+    <Frame className="group [&_svg]:block [&_svg]:h-auto [&_svg]:w-full" ref={ref}>
       <svg
         viewBox="0 0 620 196"
         role="img"
@@ -56,8 +59,8 @@ export function LoadTimeChart() {
           const x = 74 + s * 164.33;
           return (
             <g key={s}>
-              <line className="ax" x1={x} y1={16} x2={x} y2={166} />
-              <text className="axt" x={x} y={10} textAnchor="middle">
+              <line className="stroke-rule [stroke-width:1]" x1={x} y1={16} x2={x} y2={166} />
+              <text className="fill-mute font-mono text-t1" x={x} y={10} textAnchor="middle">
                 {s}s
               </text>
             </g>
@@ -66,17 +69,24 @@ export function LoadTimeChart() {
 
         {ROWS.map((row, i) => (
           <g key={row.key}>
-            <text className="rk" x={0} y={row.y + 22}>
+            <text className="fill-ink font-mono text-t2 font-medium" x={0} y={row.y + 22}>
               {row.key}
             </text>
-            <text className="rl" x={32} y={row.y + 13}>
+            <text className="fill-mute text-t1 font-normal" x={32} y={row.y + 13}>
               이전
             </text>
-            <rect className="gbar b-old" x={74} y={row.y} width={row.oldW} height={17} rx={1} />
-            <text className="vo" x={74 + row.oldW + 9} y={row.y + 13}>
+            <rect
+              className="fill-rule-2 [transform-box:fill-box] [transform-origin:left_center] group-data-[in]:animate-gbar motion-reduce:group-data-[in]:animate-none"
+              x={74}
+              y={row.y}
+              width={row.oldW}
+              height={17}
+              rx={1}
+            />
+            <text className="fill-mute font-mono text-t2" x={74 + row.oldW + 9} y={row.y + 13}>
               {row.from.toFixed(2)}s
             </text>
-            <text className="rl" x={32} y={row.y + 43}>
+            <text className="fill-mute text-t1 font-normal" x={32} y={row.y + 43}>
               이후
             </text>
             {/*
@@ -84,7 +94,7 @@ export function LoadTimeChart() {
               숫자가 2.47에서 1.33으로 내려가는데 막대만 0에서 자라면 둘이 다른 이야기를 한다.
             */}
             <rect
-              className="gbar b-new"
+              className="fill-mark [transform-box:fill-box] [transform-origin:left_center] group-data-[in]:animate-gbar motion-reduce:group-data-[in]:animate-none"
               style={{ ["--from" as string]: row.ratio }}
               x={74}
               y={row.y + 30}
@@ -93,7 +103,7 @@ export function LoadTimeChart() {
               rx={1}
             />
             <text
-              className="vn"
+              className="fill-mark font-mono text-[13px] font-medium"
               x={74 + row.newW + 9}
               y={row.y + 43}
               ref={(el) => {
@@ -105,6 +115,6 @@ export function LoadTimeChart() {
           </g>
         ))}
       </svg>
-    </div>
+    </Frame>
   );
 }
