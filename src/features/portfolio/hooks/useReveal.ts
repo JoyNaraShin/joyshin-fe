@@ -5,7 +5,8 @@ const mq = () => (typeof matchMedia === "function" ? matchMedia(QUERY) : null);
 const reduced = () => mq()?.matches === true;
 
 /**
- * 화면에 들어올 때 한 번 `in` 을 붙이고 콜백을 부른다.
+ * 화면에 들어올 때 한 번 `data-in` 을 붙이고 콜백을 부른다.
+ * 클래스가 아니라 데이터 속성인 것은 Tailwind 의 `revealed:` / `group-data-[in]:` 로 받기 위해서다.
  *
  * 이 사이트가 파는 이야기 중 하나가 IntersectionObserver라서, 지면 자체도 같은 것으로 만든다.
  * 스크롤 리스너를 달고 위치를 재는 방식이었다면 앞뒤가 맞지 않는다.
@@ -29,7 +30,7 @@ export function useReveal(
 
     // 모션을 끈 상태면 관찰하지 않고 바로 보인다.
     const settle = () => {
-      el.classList.add("in");
+      el.dataset.in = "";
       enter.current?.();
     };
     if (reduced()) {
