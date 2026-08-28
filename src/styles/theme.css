@@ -1,0 +1,133 @@
+/*
+ * 디자인 토큰 — 이 파일이 색·서체·타입 스케일·브레이크포인트의 단일 출처다.
+ *
+ * Tailwind v4 의 `@theme` 은 값을 :root 커스텀 프로퍼티로 내보내면서 동시에 유틸리티를 만든다.
+ * `--color-mark` 하나로 `text-mark` `bg-mark` `border-mark` 가 생기고, CSS 쪽에서는
+ * `var(--color-mark)` 로 같은 값을 본다. 그래서 마크업과 스타일시트가 갈라지지 않는다.
+ *
+ * 규칙 하나: **스타일시트에 색 리터럴을 쓰지 않는다.** 새 색이 필요하면 여기에 토큰을 먼저 만든다.
+ * (2026-08-27 실측: 토큰 15개인데 CSS 에 색 리터럴 50종이 돌았고, 그중 다수가 토큰과
+ *  1.02:1 로 갈라진 중복이었다. 아래 잉크·괘선 단계는 그 통합의 결과다.)
+ */
+@theme {
+  --font-sans: "IBM Plex Sans KR", system-ui, sans-serif;
+  /* mono 서체에는 한글이 없다. 스택에 한글 서체를 끼워 두지 않으면 mono 칸에 섞인 한글이
+     OS 기본 고정폭으로 떨어져 지면에서 혼자 다른 글꼴이 된다(실측 77자). */
+  --font-mono: "IBM Plex Mono", "IBM Plex Sans KR", ui-monospace, monospace;
+
+  /* ─── 지면 1층. 카드를 걷어냈으므로 층도 하나면 된다.
+     회색 지면은 흰 카드를 띄우려고 있던 것이다 — 카드가 없으면 회색은 할 일이 없고,
+     지면을 셋으로 나눈 것 자체가 위계를 색에 떠넘긴 것이었다.
+     층은 이제 여백 크기와 칼럼 폭이 진다. inset 은 코드·키캡처럼 글자를 감싸는 데만 남긴다. */
+  --color-paper: #ffffff;
+  --color-surface: #ffffff;
+  --color-inset: #f4f5f7;
+  /* 좁은 폭에서 상단 띠가 본문 위에 뜰 때만 쓰는 반투명 지면 */
+  --color-surface-veil: rgba(255, 255, 255, 0.92);
+
+  /* ─── 잉크 4단. 본문에 쓸 수 있는 것은 여기까지다.
+     통합 전에는 #2C2F35 · #2E3138 · #33363C · #3A3D44 · #3C4048 · #5A5E66 처럼
+     서로 1.02:1 인 값이 여섯 개 따로 돌았다. 눈으로 구분되지 않는 차이는 단계가 아니라 사고다. */
+  --color-ink: #111214;
+  --color-ink-2: #2c2f35;
+  --color-ink-3: #4a4e56;
+  /* 흰 카드 5.96:1 · 회색 지면 5.32:1 — 둘 다 AA(4.5:1) 통과.
+     통합 전에는 #8A8F97(3.25) · #9AA0A8(2.64) · #9BA0A8(2.63) · #A2A7AF(2.42)가 섞여 전부 미달이었다. */
+  --color-mute: #5f646c;
+  --color-faint: #8a8f97; /* 도판 안 비활성 표시 전용. 본문 글자에는 쓰지 않는다 */
+
+  /* ─── 괘선 3단 — 카드 테두리 / 도판 선 / 목록 마커. 통합 전 8종이었다. */
+  --color-rule: #e3e5e9;
+  --color-rule-2: #cdd1d8;
+  --color-rule-3: #a9aeb6;
+
+  /* ─── 강조 1색. 이 지면에 강조색은 하나뿐이다. */
+  --color-mark: #0a5c5c;
+  --color-mark-deep: #084848; /* hover */
+  --color-mark-press: #063a3a; /* active */
+  --color-mark-soft: #e8f0ef; /* 도판 안 선택된 항목의 지면 · 버튼 active */
+  --color-warn: #c0554a; /* 도판에서 "이전/버려진 요청" 표시 */
+
+  /* 밑줄·테두리로 쓰는 반투명 강조. 통합 전에는 .30 .32 .34 .35 .40 이 따로 돌았다. */
+  --color-mark-line: rgba(10, 92, 92, 0.35);
+  --color-mark-wash: rgba(10, 92, 92, 0.045);
+  /* 잉크 위에 얹는 상호작용 지면 — hover 와 :active 두 단계만 둔다. */
+  /* 인쇄 전용. 화면 괘선은 종이에서 너무 옅게 나온다. */
+  --color-print-rule: #cccccc;
+
+  /* ─── 타입 스케일 1.25(major third), 본문 15px 기준. 크기는 이 여섯 개만 쓴다. */
+  --text-t1: 11px; /* mono 캡션·인덱스. 이보다 작게 쓰지 않는다 */
+  --text-t2: 12px; /* 라벨·보조 */
+  --text-t3: 16px; /* 본문. 15px 에 806px 폭이면 한 줄 60자가 된다 — 실측 레퍼런스는 48~52자다 */
+  --text-t4: 19px; /* 사례 제목 */
+  --text-t5: 23px; /* 카드 제목 */
+  --text-t6: 29px; /* 섹션 제목 */
+  /* 디스플레이. 히어로와 어두운 밴드의 큰 수치에만 쓴다 — 지면에서 두 번만 나온다.
+     R4 실측 실효 스케일 대비가 1.9배(29/15)였다. 이 단계가 그 폭을 4배까지 벌린다. */
+  --text-t7: clamp(34px, 5.2vw, 56px);
+
+  --radius-card: 14px;
+  --radius-sm: 8px;
+
+  /*
+   * ─── 브레이크포인트. 미디어쿼리 안에서는 var() 가 통하지 않으므로 Tailwind v4 의
+   * `theme()` 함수로 읽는다 — `@media (width <= theme(--breakpoint-rail))`.
+   * 이름은 픽셀이 아니라 그 폭에서 무엇이 바뀌는지로 붙인다.
+   * 통합 전에는 1000·760·700·640·620·560 여섯 개가 이름 없이 흩어져 있었다.
+   */
+  --breakpoint-rail: 1000px; /* 왼쪽 레일 → 상단 가로 띠 */
+  --breakpoint-page: 760px; /* 지면 여백·제목 단계·수치 4칸 → 2칸 */
+  --breakpoint-fig: 640px; /* 도판 2단 → 1단, 도식 → 대체 텍스트 */
+  --breakpoint-card: 560px; /* 카드 내부 표가 2열 → 1열 */
+
+  /* 그림 1 막대. 기본 상태(애니메이션 없음)가 곧 정답이도록 시작값을 키프레임 안에 둔다 —
+     스크롤 없이 렌더되는 경로에서 '이후' 막대가 '이전' 길이로 굳는 것을 막는다. */
+  --animate-gbar: gbar 0.9s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+  /* 어두운 밴드에 들어설 때의 한 번짜리 연출. 흩뿌린 효과 대신 한 곳에 모은다. */
+  --animate-rise-in: rise-in 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes gbar {
+    from {
+      transform: scaleX(var(--from, 0));
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/*
+ * 커스텀 변형 둘. 유틸리티로 쓰기 위한 것이지, 규칙을 따로 쓰기 위한 것이 아니다.
+ *   js:       main.tsx 가 :root 에 .js 를 붙인 뒤에만 — JS 없이 뜬 화면에 모션을 걸지 않는다
+ *   revealed: useReveal 이 화면에 들어온 요소에 data-in 을 단다
+ */
+@custom-variant js (:root.js &);
+@custom-variant revealed (&[data-in]);
+
+/*
+ * 커스텀 유틸리티 — 지면 전체에서 반복되는 두 가지.
+ * `@utility` 로 만들면 variant 조합(`max-page:num` 같은 것)까지 Tailwind 가 처리한다.
+ * 규칙을 세만틱 클래스로 따로 쓰는 것과 다르다.
+ */
+@utility num {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--color-mark);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+/* 값에 한글이 섞인 칸. mono 서체에 한글이 없어 자간이 벌어지므로 본문 서체로 돌린다. */
+@utility num-ko {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
