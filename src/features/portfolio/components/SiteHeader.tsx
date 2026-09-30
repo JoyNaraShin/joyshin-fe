@@ -13,20 +13,17 @@ const LINKS = [
  */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/10 bg-sand text-ink print:hidden">
-      <div className="mx-auto flex h-16 w-[min(1200px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(1200px,100%-32px)]">
+    <header className="sticky top-0 z-50 border-b border-rule bg-paper text-ink print:hidden">
+      <div className="mx-auto flex h-16 w-[min(720px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(720px,100%-32px)]">
         <Link className="text-t3 font-bold tracking-[-0.02em] no-underline" to="/">
           신나라
-          <span className="ml-2 text-t2 font-normal text-mute max-card:hidden">
-            프론트엔드 개발자
-          </span>
         </Link>
         <nav aria-label="주 메뉴">
           <ul className="flex list-none gap-1">
             {LINKS.map((l) => (
               <li key={l.to}>
                 <Link
-                  className="rounded-sm px-3 py-2 text-t2 font-medium text-ink-3 no-underline hover:bg-sand-2 hover:text-ink max-card:px-2"
+                  className="rounded-sm px-3 py-2 text-t2 font-medium text-ink-3 no-underline hover:text-ink max-card:px-2"
                   to={l.to}
                 >
                   {l.label}

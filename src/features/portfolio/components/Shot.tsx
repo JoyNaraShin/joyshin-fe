@@ -19,10 +19,10 @@ export function Shot({
   className?: string;
 }) {
   return (
-    <figure className={`mt-10 ${className}`}>
+    <figure className={`mt-8 ${className}`}>
       <img
         alt={alt}
-        className="block h-auto w-full rounded-sm border border-rule bg-inset"
+        className="block h-auto w-full rounded-md border border-rule"
         decoding="async"
         height={height}
         loading="lazy"

@@ -14,7 +14,7 @@ export function RootLayout() {
       <ScrollRestoration />
       <SiteHeader />
       <Outlet />
-      <footer className="mx-auto mt-10 flex w-[min(1200px,100%-48px)] flex-wrap justify-between gap-2 border-t border-ink/15 py-8 text-t2 text-mute max-page:w-[min(1200px,100%-32px)] print:hidden">
+      <footer className="mx-auto mt-16 flex w-[min(720px,100%-48px)] flex-wrap justify-between gap-2 border-t border-rule py-8 text-t2 text-mute max-page:w-[min(720px,100%-32px)] print:hidden">
         <span>© 2026 신나라</span>
         <span>서비스 화면 캡처 출처 CLO-SET 헬프센터</span>
       </footer>
