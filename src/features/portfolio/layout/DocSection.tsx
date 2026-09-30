@@ -38,7 +38,7 @@ export function DocSection({
         motion-reduce:!translate-y-0 motion-reduce:!transition-none
         print:!translate-y-0 print:!transition-none print:pt-8"
     >
-      <div className="ml-14 w-[min(840px,100%-56px)] max-page:mx-auto max-page:w-[min(840px,100%-32px)] print:w-full print:ml-0">
+      <div className="mx-auto w-[min(1120px,100%-48px)] max-page:w-[min(1120px,100%-32px)] print:w-full">
         {/* 섹션 머리는 지면 폭을 다 쓴다. 본문 칼럼보다 넓은 것이 섹션임을 알린다. */}
         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-ink pb-3 print:break-after-avoid">
           <h2
@@ -78,7 +78,7 @@ export function Hang({
       <div className="pt-1 text-t1 leading-[1.6] text-mute max-page:mb-2 max-page:pt-0 print:break-inside-avoid">
         {label}
       </div>
-      <div className="min-w-0">{children}</div>
+      <div className="min-w-0 max-w-[760px]">{children}</div>
     </div>
   );
 }

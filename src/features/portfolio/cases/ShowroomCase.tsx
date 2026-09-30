@@ -1,5 +1,6 @@
 import { Bullets } from "../components/Bullets";
 import { Overview } from "../components/Overview";
+import { Shot } from "../components/Shot";
 import { SubHead } from "../components/SubHead";
 import { ReuseBoundary, reuseBoundaryFallback } from "../figures/ReuseBoundary";
 import { Figure } from "../layout/Figure";
@@ -13,6 +14,13 @@ export function ShowroomCase() {
         situation="360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸입니다. 기능이 많아 상태가 복잡했는데, API 는 공간과 스팟 전체를 JSON 문서 하나로 주고받았습니다."
         task="2022 하반기부터 2026 상반기까지 초기 개발과 이후 기능 추가를 프론트엔드 단독으로 담당. 배경 타일 전환에서는 업로드와 수정 흐름만 맡음"
         action="Recoil 도입과 엔티티 단위 atom 정규화, 페이지별 컴포넌트 분리, 타일 변환 대기 상태 처리"
+      />
+      <Shot
+        alt="왼쪽에 공간 목록, 가운데에 360° 매장 공간, 위에 Preview와 Save, Publish to Live 버튼이 있는 쇼룸 편집 페이지"
+        caption="편집 페이지. 공간을 추가하고 그 안에 스팟을 배치한 뒤 라이브로 발행합니다."
+        height={902}
+        src="showroom-editor.webp"
+        width={1600}
       />
       {/* 사례 공통 형식 — SubHead 로 문제와 해결을 가르고, 항목은 <b>라벨</b> — 문장. */}
       <SubHead>문제</SubHead>
@@ -58,6 +66,13 @@ export function ShowroomCase() {
           주고, 변환이 끝나면 타일 배경으로 교체하도록 상태를 처리했습니다.
         </li>
       </Bullets>
+      <Shot
+        alt="360° 이미지를 올리는 중 진행률이 표시되고, 아래에 이미 올린 배경의 썸네일이 놓인 업로드 화면"
+        caption="배경 업로드 화면. 서버의 타일 변환이 끝나기 전에는 썸네일로 먼저 보여 줍니다."
+        height={744}
+        src="showroom-upload.webp"
+        width={1200}
+      />
       <Figure
         index="그림 4"
         caption="재사용 경계를 어디에 뒀는지, 처음과 바꾼 뒤를 나란히 그린 도식입니다."

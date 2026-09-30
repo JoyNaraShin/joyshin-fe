@@ -7,17 +7,29 @@ import { Item } from "../layout/Item";
 
 export function StateCase() {
   return (
-    <Item index="03" id="case-state" source="CLO-SET" title="서버 데이터와 화면 상태 분리">
+    <Item index="03" id="case-state" source="CLO-SET" title="1차 서비스 리뉴얼">
       <Overview
-        lead="1차 서비스 리뉴얼에서 서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil 로 나눴습니다."
+        lead="1차 서비스 리뉴얼에서 모노레포 도구와 패키지 구조, 상태 관리 방식을 직접 정했습니다."
         situation="MobX 스토어가 커지면서 여러 도메인의 상태가 한 인스턴스에 누적됐습니다. 스토어마다 같은 보일러플레이트도 반복됐습니다."
-        task="1차 서비스 리뉴얼(2023 하반기부터 2024 상반기)의 상태 관리 방식 결정"
-        action="서버 상태는 TanStack Query 캐시 한 곳에, UI 상태는 atom 단위로 분리. 컨테이너 컴포넌트의 로직은 VAC 패턴과 커스텀 훅으로 분리"
+        task="1차 서비스 리뉴얼(2023 하반기부터 2024 상반기)의 모노레포 도구, 패키지 구조, 상태 관리 방식 결정. 빌드 도구와 린트, 커밋 규칙, App Router 구조, URL 설계는 범위 밖"
+        action="Yarn workspaces 모노레포와 관심사별 패키지 분리. 서버 상태는 TanStack Query 캐시 한 곳에, UI 상태는 atom 단위로 분리. 컨테이너 컴포넌트의 로직은 VAC 패턴과 커스텀 훅으로 분리"
         why="서버 데이터를 스토어에도 복제해 두면 갱신할 때마다 두 곳을 같이 고쳐야 했습니다. 캐시를 한 곳으로 두면 남는 것은 화면이 스스로 가진 상태뿐입니다."
         again="MobX 를 전부 걷어내지는 못했습니다."
       />
+      <SubHead>모노레포</SubHead>
+      <Bullets>
+        <li>
+          <b>도구</b> — 팀의 학습 비용을 고려해 Turborepo나 Nx 없이 Yarn workspaces 만으로
+          구성했습니다.
+        </li>
+        <li>
+          <b>패키지</b> — 앱과 공유 UI, API 클라이언트, 빌드 설정을 관심사별 패키지로 나눴습니다.
+          API 클라이언트는 사내 다른 서비스에서도 쓰도록 독립 패키지로 뺐습니다.
+        </li>
+      </Bullets>
+
       {/* 사례 공통 형식 — SubHead 로 문제와 해결을 가르고, 항목은 <b>라벨</b> — 문장. */}
-      <SubHead>문제</SubHead>
+      <SubHead>상태 관리의 문제</SubHead>
       <Bullets>
         <li>
           <b>스토어 수명</b> — MobX 스토어가 모듈 스코프 싱글턴이라 인스턴스가 화면 단위로
@@ -34,7 +46,7 @@ export function StateCase() {
         </li>
       </Bullets>
 
-      <SubHead>해결</SubHead>
+      <SubHead>상태 관리의 해결</SubHead>
       <Bullets>
         <li>
           <b>서버 상태</b> — TanStack Query 캐시 하나만 서버 데이터의 출처로 뒀습니다. 같은 데이터를

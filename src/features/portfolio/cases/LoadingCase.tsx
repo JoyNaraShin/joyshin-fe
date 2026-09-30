@@ -1,5 +1,6 @@
 import { Bullets } from "../components/Bullets";
 import { Overview } from "../components/Overview";
+import { Shot } from "../components/Shot";
 import { SubHead } from "../components/SubHead";
 import { LoadTimeChart } from "../figures/LoadTimeChart";
 import { Figure } from "../layout/Figure";
@@ -18,6 +19,13 @@ export function LoadingCase() {
         situation="에셋 목록을 한 번에 다 보여주는 화면이 처음 뜰 때 느렸습니다."
         task="워크룸(에셋 목록이 있는 메인 작업 공간)의 첫 화면. 2024 하반기, Performance 패널과 Lighthouse 로 계측해 과제로 제안"
         action="코드 스플리팅과 모듈 초기화 지연, 이미지 리사이징 공통 적용, 쓰지 않는 응답 필드 제거"
+      />
+      <Shot
+        alt="필터와 정렬 도구 아래로 에셋 카드가 격자로 늘어선 워크룸 화면"
+        caption="대상 화면인 워크룸. 에셋 카드가 격자로 늘어선 메인 작업 공간입니다."
+        height={1241}
+        src="workroom-list.webp"
+        width={1600}
       />
       {/* 사례 공통 형식 — SubHead 로 문제와 해결을 가르고, 항목은 <b>라벨</b> — 문장. */}
       <SubHead>문제</SubHead>

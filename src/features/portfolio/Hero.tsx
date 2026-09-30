@@ -1,44 +1,41 @@
-import { KEYWORDS, STATS } from "./content/hero";
+import { STATS } from "./content/hero";
 
 /**
- * 히어로 — 채용 담당자가 스크롤 없이 3~15초 안에 보는 구간.
- * 소개는 전 경력을 걸치고, 아래 네 칸은 대표 작업 네 개를 이름으로 세운다.
+ * 히어로 — 채용 담당자가 스크롤 없이 몇 초 안에 보는 구간.
+ * 이력서 첫 문단과 같은 주장을 하되, 바로 아래 대표 작업 캡처가 그 근거가 된다.
  */
 export function Hero() {
   return (
-    <section className="ml-14 w-[min(840px,100%-56px)] max-page:mx-auto max-page:w-[min(840px,100%-32px)] pt-28 pb-4 max-page:pt-16 print:w-full print:ml-0 print:pt-0">
-      <h1 className="text-t7 font-bold leading-[1.06] tracking-tighter">
-        <span className="block">프론트엔드 개발자</span>
-        <span className="block">
-          <b className="font-bold shadow-[inset_0_-0.1em_0_var(--color-mark-line)]">신나라</b>
-          입니다.
-        </span>
-      </h1>
-      <p className="mt-8 max-w-[60ch] text-[clamp(16px,1.5vw,18px)] font-normal text-balance leading-[1.8] tracking-[-0.005em] text-ink-2">
-        2019년 Java 풀스택으로 시작해 프론트엔드로 전향했습니다. 주력 스택은 TypeScript, React,
-        Next.js입니다. 3D를 다루는 서비스 두 곳에서 뷰어를 감싼 웹 화면과 서비스 전체 검색, 디자인
-        시스템 등 다양한 작업들을 담당했습니다.
+    <section className="mx-auto w-[min(1120px,100%-48px)] pt-24 pb-6 max-page:w-[min(1120px,100%-32px)] max-page:pt-14">
+      <p className="text-t2 font-medium tracking-[0.02em] text-mark">
+        프론트엔드 개발자 · 6년 11개월
       </p>
-      <p className="mt-5 text-t1 text-mute">{KEYWORDS.join("  ·  ")}</p>
-      <dl className="mt-14 grid grid-cols-4 border-t border-ink max-page:grid-cols-2">
+      <h1 className="mt-4 max-w-[18ch] text-t7 font-bold text-balance leading-[1.12] tracking-[-0.045em]">
+        대량 목록과 복잡한 상태를 다뤄 온 <span className="text-mark">신나라</span>입니다.
+      </h1>
+      <p className="mt-7 max-w-[60ch] text-[clamp(16px,1.5vw,18px)] font-normal text-pretty leading-[1.8] text-ink-2">
+        글로벌 B2B 3D 협업 플랫폼 CLO-SET에서 4년간 일했습니다. 기획 회의에서 PO와 디자이너에게 구현
+        제약을 설명하고 범위를 함께 정해 왔고, 백엔드와는 응답 필드 축소를, 인프라 담당자와는 배포
+        구조 변경을 협의했습니다.
+      </p>
+      <dl className="mt-12 grid grid-cols-4 border-t border-ink max-page:grid-cols-2">
         {STATS.map((s) => (
           <div
-            className="border-r border-rule px-5 pt-4 pb-6 first:pl-0 last:border-r-0 max-page:border-b max-page:nth-2:border-r-0 max-page:nth-3:pl-0 print:break-inside-avoid"
+            className="border-r border-rule px-5 pt-4 pb-5 first:pl-0 last:border-r-0 max-page:border-b max-page:nth-2:border-r-0 max-page:nth-3:pl-0"
             key={s.k}
           >
             <dt className="text-t1 text-mute">{s.k}</dt>
             <dd
-              className={`mt-3 text-[clamp(24px,2.8vw,34px)] leading-none ${s.ko ? "num num-ko" : "num"}`}
+              className={`mt-3 text-[clamp(22px,2.6vw,30px)] leading-none ${s.ko ? "num num-ko" : "num"}`}
             >
               {s.n}
             </dd>
-            <dd className="mt-2.5 text-t2 font-normal leading-[1.6] text-mute">{s.d}</dd>
+            <dd className="mt-2.5 text-t2 font-normal text-pretty leading-[1.6] text-mute">
+              {s.d}
+            </dd>
           </div>
         ))}
       </dl>
-      <p className="mt-3 text-t2 font-normal text-mute">
-        성능 수치는 팀원 각자 PC에서 잰 랩 기준 평균입니다.
-      </p>
     </section>
   );
 }

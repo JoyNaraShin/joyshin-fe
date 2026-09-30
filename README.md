@@ -1,7 +1,7 @@
 # joyshin-fe
 
-프론트엔드 개발자 포트폴리오. 경력과 맡았던 작업 열한 건을 한 장에 담은 정적 사이트다.
-앞의 다섯 건은 문제·해결과 도판까지 길게 펴고, 나머지 여섯 건은 두세 줄로 훑는다.
+프론트엔드 개발자 포트폴리오. 홈은 대표 작업 세 건을 실제 서비스 캡처와 함께 크게 보여 주고,
+작업마다 `/work/:slug` 케이스 페이지에서 내 몫과 범위 밖, 문제와 해결, 도판을 편다.
 
 <https://joynarashin.github.io/joyshin-fe/>
 
@@ -27,25 +27,25 @@ pnpm build && pnpm preview
 
 ## 구조
 
-화면은 하나지만 껍데기와 지면을 갈라 뒀다. 포트폴리오 지면은 `features/portfolio/` 안에서
-닫히고, 그 바깥은 라우팅·레이아웃·공용 조각만 진다.
+화면은 홈과 케이스 페이지 둘이다. 포트폴리오 지면은 `features/portfolio/` 안에서 닫히고,
+그 바깥은 라우팅·레이아웃·공용 조각만 진다.
 
 ```
 src/
   routes/                 라우터 · 경로 상수 · 에러 화면
-  layouts/RootLayout.tsx  스킵 링크 · 스크롤 복원
-  pages/                  HomePage(섹션 순서) · NotFoundPage
+  layouts/RootLayout.tsx  상단 띠 · 스크롤 복원
+  pages/                  HomePage(섹션 순서) · CasePage · NotFoundPage
   components/ui/          Button — 404·에러 화면이 쓴다
   styles/                 theme(토큰) · base(기본 규칙) · fonts(@font-face)
 
   features/portfolio/
-    Hero · SkillSection · AiSection · CareerSection · ContactSection
-    cases/                01–05. 길게 편 작업 다섯 건
-    content/              화면에 나가는 문장 — hero · moreWork · jobs · nav · profile
+    Hero · WorkSection · CasePage · AiSection · CareerSection · ContactSection
+    cases/                케이스 페이지 본문 여섯 건
+    content/              화면에 나가는 문장 — projects · hero · moreWork · jobs · profile
     figures/              본문 도판 6개. 전부 좌표를 직접 잡은 SVG
     layout/               지면 배치 — DocSection · Item · Figure · Frame
-    components/           내용 조각 — Bullets · Overview · Prose · SubHead · SideRail
-    hooks/                useReveal · useScrollSpy
+    components/           내용 조각 — Bullets · Overview · Prose · SubHead · Shot · Cover · SiteHeader
+    hooks/                useReveal
 ```
 
 `content/` 를 따로 둔 것은 문장이 코드보다 자주 바뀌기 때문이다. 문구만 고칠 때 컴포넌트를
@@ -60,9 +60,13 @@ src/
 |---|---|
 | 도판 6개 | `features/portfolio/figures/`. 좌표를 직접 잡은 SVG 다. 좁은 폭에서 형체가 남지 않는 다섯 개는 접고 같은 내용의 문단으로 바꾼다. 막대 하나짜리 계측 도판은 접지 않는다 |
 | 스크롤 리빌 | `IntersectionObserver` 한 곳 (`hooks/useReveal.ts`). `prefers-reduced-motion` 존중 |
-| 읽는 구간 표시 | `IntersectionObserver` (`hooks/useScrollSpy.ts`). CSS 네이티브(`scroll-target-group`·`:target-current`)는 Chrome 전용이라 쓰지 않았다 |
 | 레이아웃 | Grid·Flex 와 CSS 변수만 |
 | 스크롤 위치·해시 착지 | 직접 만들지 않고 React Router 의 `<ScrollRestoration>` |
+
+## 서비스 캡처
+
+`public/work/` 의 이미지는 CLO-SET 헬프센터(support.clo-set.com)에 공개된 캡처를 줄여 WebP 로
+바꾼 것이다. 헬프센터가 그어 둔 강조 상자는 잘라 냈고, 캡션마다 출처를 붙인다.
 
 ## 폰트
 
