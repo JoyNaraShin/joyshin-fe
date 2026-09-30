@@ -16,22 +16,22 @@ import { DocSection, Hang } from "./layout/DocSection";
  * **형식**으로 가른다 — Featured 큰 카드 / Other 작은 카드 / Archive 표. 회사 일을 두 섹션으로
  * 쪼갠 사례는 찾지 못했다. 그래서 이름을 새로 짓는 대신 축을 없앴다.
  *
- * 01–11 번호가 그 축을 대신 진다. 순서가 곧 위계고, 앞 다섯만 도판과 함께 길게 편다.
+ * 01–10 번호가 그 축을 대신 진다. 순서가 곧 위계고, 앞 다섯만 도판과 함께 길게 편다.
  */
 export function SkillSection() {
   return (
-    <DocSection id="skill" title="주요 작업" meta="CLO-SET · 11건 · 2022–2026">
+    <DocSection id="skill" title="주요 작업" meta="CLO-SET · 10건 · 2022–2026">
       <LoadingCase />
       <ListRenderingCase />
       <StateCase />
       <ShowroomCase />
       <DeployCase />
 
-      {/* 06–11. 카드 격자가 아니다 — 훑는 목록이라 번호와 분류만 왼쪽에 매달고 한 줄씩 흐른다.
+      {/* 06–10. 카드 격자가 아니다 — 훑는 목록이라 번호와 분류만 왼쪽에 매달고 한 줄씩 흐른다.
           예전 `#more` 앵커로 들어오던 링크가 여기 착지하도록 id 는 그대로 둔다. */}
       <Hang className="mt-18 max-page:mt-14">
         <p className="text-t2 font-normal text-mute" id="more">
-          06–11은 항목마다 두세 줄로 적었습니다.
+          06–10은 항목마다 두세 줄로 적었습니다.
         </p>
       </Hang>
       <ul className="mt-5 list-none border-t border-rule">
