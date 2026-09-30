@@ -1,12 +1,12 @@
 import { JOBS } from "./content/jobs";
-import { DocSection, Hang } from "./layout/DocSection";
+import { COLUMN, Hang } from "./layout/DocSection";
 
 export function CareerSection() {
   return (
-    <DocSection id="career" title="경력" meta="3곳 · 2019–2026">
-      {/* ul 에 border-t 를 두면 섹션 머리의 border-b 와 겹쳐 줄이 두 개로 보인다.
-          첫 항목 위 경계는 섹션 머리가 이미 긋는다. */}
-      <ul className="mt-6 list-none">
+    <main className={`${COLUMN} pt-16 max-page:pt-10`} id="main">
+      <h1 className="text-t6 font-bold tracking-[-0.04em]">경력</h1>
+      <p className="mt-2 text-t3 text-mute">총 6년 11개월 · 3곳</p>
+      <ul className="mt-10 list-none">
         {JOBS.map((job) => (
           <li
             className="border-t border-rule py-6 first:border-t-0 print:break-inside-avoid"
@@ -36,6 +36,6 @@ export function CareerSection() {
           </li>
         ))}
       </ul>
-    </DocSection>
+    </main>
   );
 }

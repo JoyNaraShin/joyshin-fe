@@ -1,6 +1,6 @@
 # joyshin-fe
 
-프론트엔드 개발자 포트폴리오. 블로그처럼 한 단으로 읽힌다. 홈은 소개와 경력, `/work` 는 썸네일이
+프론트엔드 개발자 포트폴리오. 블로그처럼 한 단으로 읽힌다. 홈은 소개와 AI 활용, `/career` 는 경력, `/work` 는 썸네일이
 붙은 작업 목록, `/work/:slug` 는 작업 한 편(문제, 해결, 결과, 캡처와 도판)이다.
 
 <https://joynarashin.github.io/joyshin-fe/>
@@ -22,7 +22,7 @@ pnpm check            # Biome + tsc
 pnpm build && pnpm preview
 ```
 
-`pnpm build` 는 `dist/index.html` 을 `404.html`, `work/index.html`, `work/<slug>/index.html` 로도 복사한다
+`pnpm build` 는 `dist/index.html` 을 `404.html`, `work/index.html`, `career/index.html`, `work/<slug>/index.html` 로도 복사한다
 (`scripts/copy-routes.mjs`). GitHub Pages 가 SPA 폴백을 주지 않아서, 케이스 페이지 주소로 바로
 들어와도 200 으로 열리고 앱이 라우팅을 이어받게 하려는 것이다.
 

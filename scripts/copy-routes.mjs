@@ -10,5 +10,7 @@ for (const slug of slugs) {
   copyFileSync("dist/index.html", `dist/work/${slug}/index.html`);
 }
 copyFileSync("dist/index.html", "dist/work/index.html");
+mkdirSync("dist/career", { recursive: true });
+copyFileSync("dist/index.html", "dist/career/index.html");
 copyFileSync("dist/index.html", "dist/404.html");
 console.log(`routes: ${slugs.join(", ")}`);

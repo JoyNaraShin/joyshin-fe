@@ -1,4 +1,5 @@
 import { RootLayout } from "@/layouts/RootLayout";
+import { CareerPage } from "@/pages/CareerPage";
 import { CasePage } from "@/pages/CasePage";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
@@ -24,6 +25,7 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, element: <HomePage /> },
       { path: "work", element: <WorkPage /> },
+      { path: "career", element: <CareerPage /> },
       { path: "work/:slug", element: <CasePage /> },
       { path: "*", element: <NotFoundPage /> },
     ],
