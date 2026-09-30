@@ -38,7 +38,7 @@ export function DocSection({
         motion-reduce:!translate-y-0 motion-reduce:!transition-none
         print:!translate-y-0 print:!transition-none print:pt-8"
     >
-      <div className="mx-auto w-[min(1120px,100%-48px)] max-page:w-[min(1120px,100%-32px)] print:w-full">
+      <div className="mx-auto w-[min(1200px,100%-48px)] max-page:w-[min(1200px,100%-32px)] print:w-full">
         {/* 섹션 머리는 지면 폭을 다 쓴다. 본문 칼럼보다 넓은 것이 섹션임을 알린다. */}
         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-ink pb-3 print:break-after-avoid">
           <h2

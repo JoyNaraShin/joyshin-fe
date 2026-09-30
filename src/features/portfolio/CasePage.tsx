@@ -39,12 +39,12 @@ export function CasePage() {
 
   return (
     <main className="pb-32" id="main">
-      <header className="mx-auto w-[min(1120px,100%-48px)] pt-14 max-page:w-[min(1120px,100%-32px)] max-page:pt-8">
+      <header className="mx-auto w-[min(1200px,100%-48px)] pt-14 max-page:w-[min(1200px,100%-32px)] max-page:pt-8">
         <Link className="text-t2 text-mute no-underline hover:text-mark" to="/#work">
           <span aria-hidden="true">←</span> 작업 목록
         </Link>
         <p className="mt-10 font-mono text-t1 tracking-[0.06em] text-mute">CLO-SET · {p.when}</p>
-        <h1 className="mt-3 max-w-[20ch] text-t7 font-bold text-balance leading-[1.12] tracking-[-0.045em]">
+        <h1 className="mt-3 max-w-[20ch] text-[clamp(36px,5.2vw,68px)] font-bold text-balance leading-[1.1] tracking-[-0.055em]">
           {p.title}
         </h1>
         <p className="mt-5 max-w-[46ch] text-t4 font-medium text-pretty leading-[1.55] tracking-[-0.02em] text-ink-2">
@@ -52,16 +52,16 @@ export function CasePage() {
         </p>
         {/* 도판 표지는 본문에 같은 그림이 다시 나오므로 머리에는 캡처만 올린다. */}
         {p.cover.kind === "shot" ? (
-          <figure className="mt-10">
-            <div className="overflow-hidden rounded-sm border border-rule">
+          <figure className="mt-12 rounded-[28px] bg-deep p-[clamp(16px,4vw,48px)]">
+            <div className="overflow-hidden rounded-xl shadow-[0_24px_60px_-24px_rgba(0,0,0,0.55)]">
               <Cover cover={p.cover} eager natural />
             </div>
-            <figcaption className="mt-2 text-t1 text-faint">출처 CLO-SET 헬프센터</figcaption>
+            <figcaption className="mt-4 text-t2 text-deep-mute">출처 CLO-SET 헬프센터</figcaption>
           </figure>
         ) : null}
       </header>
 
-      <div className="mx-auto mt-16 grid w-[min(1120px,100%-48px)] grid-cols-12 gap-x-10 max-page:w-[min(1120px,100%-32px)] max-page:grid-cols-1 max-page:mt-12">
+      <div className="mx-auto mt-16 grid w-[min(1120px,100%-48px)] grid-cols-12 gap-x-10 max-page:w-[min(1200px,100%-32px)] max-page:grid-cols-1 max-page:mt-12">
         <aside className="col-span-4 max-page:order-2 max-page:col-span-1 max-page:mt-14">
           <div className="sticky top-[calc(var(--header-h)+32px)]">
             <dl className="border-t border-ink">
@@ -100,7 +100,7 @@ export function CasePage() {
 
       <nav
         aria-label="다음 작업"
-        className="mx-auto mt-28 w-[min(1120px,100%-48px)] border-t border-ink pt-6 max-page:w-[min(1120px,100%-32px)]"
+        className="mx-auto mt-28 w-[min(1120px,100%-48px)] border-t border-ink pt-6 max-page:w-[min(1200px,100%-32px)]"
       >
         <Link className="group block no-underline" to={`/work/${next.slug}`}>
           <span className="text-t2 text-mute">다음 작업</span>

@@ -13,11 +13,11 @@ const LINKS = [
  */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-night-line bg-night text-night-ink print:hidden">
+    <header className="sticky top-0 z-50 border-b border-ink/10 bg-sand text-ink print:hidden">
       <div className="mx-auto flex h-16 w-[min(1200px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(1200px,100%-32px)]">
         <Link className="text-t3 font-bold tracking-[-0.02em] no-underline" to="/">
           신나라
-          <span className="ml-2 text-t2 font-normal text-night-mute max-card:hidden">
+          <span className="ml-2 text-t2 font-normal text-mute max-card:hidden">
             프론트엔드 개발자
           </span>
         </Link>
@@ -26,7 +26,7 @@ export function SiteHeader() {
             {LINKS.map((l) => (
               <li key={l.to}>
                 <Link
-                  className="rounded-sm px-3 py-2 text-t2 font-medium text-night-mute no-underline hover:bg-night-2 hover:text-night-ink max-card:px-2"
+                  className="rounded-sm px-3 py-2 text-t2 font-medium text-ink-3 no-underline hover:bg-sand-2 hover:text-ink max-card:px-2"
                   to={l.to}
                 >
                   {l.label}

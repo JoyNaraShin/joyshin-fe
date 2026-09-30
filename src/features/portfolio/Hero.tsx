@@ -1,90 +1,71 @@
-import { MAIL } from "./content/profile";
+import { LINKS, MAIL } from "./content/profile";
 
 const img = (f: string) => `${import.meta.env.BASE_URL}work/${f}`;
 
 /**
- * 히어로. 채용 담당자가 스크롤 없이 보는 구간이라 글보다 화면이 먼저 보이게 한다.
- * 왼쪽은 이력서 요약 문단, 오른쪽은 실제로 만든 쇼룸의 라이브 화면과 편집 화면을 겹쳐 둔다.
- * 수치는 칸을 따로 세우지 않고 캡처 위 배지 두 개로만 올린다 — 수치가 약한 칸을 늘어놓으면
- * 오히려 빈약해 보인다.
+ * 히어로. 큰 글씨 한 문장과 실제 화면 한 장만 둔다.
+ * 캡처는 짙은 청록 판 위에 액자처럼 앉힌다 — 흰 배경 캡처가 지면과 섞이지 않고,
+ * 그라데이션이나 배지를 얹지 않아도 화면이 먼저 읽힌다.
  */
 export function Hero() {
   return (
-    <section className="overflow-hidden bg-night text-night-ink">
-      <div className="mx-auto grid w-[min(1200px,100%-48px)] grid-cols-12 items-center gap-x-12 gap-y-14 pt-20 pb-24 max-page:w-[min(1200px,100%-32px)] max-page:grid-cols-1 max-page:pt-12 max-page:pb-16">
-        <div className="col-span-6 max-page:col-span-1">
-          <p className="text-t2 font-medium text-mark-bright">
-            프론트엔드 개발자 · 경력 6년 11개월
-          </p>
-          <h1 className="mt-5 text-[clamp(34px,4.6vw,60px)] font-bold text-balance leading-[1.12] tracking-[-0.045em]">
-            대량 목록과 복잡한 상태를 다루는 <span className="text-mark-bright">신나라</span>입니다.
-          </h1>
-          <p className="mt-7 max-w-[54ch] text-[clamp(15px,1.3vw,17px)] text-pretty leading-[1.8] text-night-mute">
-            글로벌 B2B 3D 협업 플랫폼 <span className="whitespace-nowrap">CLO-SET</span>에서 수만 건
-            목록의 가상화, 워크룸 첫 화면 LCP 44% 단축, MobX 중심 상태 관리를 서버 상태와 클라이언트
-            상태로 나누는 구조 전환을 주도했습니다. PO, 디자이너와 구현 범위를 함께 정하고 백엔드,
-            인프라 담당자와 응답 필드와 배포 구조를 협의해 왔습니다.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+    <section className="mx-auto w-[min(1200px,100%-48px)] pt-20 pb-6 max-page:w-[min(1200px,100%-32px)] max-page:pt-12">
+      <p className="text-t2 font-semibold text-deep">프론트엔드 개발자 · 경력 6년 11개월</p>
+      <h1 className="mt-6 max-w-[17ch] text-[clamp(38px,6.2vw,84px)] font-bold text-balance leading-[1.08] tracking-[-0.055em] text-ink">
+        대량 목록과 복잡한 상태를 다루는{" "}
+        <span className="bg-[linear-gradient(transparent_62%,var(--color-sun)_62%,var(--color-sun)_92%,transparent_92%)] px-1">
+          신나라
+        </span>
+        입니다.
+      </h1>
+
+      <div className="mt-10 grid grid-cols-12 gap-x-10 gap-y-6 max-page:grid-cols-1">
+        <p className="col-span-7 max-w-[58ch] text-[clamp(15px,1.3vw,18px)] text-pretty leading-[1.8] text-ink-2 max-page:col-span-1">
+          글로벌 B2B 3D 협업 플랫폼 <span className="whitespace-nowrap">CLO-SET</span>에서 수만 건
+          목록의 가상화, 워크룸 첫 화면 LCP 44% 단축, MobX 중심 상태 관리를 서버 상태와 클라이언트
+          상태로 나누는 구조 전환을 주도했습니다.
+        </p>
+        <ul className="col-span-5 flex list-none flex-wrap content-start items-center gap-x-6 gap-y-2 justify-self-end max-page:col-span-1 max-page:justify-self-start">
+          <li>
             <a
-              className="rounded-full bg-mark-bright px-6 py-3 text-t3 font-semibold text-night no-underline hover:brightness-110"
-              href="#work"
-            >
-              대표 작업 보기
-            </a>
-            <a
-              className="rounded-full border border-night-line px-6 py-3 text-t3 font-medium text-night-ink no-underline hover:border-night-mute"
-              href="https://github.com/JoyNaraShin"
-              rel="noreferrer"
-              target="_blank"
-            >
-              GitHub <span aria-hidden="true">↗</span>
-            </a>
-            <a
-              className="px-2 py-3 text-t3 text-night-mute no-underline hover:text-night-ink"
+              className="rounded-full bg-deep px-5 py-2.5 text-t3 font-semibold text-deep-ink no-underline hover:bg-deep-2"
               href={`mailto:${MAIL}`}
             >
-              {MAIL}
+              연락하기
             </a>
-          </div>
-        </div>
-
-        {/* 캡처 겹침. 뒤는 편집 화면, 앞은 바이어가 보는 라이브 화면. */}
-        <div className="relative col-span-6 max-page:col-span-1">
-          <img
-            alt=""
-            className="ml-auto block w-[82%] rounded-lg opacity-70 ring-1 ring-night-line"
-            height={902}
-            src={img("showroom-editor.webp")}
-            width={1600}
-          />
-          <img
-            alt="CLO-SET 버추얼 쇼룸 라이브 화면"
-            className="relative -mt-[34%] block w-[84%] rounded-lg shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] ring-1 ring-night-line"
-            fetchPriority="high"
-            height={1016}
-            src={img("showroom-live.webp")}
-            width={1600}
-          />
-          <div className="absolute right-0 bottom-[8%] rounded-xl border border-night-line bg-night-2/95 px-5 py-4 shadow-2xl backdrop-blur max-card:static max-card:mt-4">
-            <p className="text-t1 text-night-mute">버추얼 쇼룸</p>
-            <p className="mt-1 text-[22px] leading-none font-bold tracking-[-0.03em]">
-              프론트엔드 단독{" "}
-              <span className="text-t2 font-normal text-night-mute">2022 – 2026</span>
-            </p>
-          </div>
-          <div className="absolute top-[4%] left-[-2%] rounded-xl border border-night-line bg-night-2/95 px-5 py-4 shadow-2xl backdrop-blur max-page:left-0 max-card:static max-card:mt-3">
-            <p className="text-t1 text-night-mute">가상화한 에셋 목록</p>
-            <p className="mt-1 text-[22px] leading-none font-bold tracking-[-0.03em]">
-              수만 건{" "}
-              <span className="text-t2 font-normal text-night-mute">DOM은 보이는 행만큼</span>
-            </p>
-          </div>
-        </div>
+          </li>
+          {LINKS.slice(0, 2).map((l) => (
+            <li key={l.href}>
+              <a
+                className="border-b border-ink/30 pb-0.5 text-t3 font-medium text-ink no-underline hover:border-ink"
+                href={l.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {l.label} <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-      <p className="mx-auto w-[min(1200px,100%-48px)] border-t border-night-line py-5 text-t2 text-night-mute max-page:w-[min(1200px,100%-32px)]">
-        캡처 출처 CLO-SET 헬프센터 · CLO-SET 2022.04 – 2026.04
-      </p>
+
+      <figure className="mt-14 rounded-[28px] bg-deep p-[clamp(16px,4vw,56px)] max-page:mt-10">
+        <img
+          alt="CLO-SET 버추얼 쇼룸 라이브 화면"
+          className="block h-auto w-full rounded-xl shadow-[0_24px_60px_-24px_rgba(0,0,0,0.55)]"
+          fetchPriority="high"
+          height={1016}
+          src={img("showroom-live.webp")}
+          width={1600}
+        />
+        <figcaption className="mt-5 flex flex-wrap justify-between gap-x-6 gap-y-1 text-t2 text-deep-mute">
+          <span>
+            <b className="font-semibold text-deep-ink">버추얼 쇼룸</b> 라이브 화면. 2022 하반기부터
+            2026 상반기까지 프론트엔드 단독 담당
+          </span>
+          <span>출처 CLO-SET 헬프센터</span>
+        </figcaption>
+      </figure>
     </section>
   );
 }
