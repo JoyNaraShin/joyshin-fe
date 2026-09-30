@@ -2,13 +2,11 @@ import type { ReactNode } from "react";
 
 /* note 는 측정 조건·한계처럼 본문에 섞으면 흐름을 끊는 것만 받는다. 캡션과 다른 칸이다. */
 export function Figure({
-  index,
   caption,
   note,
   fallback,
   children,
 }: {
-  index: string;
   caption: string;
   note?: ReactNode;
   /*
@@ -46,11 +44,7 @@ export function Figure({
           fallback && !note ? "max-fig:hidden" : ""
         }`}
       >
-        <span className={fallback ? "max-fig:hidden" : ""}>
-          <b className="font-normal text-mute">{index}</b>
-          <span aria-hidden="true"> · </span>
-          {caption}
-        </span>
+        <span className={fallback ? "max-fig:hidden" : ""}>{caption}</span>
         {note ? (
           <span
             className={`mt-2 block border-t border-rule pt-2 text-[11.5px] leading-[1.6] ${

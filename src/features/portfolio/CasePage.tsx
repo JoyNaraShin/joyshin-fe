@@ -20,10 +20,8 @@ const BODIES: Record<string, ComponentType> = {
 };
 
 /**
- * 케이스 한 편. 머리(제목·역할·기간·스택) → 대표 이미지 → 맡은 일 → 본문 순이다.
- *
- * 「맡은 일」 칸을 본문 옆에 고정한다. 읽는 사람이 가장 먼저 확인하는 것이
- * "이 중 무엇을 이 사람이 했나"다.
+ * 케이스 한 편. 머리(제목, 결과 한 줄) → 대표 캡처 → 본문이고, 옆 칸에 역할과 기간,
+ * 스택, 맡은 일을 고정한다. 결론은 머리의 결과 한 줄 하나뿐이다.
  */
 export function CasePage() {
   const { slug = "" } = useParams();
@@ -46,21 +44,6 @@ export function CasePage() {
         <p className="mt-5 max-w-[46ch] text-t4 font-medium text-pretty leading-[1.55] tracking-[-0.02em] text-ink-2">
           {p.result}
         </p>
-        <dl className="mt-10 grid grid-cols-3 border-t border-ink max-page:grid-cols-1">
-          {[
-            ["역할", p.role],
-            ["기간", p.when],
-            ["스택", p.stack.join(", ")],
-          ].map(([k, v]) => (
-            <div
-              className="border-r border-rule py-4 pr-5 not-first:pl-5 last:border-r-0 max-page:border-r-0 max-page:border-b max-page:not-first:pl-0"
-              key={k}
-            >
-              <dt className="text-t1 text-mute">{k}</dt>
-              <dd className="mt-1.5 text-t3 font-medium">{v}</dd>
-            </div>
-          ))}
-        </dl>
         {/* 도판 표지는 본문에 같은 그림이 다시 나오므로 머리에는 캡처만 올린다. */}
         {p.cover.kind === "shot" ? (
           <div className="mt-10 overflow-hidden rounded-sm border border-rule">
@@ -71,8 +54,20 @@ export function CasePage() {
 
       <div className="mx-auto mt-16 grid w-[min(1120px,100%-48px)] grid-cols-12 gap-x-10 max-page:w-[min(1120px,100%-32px)] max-page:grid-cols-1 max-page:mt-12">
         <aside className="col-span-4 max-page:col-span-1 max-page:mb-12">
-          <div className="sticky top-[calc(var(--header-h)+84px)]">
-            <h2 className="text-t2 font-semibold text-mark">맡은 일</h2>
+          <div className="sticky top-[calc(var(--header-h)+32px)]">
+            <dl className="border-t border-ink">
+              {[
+                ["역할", p.role],
+                ["기간", p.when],
+                ["스택", p.stack.join(", ")],
+              ].map(([k, v]) => (
+                <div className="border-b border-rule py-3" key={k}>
+                  <dt className="text-t1 text-mute">{k}</dt>
+                  <dd className="mt-1 text-t3 font-medium text-pretty">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <h2 className="mt-8 text-t2 font-semibold text-mark">맡은 일</h2>
             <ul className="mt-3 list-none">
               {p.mine.map((m) => (
                 <li

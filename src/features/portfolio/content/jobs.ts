@@ -20,12 +20,16 @@ export const JOBS = [
       "TypeScript",
       "TanStack Query",
       "Tailwind CSS",
+      "TanStack Virtual",
+      "react-virtuoso",
       "Recoil",
       "Jotai",
       "styled-components",
       "SCSS",
       "MobX",
       "Yarn workspaces",
+      "Vite",
+      "Datadog RUM",
     ],
   },
   {
@@ -35,7 +39,7 @@ export const JOBS = [
     lead: "디지털트윈과 3D 공간 기술 기업",
     bullets: [
       "Pivo(미디어 클라우드와 3D 도면 투어 웹 서비스) 신규 기능 개발, 유지보수, 다국어 대응",
-      "Beamo(3D 도면 솔루션)에서 3D 공간에 스팟을 배치하는 기능 개발과 버그 수정. lerna 멀티 패키지 구조",
+      "Beamo(3D 도면 솔루션)에서 3D 공간에 스팟을 배치하는 기능 개발과 버그 수정 (Vue, lerna 멀티 패키지)",
     ],
     stack: ["Vue 3", "TypeScript", "Tailwind CSS", "Vuex", "lerna"],
   },
@@ -49,6 +53,6 @@ export const JOBS = [
       "선진 직원 성과 관리 시스템에서 Vue.js로 화면을 개발하고 오픈 후 유지보수 담당. 이 경험으로 프론트엔드로 전향",
       "AWS(EC2, RDS, Route 53, CloudFront)로 프로덕션 환경 구축",
     ],
-    stack: ["Java", "Spring", "Vue.js", "JSP", "jQuery", "PostgreSQL", "MySQL", "AWS"],
+    stack: ["Java", "Spring", "Vue.js", "JSP", "jQuery", "AWS"],
   },
 ];

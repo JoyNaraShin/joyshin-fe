@@ -94,7 +94,7 @@ export function WorkSection() {
 
       <section aria-labelledby="more-title" className={`${wrap} pt-28 max-page:pt-20`} id="more">
         <SectionHead id="more-title" title="다른 작업" />
-        <div className="mt-10 grid grid-cols-3 gap-x-8 gap-y-12 max-page:grid-cols-1">
+        <div className="mt-10 grid grid-cols-2 gap-x-10 gap-y-12 max-page:grid-cols-1">
           {MORE.map((p) => (
             <MoreCard key={p.slug} p={p} />
           ))}

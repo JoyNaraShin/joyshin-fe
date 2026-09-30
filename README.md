@@ -1,7 +1,7 @@
 # joyshin-fe
 
 프론트엔드 개발자 포트폴리오. 홈은 대표 작업 세 건을 실제 서비스 캡처와 함께 크게 보여 주고,
-작업마다 `/work/:slug` 케이스 페이지에서 내 몫과 범위 밖, 문제와 해결, 도판을 편다.
+작업마다 `/work/:slug` 케이스 페이지에서 맡은 일, 문제와 해결, 결과, 도판을 편다.
 
 <https://joynarashin.github.io/joyshin-fe/>
 
@@ -42,7 +42,7 @@ src/
     Hero · WorkSection · CasePage · AiSection · CareerSection · ContactSection
     cases/                케이스 페이지 본문 여섯 건
     content/              화면에 나가는 문장 — projects · hero · moreWork · jobs · profile
-    figures/              본문 도판 6개. 전부 좌표를 직접 잡은 SVG
+    figures/              본문 도판 5개. 전부 좌표를 직접 잡은 SVG
     layout/               지면 배치 — DocSection · Item · Figure · Frame
     components/           내용 조각 — Bullets · Overview · Prose · SubHead · Shot · Cover · SiteHeader
     hooks/                useReveal
@@ -58,7 +58,7 @@ src/
 
 | | |
 |---|---|
-| 도판 6개 | `features/portfolio/figures/`. 좌표를 직접 잡은 SVG 다. 좁은 폭에서 형체가 남지 않는 다섯 개는 접고 같은 내용의 문단으로 바꾼다. 막대 하나짜리 계측 도판은 접지 않는다 |
+| 도판 5개 | `features/portfolio/figures/`. 좌표를 직접 잡은 SVG 다. 좁은 폭에서 형체가 남지 않는 네 개는 접고 같은 내용의 문단으로 바꾼다. 막대 하나짜리 계측 도판은 접지 않는다 |
 | 스크롤 리빌 | `IntersectionObserver` 한 곳 (`hooks/useReveal.ts`). `prefers-reduced-motion` 존중 |
 | 레이아웃 | Grid·Flex 와 CSS 변수만 |
 | 스크롤 위치·해시 착지 | 직접 만들지 않고 React Router 의 `<ScrollRestoration>` |

@@ -1,17 +1,9 @@
 import type { ReactNode } from "react";
 
 /**
- * 케이스 요약 — STAR 를 두괄식으로 뒤집은 배치다.
- *
- * lead 가 Result 다. 제목 바로 밑에 큰 글씨 한 줄로 두어 결론이 먼저 읽히게 하고,
- * 그 아래 박스가 문제(S) · 맡은 범위(T) · 해결(A) 순으로 근거를 댄다.
- * 맡은 범위 칸에는 내 담당 경계를 적는다 — "우리 팀이"로 뭉뚱그리지 않기 위한 칸이다.
- *
- * 라벨은 「문제 / 맡은 범위 / 해결」이다. 본문 소제목이 「문제 / 해결」이라 같은 것을 두 어휘로
- * 부르면 요약 박스가 본문과 따로 논다.
- *
- * 고른 이유 · 다시 한다면은 STAR 밖이지만 면접에서 사례마다 따라오는 질문이라 같은 박스에 둔다.
- * 답이 없는 칸은 넘긴다 — 지어내지 않는다.
+ * 사례 끝에 붙는 판단 칸. 결론과 맡은 일은 케이스 페이지 머리와 옆 칸이 이미 말하므로
+ * 여기에는 본문 불릿이 답하지 않는 두 가지만 둔다 — 왜 그렇게 골랐나, 무엇이 아쉬웠나.
+ * 답이 없는 칸은 넘긴다.
  */
 function Row({ term, children }: { term: string; children: ReactNode }) {
   return (
@@ -24,33 +16,12 @@ function Row({ term, children }: { term: string; children: ReactNode }) {
   );
 }
 
-export function Overview({
-  lead,
-  situation,
-  task,
-  action,
-  why,
-  again,
-}: {
-  lead: ReactNode;
-  situation: string;
-  task: string;
-  action: ReactNode;
-  why?: ReactNode;
-  again?: ReactNode;
-}) {
+export function Overview({ why, regret }: { why?: ReactNode; regret?: ReactNode }) {
+  if (!why && !regret) return null;
   return (
-    <>
-      <p className="mt-4 text-t4 font-medium text-balance leading-[1.55] tracking-[-0.028em] text-ink [&_.num]:text-t3 [&_.num]:tracking-[-0.01em]">
-        {lead}
-      </p>
-      <dl className="mt-7 border-t border-ink">
-        <Row term="문제">{situation}</Row>
-        <Row term="맡은 범위">{task}</Row>
-        <Row term="해결">{action}</Row>
-        {why ? <Row term="고른 이유">{why}</Row> : null}
-        {again ? <Row term="다시 한다면">{again}</Row> : null}
-      </dl>
-    </>
+    <dl className="mt-12 border-t border-ink">
+      {why ? <Row term="고른 이유">{why}</Row> : null}
+      {regret ? <Row term="아쉬운 점">{regret}</Row> : null}
+    </dl>
   );
 }

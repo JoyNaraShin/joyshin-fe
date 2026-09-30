@@ -16,7 +16,7 @@ export type Project = {
   when: string;
   /** 이력서의 역할 표현 그대로 — 단독 담당 / 교체 주도 / 리드 */
   role: string;
-  /** 카드와 케이스 머리에 붙는 결과 한 줄 */
+  /** 카드와 케이스 머리에 붙는 결과 한 줄. 역할이 아니라 무엇이 나아졌나를 적는다. */
   result: string;
   summary: string;
   stack: string[];
@@ -37,26 +37,28 @@ export const FEATURED: Project[] = [
     title: "버추얼 쇼룸",
     when: "2022 하반기 – 2026 상반기",
     role: "프론트엔드 단독 담당",
-    result: "초기 개발부터 퇴사 시점까지 이어진 기능 추가와 개선을 프론트엔드 단독으로 담당",
+    result:
+      "JSON 문서 하나로 오가던 쇼룸 데이터를 엔티티 단위 atom으로 정규화하고, 편집과 라이브를 페이지별 컴포넌트로 분리",
     summary:
-      "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 공간과 스팟 전체가 JSON 문서 하나로 오가는 API에 맞춰 편집 상태를 설계",
+      "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 초기 개발부터 퇴사 시점까지 이어진 기능 추가와 개선을 담당",
     stack: ["React", "Recoil", "MobX", "TypeScript"],
     cover: shot("showroom-live.webp", "바이어에게 공개된 버추얼 쇼룸 라이브 페이지"),
     mine: [
       "편집 페이지와 라이브 페이지 개발",
-      "MobX만 쓰던 코드베이스에 Recoil 도입, 문서를 엔티티 단위 atom으로 정규화",
-      "mode prop 분기 컴포넌트를 페이지별 컴포넌트로 분리",
-      "배경 타일 분할 로딩 전환에 맞춘 업로드 흐름 구현",
+      "Recoil 도입과 엔티티 단위 atom 정규화",
+      "mode prop 분기 컴포넌트를 페이지별로 분리",
+      "배경 타일 분할 로딩에 맞춘 업로드 흐름",
     ],
   },
   {
     slug: "list-rendering",
     title: "목록 렌더링 성능 개선",
-    when: "2023 하반기, 2025",
+    when: "2023 하반기, 2025 상반기 – 하반기",
     role: "교체 주도",
-    result: "수만 건 목록에서도 렌더링되는 DOM 노드를 화면에 보이는 행만큼으로 유지",
+    result:
+      "수만 건 목록에서도 DOM 노드를 화면에 보이는 행만큼으로 유지. 적용 후 목록 성능 관련 사용자 리포트 감소",
     summary:
-      "스크롤마다 아이템 위치를 계산하던 오래된 무한 스크롤 라이브러리를 VirtuosoGrid, TanStack Virtual 순으로 두 차례 교체",
+      "리플로우와 프레임 드롭을 일으키던 오래된 무한 스크롤 라이브러리를 VirtuosoGrid, TanStack Virtual 순으로 교체",
     stack: ["TanStack Virtual", "react-virtuoso", "React"],
     cover: shot("workroom-list.webp", "에셋 카드가 격자로 늘어선 CLO-SET 워크룸 목록"),
     mine: [
@@ -70,15 +72,33 @@ export const FEATURED: Project[] = [
     title: "워크룸 초기 로딩 개선",
     when: "2024 하반기",
     role: "제안과 개발",
-    result: "DOMContentLoaded 46%, LCP 44% 단축",
+    result: "DOMContentLoaded 2.47s → 1.33s, LCP 2.91s → 1.64s",
     summary: "워크룸 첫 화면이 느린 문제를 Performance 패널과 Lighthouse로 계측해 과제로 제안",
     stack: ["Next.js", "Cloudflare Images", "Lighthouse"],
     cover: { kind: "figure", figure: "load" },
     mine: [
       "계측과 과제 제안",
       "코드 스플리팅과 모듈 초기화 지연",
-      "Next.js Image 커스텀 로더로 Cloudflare 이미지 리사이징 공통 적용",
-      "쓰지 않는 응답 필드를 참조처 전수 조사로 추려 백엔드와 협의해 제거",
+      "Next.js Image 커스텀 로더로 이미지 리사이징 공통 적용",
+      "쓰지 않는 응답 필드를 추려 백엔드와 협의해 제거",
+    ],
+  },
+  {
+    slug: "renewal",
+    title: "1차 서비스 리뉴얼",
+    when: "2023 하반기 – 2024 상반기",
+    role: "리뉴얼 주도, 뷰어 설계와 개발",
+    result:
+      "MobX 싱글턴 스토어에 쌓이던 상태를 서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil로 분리",
+    summary:
+      "서비스 확장에 맞춘 프론트엔드 구조 재설계. 모노레포 도구, 패키지 구조, 상태 관리 방식을 직접 결정",
+    stack: ["Yarn workspaces", "TanStack Query", "Recoil"],
+    cover: { kind: "figure", figure: "state" },
+    mine: [
+      "Yarn workspaces 모노레포 구성과 패키지 분리",
+      "API 클라이언트 독립 패키지화",
+      "서버 상태와 UI 상태 분리, VAC 패턴 도입",
+      "3D, 2D, 렌더 뷰어 전체 설계와 개발",
     ],
   },
 ];
@@ -89,9 +109,10 @@ export const MORE: Project[] = [
     title: "요금제 개편과 사용량 제한",
     when: "2024 하반기 – 2025 상반기",
     role: "개발",
-    result: "Pricing 페이지, 사용량 화면, 플랜별 한도, BD 팀 백오피스 개발",
-    summary: "Free, Standard, Premium 요금제 도입에 맞춘 화면과 사용량 제한 개발",
-    stack: ["Next.js", "TanStack Query"],
+    result: "BD 팀이 스프레드시트로 하던 고객사 크레딧과 플랜 관리를 백오피스로 이관",
+    summary:
+      "Free, Standard, Premium 요금제 도입에 맞춰 Pricing 페이지, 사용량 화면, 플랜별 한도, 백오피스 개발",
+    stack: ["React", "TypeScript"],
     cover: shot(
       "pricing-plans.webp",
       "Free, Standard, Premium 세 요금제 카드가 놓인 Pricing 페이지",
@@ -99,9 +120,9 @@ export const MORE: Project[] = [
     ),
     mine: [
       "Pricing 페이지와 Admin Console 사용량 화면",
-      "파일 업로드와 임베드 뷰의 플랜별 한도 적용",
-      "권한별 버튼을 보여 주는 한도 초과 공통 안내 페이지",
-      "BD 팀 백오피스의 요금 계산, 플랜 변경, 메모 기능",
+      "파일 업로드와 임베드 뷰의 플랜별 한도",
+      "권한별 버튼이 다른 한도 초과 안내 페이지",
+      "백오피스의 요금 계산, 플랜 변경, 메모 기능",
     ],
   },
   {
@@ -109,31 +130,14 @@ export const MORE: Project[] = [
     title: "프론트엔드 배포 분리",
     when: "2026 상반기",
     role: "설계와 검증 리드",
-    result: "설계부터 테스트 서버 검증까지 리드, 운영 반영 전 퇴사",
-    summary:
-      "React SPA의 index.html이 Next.js 서버 이미지에 실려 있던 구조를 분리하는 배포 파이프라인 설계",
+    result: "롤백을 index.html의 버전 참조만 되돌리는 작업으로 단순화한 배포 구조 설계",
+    summary: "프론트엔드만 바뀌어도 Next.js 서버 이미지를 다시 빌드하던 구조를 분리",
     stack: ["GitHub Actions", "Cloudflare Pages"],
     cover: { kind: "figure", figure: "deploy" },
     mine: [
       "Cloudflare Pages 선택과 GitHub Actions 파이프라인 설계",
-      "index.html이 가리키는 버전을 되돌리는 롤백 방식",
+      "버전 참조 방식의 배포와 롤백",
       "제안서로 인프라 담당자와 리스크 검토, 테스트 서버 단계별 검증",
-    ],
-  },
-  {
-    slug: "renewal",
-    title: "1차 서비스 리뉴얼",
-    when: "2023 하반기 – 2024 상반기",
-    role: "리뉴얼 주도, 뷰어 설계와 개발",
-    result: "모노레포 도구, 패키지 구조, 상태 관리 방식을 직접 결정하고 뷰어 전체를 설계, 개발",
-    summary: "서비스 확장에 맞춘 프론트엔드 구조 재설계",
-    stack: ["Yarn workspaces", "TanStack Query", "Recoil"],
-    cover: { kind: "figure", figure: "state" },
-    mine: [
-      "Yarn workspaces 모노레포 구성과 패키지 분리",
-      "API 클라이언트 독립 패키지화",
-      "서버 상태는 TanStack Query, UI 상태는 Recoil로 분리",
-      "3D, 2D, 렌더 뷰어 전체 설계와 개발",
     ],
   },
 ];

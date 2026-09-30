@@ -5,8 +5,8 @@ export function HomePage() {
     <main id="main" className="w-full">
       <Hero />
       <WorkSection />
-      <AiSection />
       <CareerSection />
+      <AiSection />
       <ContactSection />
     </main>
   );

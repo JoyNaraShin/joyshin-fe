@@ -19,7 +19,7 @@ const FOCUS = {
   load: [0, 620],
   list: [0, 560],
   state: [0, 530],
-  deploy: [290, 330],
+  deploy: [300, 320],
 } as const;
 
 /**

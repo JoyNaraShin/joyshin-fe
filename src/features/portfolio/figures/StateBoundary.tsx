@@ -16,7 +16,7 @@ const SCREENS = [
 
 /** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
 export const stateBoundaryFallback =
-  "서버에서 온 값은 TanStack Query 한 곳에만 둡니다. 뷰어와 사이드 패널은 각자 자기 화면 상태만 들고 서로 이어지지 않습니다.";
+  "서버 데이터는 TanStack Query 캐시에만 두고 전역 스토어에 복제하지 않음. 뷰어와 사이드 패널은 각자의 UI 상태만 가짐.";
 
 export function StateBoundary() {
   return (
@@ -24,7 +24,7 @@ export function StateBoundary() {
       <svg
         viewBox="0 0 620 186"
         role="img"
-        aria-label="서버에서 온 값은 TanStack Query 한 곳에 두고 전역 스토어로 복사하지 않습니다. 경계 오른쪽의 뷰어와 사이드 패널은 각자 자기 화면 상태만 들고 서로 이어지지 않습니다."
+        aria-label="서버 데이터는 TanStack Query 캐시에만 두고 전역 스토어에 복제하지 않음. 뷰어와 사이드 패널은 각자의 UI 상태만 가짐."
       >
         <defs>
           <marker
@@ -49,10 +49,10 @@ export function StateBoundary() {
           y2={180}
         />
         <text className="fill-mute text-t1" x={292} y={22} textAnchor="end">
-          서버에서 온 값
+          서버 상태
         </text>
         <text className="fill-mute text-t1" x={308} y={22}>
-          화면이 들고 있는 값
+          UI 상태
         </text>
 
         {/* 서버 → 단일 출처 */}
@@ -79,7 +79,7 @@ export function StateBoundary() {
           TanStack Query
         </text>
         <text className="fill-mark text-t1" x={102} y={92}>
-          단일 출처
+          서버 데이터 캐시
         </text>
 
         {/* 복사해 두지 않는 자리 */}
@@ -122,7 +122,7 @@ export function StateBoundary() {
               {s.name}
             </text>
             <text className="fill-mute text-t1" x={374} y={s.y + 35}>
-              자기 화면 상태
+              Recoil atom
             </text>
           </g>
         ))}

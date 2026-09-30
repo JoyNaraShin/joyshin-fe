@@ -10,7 +10,7 @@ import { Frame } from "../layout/Frame";
  */
 /** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
 export const deployTopologyFallback =
-  "전에는 번들 청크를 클라우드에 올리고 index.html 하나를 Next 프로젝트의 public 폴더에 두어 Docker 서버 이미지에 함께 실어 배포했습니다. 제안한 구조에서는 GitHub Actions가 청크를 스토리지에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next 프로젝트는 자기 배포를 따로 갖습니다.";
+  "기존에는 번들 청크만 스토리지에 올리고 index.html은 Next.js 서버의 Docker 이미지에 포함해 배포. 제안한 구조에서는 GitHub Actions가 청크를 스토리지에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next.js 서버는 별도 배포.";
 
 export function DeployTopology() {
   return (
@@ -18,7 +18,7 @@ export function DeployTopology() {
       <svg
         viewBox="0 0 620 176"
         role="img"
-        aria-label="전에는 번들 청크를 클라우드에 올리고 index.html 하나를 Next 프로젝트의 public 폴더에 두어 Docker 서버 이미지에 함께 실어 배포했습니다. 제안한 구조에서는 GitHub Actions 가 청크를 스토리지에 버전별로 올리고 index.html 만 Cloudflare Pages 로 배포하며, Next 프로젝트는 자기 배포를 따로 갖습니다."
+        aria-label="기존에는 번들 청크만 스토리지에 올리고 index.html은 Next.js 서버의 Docker 이미지에 포함해 배포. 제안한 구조에서는 GitHub Actions가 청크를 스토리지에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next.js 서버는 별도 배포."
       >
         <defs>
           <marker
@@ -42,7 +42,7 @@ export function DeployTopology() {
           y2={170}
         />
         <text className="fill-mute text-t1" x={288} y={20} textAnchor="end">
-          전
+          기존
         </text>
         <text className="fill-mark text-t1" x={304} y={20}>
           제안한 구조
@@ -58,7 +58,7 @@ export function DeployTopology() {
           y={46}
         />
         <text className="fill-mute text-t1" x={30} y={66}>
-          Next 프로젝트 서버 · Docker
+          Next.js 서버 Docker 이미지
         </text>
         <rect
           className="fill-none stroke-rule-2 [stroke-width:1.2]"
@@ -75,7 +75,7 @@ export function DeployTopology() {
           서버 이미지에 포함
         </text>
         <text className="fill-mute text-t1" x={30} y={145}>
-          번들 청크는 클라우드에 별도 업로드
+          번들 청크는 스토리지에 따로 업로드
         </text>
 
         {/* 제안한 구조 — 정적 배포 한 줄, Next 는 따로 */}
@@ -122,10 +122,10 @@ export function DeployTopology() {
           y={110}
         />
         <text className="fill-mute text-t2" x={326} y={127}>
-          Next 프로젝트
+          Next.js 서버
         </text>
         <text className="fill-mute text-t1" x={326} y={142}>
-          자기 배포를 따로
+          별도 배포
         </text>
       </svg>
     </Frame>
