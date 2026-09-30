@@ -20,10 +20,10 @@ const BODIES: Record<string, ComponentType> = {
 };
 
 /**
- * 케이스 한 편. 머리(제목·역할·기간·스택) → 대표 이미지 → 내 몫과 범위 밖 → 본문 순이다.
+ * 케이스 한 편. 머리(제목·역할·기간·스택) → 대표 이미지 → 맡은 일 → 본문 순이다.
  *
- * 「내 몫」 칸을 본문보다 먼저 둔다. 읽는 사람이 가장 먼저 확인하는 것이 "이 중 무엇을
- * 이 사람이 했나"이고, 같은 서비스의 작업을 다른 사람도 자기 포트폴리오에 올린다.
+ * 「맡은 일」 칸을 본문 옆에 고정한다. 읽는 사람이 가장 먼저 확인하는 것이
+ * "이 중 무엇을 이 사람이 했나"다.
  */
 export function CasePage() {
   const { slug = "" } = useParams();
@@ -72,7 +72,7 @@ export function CasePage() {
       <div className="mx-auto mt-16 grid w-[min(1120px,100%-48px)] grid-cols-12 gap-x-10 max-page:w-[min(1120px,100%-32px)] max-page:grid-cols-1 max-page:mt-12">
         <aside className="col-span-4 max-page:col-span-1 max-page:mb-12">
           <div className="sticky top-[calc(var(--header-h)+84px)]">
-            <h2 className="text-t2 font-semibold text-mark">제가 한 일</h2>
+            <h2 className="text-t2 font-semibold text-mark">맡은 일</h2>
             <ul className="mt-3 list-none">
               {p.mine.map((m) => (
                 <li
@@ -83,21 +83,6 @@ export function CasePage() {
                 </li>
               ))}
             </ul>
-            {p.notMine ? (
-              <>
-                <h2 className="mt-8 text-t2 font-semibold text-mute">제 몫이 아닌 것</h2>
-                <ul className="mt-3 list-none">
-                  {p.notMine.map((m) => (
-                    <li
-                      className="relative mt-2 pl-4 text-t3 text-pretty leading-[1.65] text-mute before:absolute before:top-[0.8em] before:left-0 before:h-1.5 before:w-1.5 before:rounded-full before:border before:border-rule-3 before:content-['']"
-                      key={m}
-                    >
-                      {m}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : null}
           </div>
         </aside>
         {/* 사례 컴포넌트는 원래 홈 지면의 매달린 레이블 칼럼을 전제로 도판을 왼쪽으로 당긴다.
