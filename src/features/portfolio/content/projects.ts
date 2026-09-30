@@ -149,4 +149,8 @@ export const MORE: Project[] = [
   },
 ];
 
-export const PROJECTS = [...FEATURED, ...MORE];
+/* 홈 카드와 케이스 페이지의 "다음 작업"이 같은 순서를 따른다. */
+const ORDER = ["showroom", "loading", "list-rendering", "renewal", "deploy", "pricing"];
+export const PROJECTS = [...FEATURED, ...MORE].sort(
+  (a, b) => ORDER.indexOf(a.slug) - ORDER.indexOf(b.slug),
+);

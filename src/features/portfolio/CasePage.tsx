@@ -7,8 +7,16 @@ import { PricingCase } from "./cases/PricingCase";
 import { ShowroomCase } from "./cases/ShowroomCase";
 import { StateCase } from "./cases/StateCase";
 import { Cover } from "./components/Cover";
+import { Metrics } from "./components/Metrics";
 import { PROJECTS } from "./content/projects";
+import { DeployTopology } from "./figures/DeployTopology";
+import { StateBoundary } from "./figures/StateBoundary";
 import { BareItem } from "./layout/Item";
+
+const HEAD_FIGURES: Record<string, ComponentType> = {
+  state: StateBoundary,
+  deploy: DeployTopology,
+};
 
 const BODIES: Record<string, ComponentType> = {
   showroom: ShowroomCase,
@@ -50,7 +58,7 @@ export function CasePage() {
         <p className="mt-5 max-w-[46ch] text-t4 font-medium text-pretty leading-[1.55] tracking-[-0.02em] text-ink-2">
           {p.result}
         </p>
-        {/* 도판 표지는 본문에 같은 그림이 다시 나오므로 머리에는 캡처만 올린다. */}
+        {/* 머리 그림: 캡처는 청록 판에, 수치와 도식은 모래색 판에. 도식은 본문에서 반복하지 않는다. */}
         {p.cover.kind === "shot" ? (
           <figure className="mt-12 rounded-[28px] bg-deep p-[clamp(16px,4vw,48px)]">
             <div className="overflow-hidden rounded-xl shadow-[0_24px_60px_-24px_rgba(0,0,0,0.55)]">
@@ -58,10 +66,23 @@ export function CasePage() {
             </div>
             <figcaption className="mt-4 text-t2 text-deep-mute">출처 CLO-SET 헬프센터</figcaption>
           </figure>
-        ) : null}
+        ) : (
+          <figure className="mt-12 flex justify-center rounded-[28px] bg-sand-2 p-[clamp(20px,4vw,56px)]">
+            {p.cover.kind === "metric" ? (
+              <Metrics />
+            ) : p.cover.kind === "figure" && HEAD_FIGURES[p.cover.figure] ? (
+              <div className="w-full max-w-[820px] rounded-xl bg-surface p-[clamp(16px,3vw,32px)] shadow-[0_18px_40px_-22px_rgba(0,0,0,0.35)]">
+                {(() => {
+                  const F = HEAD_FIGURES[p.cover.figure];
+                  return <F />;
+                })()}
+              </div>
+            ) : null}
+          </figure>
+        )}
       </header>
 
-      <div className="mx-auto mt-16 grid w-[min(1120px,100%-48px)] grid-cols-12 gap-x-10 max-page:w-[min(1200px,100%-32px)] max-page:grid-cols-1 max-page:mt-12">
+      <div className="mx-auto mt-16 grid w-[min(1200px,100%-48px)] grid-cols-12 gap-x-10 max-page:w-[min(1200px,100%-32px)] max-page:grid-cols-1 max-page:mt-12">
         <aside className="col-span-4 max-page:order-2 max-page:col-span-1 max-page:mt-14">
           <div className="sticky top-[calc(var(--header-h)+32px)]">
             <dl className="border-t border-ink">
@@ -76,8 +97,8 @@ export function CasePage() {
                 </div>
               ))}
             </dl>
-            <h2 className="mt-8 text-t2 font-semibold text-mark max-page:hidden">맡은 일</h2>
-            <ul className="mt-3 list-none max-page:hidden">
+            <h2 className="mt-8 text-t2 font-semibold text-mark">맡은 일</h2>
+            <ul className="mt-3 list-none">
               {p.mine.map((m) => (
                 <li
                   className="relative mt-2 pl-4 text-t3 text-pretty leading-[1.65] text-ink before:absolute before:top-[0.8em] before:left-0 before:h-1.5 before:w-1.5 before:rounded-full before:bg-mark before:content-['']"
@@ -100,7 +121,7 @@ export function CasePage() {
 
       <nav
         aria-label="다음 작업"
-        className="mx-auto mt-28 w-[min(1120px,100%-48px)] border-t border-ink pt-6 max-page:w-[min(1200px,100%-32px)]"
+        className="mx-auto mt-28 w-[min(1200px,100%-48px)] border-t border-ink pt-6 max-page:w-[min(1200px,100%-32px)]"
       >
         <Link className="group block no-underline" to={`/work/${next.slug}`}>
           <span className="text-t2 text-mute">다음 작업</span>

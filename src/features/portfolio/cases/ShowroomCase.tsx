@@ -59,11 +59,6 @@ export function ShowroomCase() {
       <Figure caption="컴포넌트 재사용 범위, 분리 전과 후" fallback={reuseBoundaryFallback}>
         <ReuseBoundary />
       </Figure>
-
-      <SubHead>현황</SubHead>
-      <Bullets>
-        <li>초기 개발부터 퇴사 시점까지 이어진 기능 추가와 개선을 프론트엔드 단독으로 담당</li>
-      </Bullets>
     </Item>
   );
 }

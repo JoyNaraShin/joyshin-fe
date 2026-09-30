@@ -75,14 +75,7 @@ export function LoadTimeChart() {
             <text className="fill-mute text-t1 font-normal" x={32} y={row.y + 13}>
               이전
             </text>
-            <rect
-              className="fill-rule-2 [transform-box:fill-box] [transform-origin:left_center] group-data-[in]:animate-gbar motion-reduce:group-data-[in]:animate-none"
-              x={74}
-              y={row.y}
-              width={row.oldW}
-              height={17}
-              rx={1}
-            />
+            <rect className="fill-rule-2" x={74} y={row.y} width={row.oldW} height={17} rx={1} />
             <text className="fill-mute font-mono text-t2" x={74 + row.oldW + 9} y={row.y + 13}>
               {row.from.toFixed(2)}s
             </text>

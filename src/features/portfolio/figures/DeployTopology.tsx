@@ -16,7 +16,7 @@ export function DeployTopology() {
   return (
     <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full">
       <svg
-        viewBox="0 0 620 176"
+        viewBox="0 0 620 180"
         role="img"
         aria-label="기존에는 번들 청크만 스토리지에 올리고 index.html은 Next.js 서버의 Docker 이미지에 포함해 배포. 제안한 구조에서는 GitHub Actions가 청크를 스토리지에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next.js 서버는 별도 배포."
       >
@@ -74,7 +74,7 @@ export function DeployTopology() {
         <text className="fill-mute text-t1" x={44} y={122}>
           서버 이미지에 포함
         </text>
-        <text className="fill-mute text-t1" x={30} y={141}>
+        <text className="fill-mute text-t1" x={16} y={170}>
           번들 청크는 스토리지에 따로 업로드
         </text>
 

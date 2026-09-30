@@ -1,7 +1,5 @@
 import { Bullets } from "../components/Bullets";
 import { SubHead } from "../components/SubHead";
-import { DeployTopology, deployTopologyFallback } from "../figures/DeployTopology";
-import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 
 export function DeployCase() {
@@ -32,9 +30,6 @@ export function DeployCase() {
           단계별 검증
         </li>
       </Bullets>
-      <Figure caption="기존 배포 구조와 제안한 구조" fallback={deployTopologyFallback}>
-        <DeployTopology />
-      </Figure>
 
       <SubHead>현황</SubHead>
       <Bullets>

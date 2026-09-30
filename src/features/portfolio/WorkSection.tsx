@@ -1,36 +1,12 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Cover } from "./components/Cover";
+import { Metrics } from "./components/Metrics";
 import { CARDS } from "./content/moreWork";
 import { PROJECTS, type Project } from "./content/projects";
 
 const wrap = "mx-auto w-[min(1200px,100%-48px)] max-page:w-[min(1200px,100%-32px)]";
 const bySlug = (slug: string) => PROJECTS.find((p) => p.slug === slug) as Project;
-
-/** 로딩 작업의 표지. 수치가 곧 그림이다. */
-function Metrics() {
-  return (
-    <dl className="grid w-full max-w-[440px] gap-6">
-      {[
-        ["LCP", "2.91s", "1.64s", "−44%"],
-        ["DOMContentLoaded", "2.47s", "1.33s", "−46%"],
-      ].map(([k, from, to, pct]) => (
-        <div className="border-t border-deep-mute/30 pt-4" key={k}>
-          <dt className="flex justify-between text-t2 text-deep-mute">
-            <span>{k}</span>
-            <span className="font-semibold text-deep-ink">{pct}</span>
-          </dt>
-          <dd className="mt-2 font-mono text-[clamp(34px,4.4vw,56px)] leading-none font-medium tracking-[-0.03em] text-sun">
-            {to}
-            <span className="ml-3 align-middle text-t3 text-deep-mute line-through decoration-1">
-              {from}
-            </span>
-          </dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
 
 function Visual({ p }: { p: Project }) {
   if (p.cover.kind === "metric") return <Metrics />;
@@ -136,7 +112,7 @@ export function WorkSection() {
 
       <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-16 max-page:grid-cols-1 max-page:gap-y-12">
         <Card p={bySlug("showroom")} shot={editor} tone="deep" wide />
-        <Card p={bySlug("loading")} tone="deep" />
+        <Card p={bySlug("loading")} />
         <Card p={bySlug("list-rendering")} />
         <Card p={bySlug("renewal")} />
         <Card p={bySlug("deploy")} />
@@ -146,7 +122,7 @@ export function WorkSection() {
       <h3 className="mt-28 text-[clamp(22px,2vw,27px)] font-bold tracking-[-0.04em] text-ink">
         그 밖의 작업
       </h3>
-      <ul className="mt-6 grid list-none grid-cols-3 gap-6 max-page:grid-cols-1">
+      <ul className="mt-6 grid list-none grid-cols-3 items-start gap-6 max-page:grid-cols-1">
         {CARDS.map((c) => (
           <li className="flex flex-col overflow-hidden rounded-[20px] bg-surface" key={c.title}>
             {"image" in c && c.image ? (

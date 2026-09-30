@@ -40,10 +40,10 @@ export function DocSection({
     >
       <div className="mx-auto w-[min(1200px,100%-48px)] max-page:w-[min(1200px,100%-32px)] print:w-full">
         {/* 섹션 머리는 지면 폭을 다 쓴다. 본문 칼럼보다 넓은 것이 섹션임을 알린다. */}
-        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-ink pb-3 print:break-after-avoid">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b border-ink/15 pb-5 print:break-after-avoid">
           <h2
             id={`${id}-title`}
-            className="text-t6 font-bold text-balance leading-[1.2] tracking-[-0.04em] max-page:text-t5"
+            className="text-[clamp(32px,3.6vw,48px)] font-bold text-balance leading-[1.2] tracking-[-0.05em]"
           >
             {title}
           </h2>
@@ -71,7 +71,7 @@ export function Hang({
 }) {
   return (
     <div
-      className={`grid grid-cols-[112px_minmax(0,1fr)] gap-x-9 max-page:grid-cols-1 max-page:gap-x-0 ${className}`}
+      className={`grid grid-cols-[132px_minmax(0,1fr)] gap-x-9 max-page:grid-cols-1 max-page:gap-x-0 ${className}`}
     >
       {/* 인쇄에서 레이블이 쪽 경계에 걸리면 「03」만 앞 쪽에 남고 「CLO-SET」이 다음 쪽으로 갔다(실측).
           `article` 에 걸면 사례가 한 쪽보다 커서 빈 쪽이 생기므로 레이블 칸에만 건다. */}

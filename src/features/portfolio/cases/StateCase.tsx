@@ -1,7 +1,5 @@
 import { Bullets } from "../components/Bullets";
 import { SubHead } from "../components/SubHead";
-import { StateBoundary } from "../figures/StateBoundary";
-import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 
 export function StateCase() {
@@ -18,13 +16,14 @@ export function StateCase() {
         <li>컨테이너 컴포넌트가 비대해지고 props drilling이 늘어남</li>
       </Bullets>
 
-      <SubHead>모노레포</SubHead>
+      <SubHead>모노레포와 뷰어</SubHead>
       <Bullets>
         <li>팀의 학습 비용을 고려해 Turborepo나 Nx 없이 Yarn workspaces만으로 구성</li>
         <li>
           앱, 공유 UI, API 클라이언트, 빌드 설정을 패키지로 분리. API 클라이언트는 사내 다른
           서비스에서도 쓰도록 독립 패키지화
         </li>
+        <li>3D, 2D, 렌더 뷰어 전체를 설계하고 개발</li>
       </Bullets>
 
       <SubHead>상태 관리</SubHead>
@@ -40,18 +39,9 @@ export function StateCase() {
           이전
         </li>
       </Bullets>
-      <Figure caption="서버 상태와 UI 상태를 두는 위치" narrow="hide">
-        <StateBoundary />
-      </Figure>
 
-      <SubHead>뷰어</SubHead>
+      <SubHead>현황</SubHead>
       <Bullets>
-        <li>3D, 2D, 렌더 뷰어 전체를 설계하고 개발</li>
-      </Bullets>
-
-      <SubHead>결과</SubHead>
-      <Bullets>
-        <li>서버 상태는 TanStack Query 캐시, UI 상태는 Recoil로 나뉜 구조로 전환</li>
         <li>MobX는 전부 걷어내지 못하고 일부 화면에 남음</li>
       </Bullets>
     </Item>

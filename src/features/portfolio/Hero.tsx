@@ -13,7 +13,7 @@ export function Hero() {
       <p className="text-t2 font-semibold text-deep">프론트엔드 개발자 · 경력 6년 11개월</p>
       <h1 className="mt-6 max-w-[17ch] text-[clamp(38px,6.2vw,84px)] font-bold text-balance leading-[1.08] tracking-[-0.055em] text-ink">
         대량 목록과 복잡한 상태를 다루는{" "}
-        <span className="bg-[linear-gradient(transparent_62%,var(--color-sun)_62%,var(--color-sun)_92%,transparent_92%)] px-1">
+        <span className="mx-[-0.06em] bg-[linear-gradient(transparent_55%,var(--color-sun)_55%,var(--color-sun)_88%,transparent_88%)] px-[0.06em]">
           신나라
         </span>
         입니다.

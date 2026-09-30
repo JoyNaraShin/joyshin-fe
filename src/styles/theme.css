@@ -42,16 +42,16 @@
   --color-rule-3: #a9aeb6;
 
   /* ─── 강조 1색. 이 지면에 강조색은 하나뿐이다. */
-  --color-mark: #0a5c5c;
-  --color-mark-deep: #084848; /* hover */
-  --color-mark-press: #063a3a; /* active */
+  --color-mark: #004643;
+  --color-mark-deep: #00332f; /* hover */
+  --color-mark-press: #002724; /* active */
   --color-mark-soft: #e8f0ef; /* 도판 안 선택된 항목의 지면 · 버튼 active */
   --color-warn: #c0554a; /* 도판에서 "이전/버려진 요청" 표시 */
 
   /* ─── 지면과 강조 (Happy Hues 팔레트 10 계열). 밝고 따뜻한 지면 위에 짙은 청록 판을 두고
      캡처를 액자처럼 앉힌다. 노랑은 강조 한 곳에만 쓴다 — 두 곳 이상에 쓰면 강조가 아니다. */
   --color-sand: #f3f1ec;
-  --color-sand-2: #e9e6de;
+  --color-sand-2: #e3ded2;
   --color-deep: #004643;
   --color-deep-2: #0b5956;
   --color-deep-ink: #fffffe;
@@ -59,8 +59,8 @@
   --color-sun: #f9bc60;
 
   /* 밑줄·테두리로 쓰는 반투명 강조. 통합 전에는 .30 .32 .34 .35 .40 이 따로 돌았다. */
-  --color-mark-line: rgba(10, 92, 92, 0.35);
-  --color-mark-wash: rgba(10, 92, 92, 0.045);
+  --color-mark-line: rgba(0, 70, 67, 0.35);
+  --color-mark-wash: rgba(0, 70, 67, 0.045);
   /* 잉크 위에 얹는 상호작용 지면 — hover 와 :active 두 단계만 둔다. */
   /* 인쇄 전용. 화면 괘선은 종이에서 너무 옅게 나온다. */
   --color-print-rule: #cccccc;

@@ -13,11 +13,11 @@ export function LoadingCase() {
         <li>첫 화면에서 쓰지 않는 코드와 모듈이 초기 번들과 앱 초기화에 포함</li>
         <li>첫 렌더에 필요 없는 API 호출과 중복 호출. 응답에는 목록이 쓰지 않는 필드도 포함</li>
         <li>백엔드 응답의 원본 이미지 URL을 그대로 써서 작은 썸네일 자리에도 큰 원본을 받음</li>
+        <li>Performance 패널과 Lighthouse로 계측해 과제로 제안</li>
       </Bullets>
 
       <SubHead>해결</SubHead>
       <Bullets>
-        <li>Performance 패널과 Lighthouse로 계측해 과제로 제안</li>
         <li>번들 분석기와 네트워크 탭으로 큰 청크와 호출 수 확인</li>
         <li>큰 청크는 라우트와 컴포넌트 단위로 코드 스플리팅</li>
         <li>첫 화면에 필요 없는 모듈은 쓰는 시점에 초기화</li>

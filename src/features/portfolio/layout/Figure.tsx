@@ -35,7 +35,7 @@ export function Figure({
      * 그림 유무와 무관하게 남는다.
      */
     <figure
-      className={`-ml-[148px] mt-12 max-page:mt-9 max-page:ml-0 print:break-inside-avoid ${narrow === "hide" ? "max-fig:hidden" : ""}`}
+      className={`-ml-[168px] mt-12 max-page:mt-9 max-page:ml-0 print:break-inside-avoid ${narrow === "hide" ? "max-fig:hidden" : ""}`}
     >
       <div className={`min-w-0 ${fallback ? "max-fig:hidden" : ""}`}>{children}</div>
       {fallback ? (
