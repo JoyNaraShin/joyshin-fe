@@ -22,8 +22,9 @@ pnpm check            # Biome + tsc
 pnpm build && pnpm preview
 ```
 
-`pnpm build` 는 `dist/index.html` 을 `404.html` 로도 복사한다. GitHub Pages 가 SPA 폴백을
-주지 않아서, 해시 없는 경로로 직접 들어와도 앱이 라우팅을 이어받게 하려는 것이다.
+`pnpm build` 는 `dist/index.html` 을 `404.html` 과 `work/<slug>/index.html` 로도 복사한다
+(`scripts/copy-routes.mjs`). GitHub Pages 가 SPA 폴백을 주지 않아서, 케이스 페이지 주소로 바로
+들어와도 200 으로 열리고 앱이 라우팅을 이어받게 하려는 것이다.
 
 ## 구조
 

@@ -25,10 +25,6 @@ export function ShowroomCase() {
           선택, 호버, 드래그 상태가 도메인 상태와 섞여 있어 동작 하나에 여러 상태를 같이 고쳐야 했음
         </li>
         <li>편집과 라이브를 mode prop 하나로 분기하던 컴포넌트에 기능이 늘며 조건문이 쌓임</li>
-        <li>
-          고해상도 360° 배경을 한 번에 받아 첫 렌더가 느림. 중국에서는 로딩이 10분 넘게 걸린다는
-          사용자 리포트
-        </li>
       </Bullets>
 
       <SubHead>해결</SubHead>
@@ -45,7 +41,8 @@ export function ShowroomCase() {
           한정
         </li>
         <li>
-          배경 타일 분할 로딩(tiledMap) 전환에 맞춰 업로드와 수정 흐름 구현. 서버의 타일 변환이 끝날
+          고해상도 360° 배경을 한 번에 받아 중국에서 로딩이 10분 넘게 걸린다는 리포트가 있던 배경을
+          타일 분할 로딩(tiledMap)으로 전환하면서 업로드와 수정 흐름 구현. 서버의 타일 변환이 끝날
           때까지 썸네일을 노출하고 완료 후 교체
         </li>
       </Bullets>
@@ -59,6 +56,11 @@ export function ShowroomCase() {
       <Figure caption="컴포넌트 재사용 범위, 분리 전과 후" fallback={reuseBoundaryFallback}>
         <ReuseBoundary />
       </Figure>
+
+      <SubHead>현황</SubHead>
+      <Bullets>
+        <li>초기 개발부터 퇴사 시점까지 이어진 기능 추가와 개선을 프론트엔드 단독으로 담당</li>
+      </Bullets>
     </Item>
   );
 }

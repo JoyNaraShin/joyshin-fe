@@ -1,5 +1,4 @@
 import { Bullets } from "../components/Bullets";
-import { Overview } from "../components/Overview";
 import { SubHead } from "../components/SubHead";
 import { DeployTopology, deployTopologyFallback } from "../figures/DeployTopology";
 import { Figure } from "../layout/Figure";
@@ -36,7 +35,11 @@ export function DeployCase() {
       <Figure caption="기존 배포 구조와 제안한 구조" fallback={deployTopologyFallback}>
         <DeployTopology />
       </Figure>
-      <Overview regret="테스트 서버 검증까지 마치고 운영 반영 전에 퇴사" />
+
+      <SubHead>현황</SubHead>
+      <Bullets>
+        <li>테스트 서버 단계별 검증까지 완료, 운영 반영 전 퇴사</li>
+      </Bullets>
     </Item>
   );
 }

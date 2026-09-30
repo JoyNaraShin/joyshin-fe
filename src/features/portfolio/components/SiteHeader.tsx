@@ -13,7 +13,7 @@ const LINKS = [
  */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-rule bg-surface-veil backdrop-blur-md print:hidden">
+    <header className="sticky top-0 z-50 border-b border-rule bg-surface print:hidden">
       <div className="mx-auto flex h-16 w-[min(1120px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(1120px,100%-32px)]">
         <Link className="text-t3 font-bold tracking-[-0.02em] no-underline" to="/">
           신나라

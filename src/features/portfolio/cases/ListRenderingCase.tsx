@@ -40,7 +40,7 @@ export function ListRenderingCase() {
       </Figure>
       <Overview
         why="레이아웃 계산을 JS에서 직접 제어할 수 있어 디버깅과 공통화가 쉬움. 사내 다른 팀에서 이미 검증한 라이브러리"
-        regret="1차 때 공통 훅부터 만들지 않아 목록마다 따로 짠 코드가 그대로 2차 작업량이 됨"
+        regret="1차 때 목록마다 따로 구현해 2차에서 전부 다시 작업"
       />
     </Item>
   );

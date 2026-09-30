@@ -67,7 +67,7 @@ function MoreCard({ p }: { p: Project }) {
     <Link className="group flex min-w-0 flex-col no-underline" to={`/work/${p.slug}`}>
       <div className="overflow-hidden rounded-sm border border-rule">
         <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
-          <Cover cover={p.cover} zoom />
+          <Cover cover={p.cover} />
         </div>
       </div>
       <p className="mt-4 font-mono text-t1 tracking-[0.06em] text-mute">{p.when}</p>
@@ -107,11 +107,29 @@ export function WorkSection() {
               key={c.title}
             >
               <p className="text-t2 text-mute">{c.tag}</p>
-              <div className="min-w-0">
-                <h3 className="text-t4 font-semibold tracking-[-0.025em]">{c.title}</h3>
-                <p className="mt-2 max-w-[68ch] text-t3 text-pretty leading-[1.75] text-ink-2">
-                  {c.body}
-                </p>
+              <div className="flex min-w-0 items-start gap-8 max-page:block">
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-t4 font-semibold tracking-[-0.025em]">{c.title}</h3>
+                  <p className="mt-2 max-w-[68ch] text-t3 text-pretty leading-[1.75] text-ink-2">
+                    {c.body}
+                  </p>
+                </div>
+                {"image" in c && c.image ? (
+                  <figure className="mt-1 w-[300px] max-w-full shrink-0 max-page:mt-4">
+                    <img
+                      alt={c.image.alt}
+                      className="block h-auto w-full rounded-sm border border-rule"
+                      decoding="async"
+                      height={c.image.height}
+                      loading="lazy"
+                      src={`${import.meta.env.BASE_URL}work/${c.image.src}`}
+                      width={c.image.width}
+                    />
+                    <figcaption className="mt-2 text-t1 text-faint">
+                      출처 CLO-SET 헬프센터
+                    </figcaption>
+                  </figure>
+                ) : null}
               </div>
             </li>
           ))}

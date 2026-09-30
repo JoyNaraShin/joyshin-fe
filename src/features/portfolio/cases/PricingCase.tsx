@@ -31,8 +31,13 @@ export function PricingCase() {
 
       <SubHead>BD 팀 백오피스</SubHead>
       <Bullets>
-        <li>스프레드시트로 하던 고객사 크레딧과 플랜 관리를 백오피스로 이관</li>
+        <li>고객사 크레딧과 플랜 관리 화면 개발</li>
         <li>요금 계산, 플랜 변경(추가, 취소, 업그레이드, 다운그레이드), 메모 기능 구현</li>
+      </Bullets>
+
+      <SubHead>결과</SubHead>
+      <Bullets>
+        <li>BD 팀의 고객사 크레딧과 플랜 관리를 스프레드시트에서 백오피스로 이관</li>
       </Bullets>
     </Item>
   );

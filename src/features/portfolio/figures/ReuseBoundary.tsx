@@ -128,7 +128,7 @@ export function ReuseBoundary() {
           도메인 모델, 순수 함수
         </text>
         <text className="fill-mute text-t1" x={340} y={156}>
-          렌더 결과가 같을 때만 재사용
+          화면 코드는 공유하지 않음
         </text>
       </svg>
     </Frame>

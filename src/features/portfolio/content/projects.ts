@@ -8,7 +8,8 @@
  */
 export type Cover =
   | { kind: "shot"; src: string; alt: string; fit?: "contain" }
-  | { kind: "figure"; figure: "load" | "list" | "state" | "deploy" };
+  | { kind: "figure"; figure: "load" | "list" | "state" | "deploy" }
+  | { kind: "metric"; items: { label: string; value: string; detail: string }[] };
 
 export type Project = {
   slug: string;
@@ -16,7 +17,7 @@ export type Project = {
   when: string;
   /** 이력서의 역할 표현 그대로 — 단독 담당 / 교체 주도 / 리드 */
   role: string;
-  /** 카드와 케이스 머리에 붙는 결과 한 줄. 역할이 아니라 무엇이 나아졌나를 적는다. */
+  /** 카드와 케이스 머리에 붙는 한 줄. 역할이 아니라 이 작업으로 바뀐 것을 적는다. */
   result: string;
   summary: string;
   stack: string[];
@@ -60,7 +61,7 @@ export const FEATURED: Project[] = [
     summary:
       "리플로우와 프레임 드롭을 일으키던 오래된 무한 스크롤 라이브러리를 VirtuosoGrid, TanStack Virtual 순으로 교체",
     stack: ["TanStack Virtual", "react-virtuoso", "React"],
-    cover: shot("workroom-list.webp", "에셋 카드가 격자로 늘어선 CLO-SET 워크룸 목록"),
+    cover: shot("workroom-grid.webp", "에셋 카드가 격자로 늘어선 CLO-SET 워크룸 목록"),
     mine: [
       "1차 VirtuosoGrid 도입, 2차 TanStack Virtual 교체",
       "열 수와 행 높이를 계산하는 행 단위 가상화 공통 훅",
@@ -72,10 +73,16 @@ export const FEATURED: Project[] = [
     title: "워크룸 초기 로딩 개선",
     when: "2024 하반기",
     role: "제안과 개발",
-    result: "DOMContentLoaded 2.47s → 1.33s, LCP 2.91s → 1.64s",
+    result: "LCP 44%, DOMContentLoaded 46% 단축",
     summary: "워크룸 첫 화면이 느린 문제를 Performance 패널과 Lighthouse로 계측해 과제로 제안",
-    stack: ["Next.js", "Cloudflare Images", "Lighthouse"],
-    cover: { kind: "figure", figure: "load" },
+    stack: ["Next.js", "Cloudflare 이미지 리사이징", "Lighthouse"],
+    cover: {
+      kind: "metric",
+      items: [
+        { label: "LCP", value: "−44%", detail: "2.91s → 1.64s" },
+        { label: "DOMContentLoaded", value: "−46%", detail: "2.47s → 1.33s" },
+      ],
+    },
     mine: [
       "계측과 과제 제안",
       "코드 스플리팅과 모듈 초기화 지연",

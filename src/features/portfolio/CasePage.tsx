@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import { type ComponentType, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { DeployCase } from "./cases/DeployCase";
 import { ListRenderingCase } from "./cases/ListRenderingCase";
@@ -28,6 +28,12 @@ export function CasePage() {
   const i = PROJECTS.findIndex((p) => p.slug === slug);
   const p = PROJECTS[i];
   const Body = BODIES[slug];
+  useEffect(() => {
+    if (p) document.title = `${p.title} — 신나라 포트폴리오`;
+    return () => {
+      document.title = "신나라 — 프론트엔드 개발자";
+    };
+  }, [p]);
   if (!p || !Body) return null;
   const next = PROJECTS[(i + 1) % PROJECTS.length];
 
@@ -46,14 +52,17 @@ export function CasePage() {
         </p>
         {/* 도판 표지는 본문에 같은 그림이 다시 나오므로 머리에는 캡처만 올린다. */}
         {p.cover.kind === "shot" ? (
-          <div className="mt-10 overflow-hidden rounded-sm border border-rule">
-            <Cover cover={p.cover} eager />
-          </div>
+          <figure className="mt-10">
+            <div className="overflow-hidden rounded-sm border border-rule">
+              <Cover cover={p.cover} eager natural />
+            </div>
+            <figcaption className="mt-2 text-t1 text-faint">출처 CLO-SET 헬프센터</figcaption>
+          </figure>
         ) : null}
       </header>
 
       <div className="mx-auto mt-16 grid w-[min(1120px,100%-48px)] grid-cols-12 gap-x-10 max-page:w-[min(1120px,100%-32px)] max-page:grid-cols-1 max-page:mt-12">
-        <aside className="col-span-4 max-page:col-span-1 max-page:mb-12">
+        <aside className="col-span-4 max-page:order-2 max-page:col-span-1 max-page:mt-14">
           <div className="sticky top-[calc(var(--header-h)+32px)]">
             <dl className="border-t border-ink">
               {[
@@ -82,7 +91,7 @@ export function CasePage() {
         </aside>
         {/* 사례 컴포넌트는 원래 홈 지면의 매달린 레이블 칼럼을 전제로 도판을 왼쪽으로 당긴다.
             여기서는 그 칼럼이 없으므로 당김을 푼다. */}
-        <article className="col-span-8 min-w-0 max-page:col-span-1 [&_figure]:ml-0">
+        <article className="col-span-8 min-w-0 max-page:order-1 max-page:col-span-1 [&_figure]:ml-0">
           <BareItem value={true}>
             <Body />
           </BareItem>
