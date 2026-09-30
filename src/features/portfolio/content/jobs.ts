@@ -28,10 +28,10 @@ export const JOBS = [
       "Tailwind CSS",
       "Recoil",
       "Jotai",
-      "Emotion",
+      "styled-components",
+      "SCSS",
       "MobX",
       "Yarn workspaces",
-      "Rollup",
     ],
   },
   {
@@ -43,7 +43,7 @@ export const JOBS = [
       "Vuex 기반 상태 관리 위에서 신규 기능을 개발하고 유지보수했습니다.",
       "lerna로 app · viewer · editor가 나뉜 MSA 구조 안에서 작업했고, vue-i18n으로 다국어를 지원했습니다.",
     ],
-    stack: ["Vue 3", "TypeScript", "Vite", "Vuex", "lerna"],
+    stack: ["Vue 3", "TypeScript", "Tailwind CSS", "Vuex", "lerna"],
   },
   {
     when: "2019.05 – 2021.05",
