@@ -55,7 +55,7 @@ export function ShowroomCase() {
 
       <SubHead>결과</SubHead>
       <Bullets>
-        <li>타일 분할 로딩 전환 후 로컬 테스트 기준 배경 로딩이 약 5초에서 1초 수준으로 단축</li>
+        <li>타일 분할 로딩 전환 후 로컬 테스트 기준 배경 로딩 시간 약 80% 단축</li>
       </Bullets>
     </Item>
   );
