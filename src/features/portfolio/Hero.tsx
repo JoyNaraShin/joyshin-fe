@@ -7,16 +7,14 @@ import { STATS } from "./content/hero";
 export function Hero() {
   return (
     <section className="mx-auto w-[min(1120px,100%-48px)] pt-24 pb-6 max-page:w-[min(1120px,100%-32px)] max-page:pt-14">
-      <p className="text-t2 font-medium tracking-[0.02em] text-mark">
-        프론트엔드 개발자 · 6년 11개월
-      </p>
+      <p className="text-t2 font-medium tracking-[0.02em] text-mark">경력 6년 11개월</p>
       <h1 className="mt-4 max-w-[18ch] text-t7 font-bold text-balance leading-[1.12] tracking-[-0.045em]">
-        대량 목록과 복잡한 상태를 다뤄 온 <span className="text-mark">신나라</span>입니다.
+        프론트엔드 개발자 <span className="text-mark">신나라</span>입니다.
       </h1>
       <p className="mt-7 max-w-[60ch] text-[clamp(16px,1.5vw,18px)] font-normal text-pretty leading-[1.8] text-ink-2">
-        글로벌 B2B 3D 협업 플랫폼 CLO-SET에서 4년간 일했습니다. 기획 회의에서 PO와 디자이너에게 구현
-        제약을 설명하고 범위를 함께 정해 왔고, 백엔드와는 응답 필드 축소를, 인프라 담당자와는 배포
-        구조 변경을 협의했습니다.
+        대량 목록 렌더링과 복잡한 클라이언트 상태 관리에 강점이 있습니다. 글로벌 B2B 3D 협업 플랫폼
+        CLO-SET에서 수만 건 목록의 가상화, 워크룸 첫 화면 LCP 44% 단축, MobX 중심 상태 관리를 서버
+        상태와 클라이언트 상태로 나누는 구조 전환을 주도했습니다.
       </p>
       <dl className="mt-12 grid grid-cols-4 border-t border-ink max-page:grid-cols-2">
         {STATS.map((s) => (

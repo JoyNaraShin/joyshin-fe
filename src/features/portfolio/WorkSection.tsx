@@ -55,7 +55,7 @@ function Featured({ p, i }: { p: Project; i: number }) {
           className="mt-6 inline-block border-b-2 border-mark-line pb-0.5 text-t3 font-semibold text-ink no-underline hover:border-mark hover:text-mark"
           to={`/work/${p.slug}`}
         >
-          문제와 해결 보기 <span aria-hidden="true">→</span>
+          자세히 보기 <span aria-hidden="true">→</span>
         </Link>
       </div>
     </article>
@@ -80,9 +80,6 @@ function MoreCard({ p }: { p: Project }) {
   );
 }
 
-/* 케이스 페이지로 펼친 두 건(모노레포, 요금제)은 빼고 나머지만 짧은 목록으로 남긴다. */
-const NOTES = CARDS.filter((c) => c.title !== "1차 리뉴얼 모노레포 구성" && c.tag !== "요금 정책");
-
 export function WorkSection() {
   return (
     <>
@@ -104,7 +101,7 @@ export function WorkSection() {
         </div>
 
         <ul className="mt-16 list-none border-t border-rule">
-          {NOTES.map((c) => (
+          {CARDS.map((c) => (
             <li
               className="grid grid-cols-[160px_minmax(0,1fr)] gap-x-10 border-b border-rule py-6 max-page:grid-cols-1 max-page:gap-y-1"
               key={c.title}

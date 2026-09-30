@@ -29,7 +29,7 @@ export function CareerSection() {
               ) : null}
               {/* 스택은 읽는 것이 아니라 훑는 것이라 한 줄로 흘린다 */}
               <p className="mt-5 font-mono text-t1 leading-[2] tracking-[0.04em] text-mute">
-                {job.stack.join("  ·  ")}
+                {job.stack.join(", ")}
               </p>
             </Hang>
           </li>
