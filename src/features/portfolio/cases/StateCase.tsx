@@ -9,11 +9,11 @@ export function StateCase() {
   return (
     <Item index="03" id="case-state" source="CLO-SET" title="서버 데이터와 화면 상태 분리">
       <Overview
-        lead="서버 응답을 전역 스토어로 복제하던 중복 상태를 제거하고, 클라이언트 상태는 소유 주체 단위로 분리했습니다."
+        lead="1차 서비스 리뉴얼에서 서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil 로 나눴습니다."
         situation="MobX 스토어가 커지면서 여러 도메인의 상태가 한 인스턴스에 누적됐습니다. 스토어마다 같은 보일러플레이트도 반복됐습니다."
-        task="뷰어를 감싼 화면의 상태 구조"
-        action="서버 상태는 TanStack Query 단일 출처로, 화면 상태는 atom 단위로 소유 주체별 분리"
-        why="atom 라이브러리는 Recoil 로 시작해 Jotai 로 옮겼습니다. Recoil 이 2025년 1월 아카이브돼 유지보수가 끊겼고, Jotai 는 같은 atomic 모델이라 상태 구조를 다시 짜지 않아도 됐습니다."
+        task="1차 서비스 리뉴얼(2023 하반기부터 2024 상반기)의 상태 관리 방식 결정"
+        action="서버 상태는 TanStack Query 캐시 한 곳에, UI 상태는 atom 단위로 분리. 컨테이너 컴포넌트의 로직은 VAC 패턴과 커스텀 훅으로 분리"
+        why="서버 데이터를 스토어에도 복제해 두면 갱신할 때마다 두 곳을 같이 고쳐야 했습니다. 캐시를 한 곳으로 두면 남는 것은 화면이 스스로 가진 상태뿐입니다."
         again="MobX 를 전부 걷어내지는 못했습니다."
       />
       {/* 사례 공통 형식 — SubHead 로 문제와 해결을 가르고, 항목은 <b>라벨</b> — 문장. */}
@@ -43,9 +43,13 @@ export function StateCase() {
           데이터를 스토어에서 읽는 화면만 옛 값을 그립니다.
         </li>
         <li>
-          <b>화면 상태</b> — 남은 것은 atom 단위로 쪼갰습니다. <code>useAtom(atom)</code> 으로
-          무엇을 읽는지 호출부에 적히고, 리렌더는 그 atom 을 읽는 컴포넌트로만 갑니다. 파생 atom 이
-          원본을 읽는 한 방향으로만 의존이 생깁니다.
+          <b>화면 상태</b> — 남은 것은 Recoil atom 단위로 쪼갰습니다.{" "}
+          <code>useRecoilValue(atom)</code> 으로 무엇을 읽는지 호출부에 적히고, 리렌더는 그 atom 을
+          읽는 컴포넌트로만 갑니다. 파생 상태가 원본을 읽는 한 방향으로만 의존이 생깁니다.
+        </li>
+        <li>
+          <b>이후</b> — 2025년 Recoil 유지보수가 끊기면서, 2차 리뉴얼에서 다른 팀원이 주도해 Recoil
+          코드를 같은 atom 기반 모델인 Jotai 로 옮겼습니다.
         </li>
       </Bullets>
       <Figure

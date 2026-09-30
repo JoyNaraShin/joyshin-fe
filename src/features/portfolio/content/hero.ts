@@ -11,12 +11,23 @@ export const KEYWORDS = ["3D 협업 서비스", "대용량 목록·검색", "B2B
 /** ko = 값에 한글이 섞인 칸. 모노 서체에 한글이 없어 자간이 벌어지므로 본문 서체로 둔다. */
 export const STATS = [
   { k: "로딩 성능 개선", n: "−46%", d: "DCL 2.47s → 1.33s · LCP −44%", ko: false },
-  { k: "목록 렌더링", n: "수만 건", d: "가상화로 DOM 상주 수 고정", ko: true },
   {
-    k: "복잡한 상태 관리",
-    n: "전역 스토어 해체",
-    d: "서버 캐시 단일 출처 · 관심사분리",
+    k: "목록 렌더링",
+    n: "수만 건",
+    d: "TanStack Virtual 공통 훅으로 전체 목록 교체, 성능 리포트 감소",
     ko: true,
   },
-  { k: "배포 구조 전환", n: "정적 배포", d: "GitHub Actions · Cloudflare Pages", ko: true },
+  {
+    k: "복잡한 상태 관리",
+    n: "상태 분리",
+    d: "서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil로",
+    ko: true,
+  },
+  // 운영 반영 전에 퇴사했다. 완료로 읽히지 않게 "테스트 서버 검증"까지만 적는다.
+  {
+    k: "프론트엔드 배포 분리",
+    n: "테스트 검증",
+    d: "GitHub Actions와 Cloudflare Pages, 운영 반영 전 퇴사",
+    ko: true,
+  },
 ] as const;

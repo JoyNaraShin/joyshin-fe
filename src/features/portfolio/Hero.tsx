@@ -15,7 +15,7 @@ export function Hero() {
         </span>
       </h1>
       <p className="mt-8 max-w-[60ch] text-[clamp(16px,1.5vw,18px)] font-normal text-balance leading-[1.8] tracking-[-0.005em] text-ink-2">
-        2019년 Java 풀스택으로 시작해 프론트엔드로 전향했습니다. 주력 스택은 TypeScript · React ·
+        2019년 Java 풀스택으로 시작해 프론트엔드로 전향했습니다. 주력 스택은 TypeScript, React,
         Next.js입니다. 3D를 다루는 서비스 두 곳에서 뷰어를 감싼 웹 화면과 서비스 전체 검색, 디자인
         시스템 등 다양한 작업들을 담당했습니다.
       </p>

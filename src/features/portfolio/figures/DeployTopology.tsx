@@ -10,7 +10,7 @@ import { Frame } from "../layout/Frame";
  */
 /** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
 export const deployTopologyFallback =
-  "전에는 번들 청크를 클라우드에 올리고 index.html 하나를 Next 프로젝트의 public 폴더에 두어 Docker 서버 이미지에 함께 실어 배포했습니다. 제안한 구조에서는 React 앱을 GitHub Actions로 빌드해 Cloudflare Pages의 버전 경로로 올리고, Next 프로젝트는 자기 배포를 따로 갖습니다.";
+  "전에는 번들 청크를 클라우드에 올리고 index.html 하나를 Next 프로젝트의 public 폴더에 두어 Docker 서버 이미지에 함께 실어 배포했습니다. 제안한 구조에서는 GitHub Actions가 청크를 스토리지에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next 프로젝트는 자기 배포를 따로 갖습니다.";
 
 export function DeployTopology() {
   return (
@@ -18,7 +18,7 @@ export function DeployTopology() {
       <svg
         viewBox="0 0 620 176"
         role="img"
-        aria-label="전에는 번들 청크를 클라우드에 올리고 index.html 하나를 Next 프로젝트의 public 폴더에 두어 Docker 서버 이미지에 함께 실어 배포했습니다. 제안한 구조에서는 React 앱을 GitHub Actions 로 빌드해 Cloudflare Pages 의 버전 경로로 올리고, Next 프로젝트는 자기 배포를 따로 갖습니다."
+        aria-label="전에는 번들 청크를 클라우드에 올리고 index.html 하나를 Next 프로젝트의 public 폴더에 두어 Docker 서버 이미지에 함께 실어 배포했습니다. 제안한 구조에서는 GitHub Actions 가 청크를 스토리지에 버전별로 올리고 index.html 만 Cloudflare Pages 로 배포하며, Next 프로젝트는 자기 배포를 따로 갖습니다."
       >
         <defs>
           <marker
@@ -110,7 +110,7 @@ export function DeployTopology() {
           Cloudflare Pages
         </text>
         <text className="fill-mark text-t1" x={484} y={80}>
-          버전 경로로 업로드
+          index.html 만 배포
         </text>
 
         <rect

@@ -1,10 +1,10 @@
 import { Frame } from "../layout/Frame";
 
 /*
- * 이 케이스의 고리는 "1차가 무엇을 못 했는가"다.
+ * 이 케이스의 고리는 "IntersectionObserver 가 무엇을 못 했는가"다.
  * IntersectionObserver 는 가시성만 알려주고 항목을 언마운트해 주지 않으므로 스크롤한 만큼
- * 노드가 계속 쌓인다. 그래서 세 단계를 같은 트랙 위에 겹쳐 그린다 — 1차와 2차의 차이가
- * 막대 길이로 바로 보인다.
+ * 노드가 계속 쌓인다. 그래서 세 단계를 같은 트랙 위에 겹쳐 그린다 — 가상화 전후의 차이가
+ * 막대 길이로 바로 보인다. VirtuosoGrid 와 TanStack Virtual 은 노드 수로는 같아서 한 줄로 둔다.
  *
  * 수치는 그리지 않는다. 이 그림이 말하는 것은 측정값이 아니라 구조다.
  */
@@ -14,8 +14,8 @@ const PITCH = 9;
 
 const ROWS = [
   { key: "이전", to: "track", note: "스크롤마다 전체 항목 위치 재계산", y: 52 },
-  { key: "1차 · IO", to: "track", note: "재계산 없음 · 노드 수는 그대로", y: 104 },
-  { key: "2차 · 가상화", to: "view", note: "노드가 화면 크기로 고정", y: 156 },
+  { key: "IO 개선", to: "track", note: "재계산 없음, 노드 수는 그대로", y: 104 },
+  { key: "가상화", to: "view", note: "보이는 행만큼만 남음", y: 156 },
 ] as const;
 
 function ticks(width: number) {
@@ -25,7 +25,7 @@ function ticks(width: number) {
 
 /** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
 export const listDomGrowthFallback =
-  "이전과 1차는 스크롤한 만큼 DOM 노드가 쌓입니다. 1차가 없앤 것은 위치 재계산이지 노드가 아닙니다. 2차 가상화에서만 노드 수가 화면 크기로 고정됩니다.";
+  "이전과 IntersectionObserver 개선 단계는 스크롤한 만큼 DOM 노드가 쌓입니다. IntersectionObserver 가 없앤 것은 위치 재계산이지 노드가 아닙니다. 가상화한 뒤에야 화면에 보이는 행만큼만 노드가 남습니다.";
 
 export function ListDomGrowth() {
   return (
@@ -33,7 +33,7 @@ export function ListDomGrowth() {
       <svg
         viewBox="0 0 620 180"
         role="img"
-        aria-label="이전과 1차 IntersectionObserver 는 스크롤한 만큼 DOM 노드가 쌓이고, 2차 가상화는 화면 크기만큼만 남습니다."
+        aria-label="이전과 IntersectionObserver 개선 단계는 스크롤한 만큼 DOM 노드가 쌓이고, 가상화한 뒤에는 화면에 보이는 행만큼만 남습니다."
       >
         {/* 화면에 실제로 보이는 구간 */}
         <line
