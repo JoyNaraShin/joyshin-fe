@@ -43,7 +43,7 @@ export const FEATURED: Project[] = [
     summary:
       "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 초기 개발부터 퇴사 시점까지 이어진 기능 추가와 개선을 담당",
     stack: ["React", "Recoil", "MobX", "TypeScript"],
-    cover: shot("showroom-live.webp", "바이어에게 공개된 버추얼 쇼룸 라이브 페이지"),
+    cover: shot("showroom-editor.webp", "공간 목록과 360° 매장 공간이 보이는 쇼룸 편집 페이지"),
     mine: [
       "편집 페이지와 라이브 페이지 개발",
       "Recoil 도입과 엔티티 단위 atom 정규화",
@@ -57,7 +57,7 @@ export const FEATURED: Project[] = [
     when: "2023 하반기, 2025 상반기 – 하반기",
     role: "교체 주도",
     result:
-      "수만 건 목록에서도 DOM 노드를 화면에 보이는 행만큼으로 유지. 적용 후 목록 성능 관련 사용자 리포트 감소",
+      "수만 건 목록에서도 화면에 보이는 행만 DOM에 렌더링. 적용 후 목록 성능 관련 사용자 리포트 감소",
     summary:
       "리플로우와 프레임 드롭을 일으키던 오래된 무한 스크롤 라이브러리를 VirtuosoGrid, TanStack Virtual 순으로 교체",
     stack: ["TanStack Virtual", "react-virtuoso", "React"],

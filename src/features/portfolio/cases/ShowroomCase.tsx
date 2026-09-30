@@ -23,13 +23,6 @@ export function ShowroomCase() {
         <li>편집과 라이브를 mode prop 하나로 분기하던 컴포넌트에 기능이 늘며 조건문이 쌓임</li>
       </Bullets>
 
-      <Shot
-        alt="왼쪽에 공간 목록, 가운데에 360° 매장 공간, 위에 Preview와 Save, Publish to Live 버튼이 있는 쇼룸 편집 페이지"
-        caption="편집 페이지. 공간을 추가하고 스팟을 배치한 뒤 라이브로 발행"
-        height={902}
-        src="showroom-editor.webp"
-        width={1600}
-      />
       <SubHead>해결</SubHead>
       <Bullets>
         <li>

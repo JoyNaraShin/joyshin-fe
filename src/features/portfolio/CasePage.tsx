@@ -51,7 +51,7 @@ export function CasePage() {
         <Link className="text-t2 text-mute no-underline hover:text-mark" to="/#work">
           <span aria-hidden="true">←</span> 작업 목록
         </Link>
-        <p className="mt-10 font-mono text-t1 tracking-[0.06em] text-mute">CLO-SET · {p.when}</p>
+        <p className="mt-10 text-t2 text-mute tabular-nums">CLO-SET · {p.when}</p>
         <h1 className="mt-3 max-w-[20ch] text-[clamp(36px,5.2vw,68px)] font-bold text-balance leading-[1.1] tracking-[-0.055em]">
           {p.title}
         </h1>
@@ -67,7 +67,9 @@ export function CasePage() {
             <figcaption className="mt-4 text-t2 text-deep-mute">출처 CLO-SET 헬프센터</figcaption>
           </figure>
         ) : (
-          <figure className="mt-12 flex justify-center rounded-[28px] bg-sand-2 p-[clamp(20px,4vw,56px)]">
+          <figure
+            className={`mt-12 flex justify-center rounded-[28px] bg-sand-2 p-[clamp(20px,4vw,56px)] ${p.cover.kind === "figure" ? "max-page:hidden" : ""}`}
+          >
             {p.cover.kind === "metric" ? (
               <Metrics />
             ) : p.cover.kind === "figure" && HEAD_FIGURES[p.cover.figure] ? (

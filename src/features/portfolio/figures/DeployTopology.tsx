@@ -110,7 +110,7 @@ export function DeployTopology() {
           Cloudflare Pages
         </text>
         <text className="fill-mark text-t1" x={484} y={80}>
-          index.html 만 배포
+          index.html만 배포
         </text>
 
         <rect

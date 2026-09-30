@@ -30,8 +30,7 @@ export function LoadingCase() {
 
       <SubHead>결과</SubHead>
       <Bullets>
-        <li>DOMContentLoaded 2.47s에서 1.33s로 46% 단축</li>
-        <li>LCP 2.91s에서 1.64s로 44% 단축</li>
+        <li>LCP 44%, DOMContentLoaded 46% 단축. 팀원 각자 PC에서 잰 랩 측정 평균</li>
       </Bullets>
       <Figure
         narrow="hide"

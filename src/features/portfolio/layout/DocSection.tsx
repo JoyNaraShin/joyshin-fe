@@ -69,6 +69,7 @@ export function Hang({
   children: ReactNode;
   className?: string;
 }) {
+  if (!label) return <div className={`max-w-[760px] ${className}`}>{children}</div>;
   return (
     <div
       className={`grid grid-cols-[132px_minmax(0,1fr)] gap-x-9 max-page:grid-cols-1 max-page:gap-x-0 ${className}`}

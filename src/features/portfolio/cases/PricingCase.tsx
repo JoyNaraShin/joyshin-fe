@@ -14,7 +14,7 @@ export function PricingCase() {
         <li>BD 팀은 고객사 크레딧과 플랜을 스프레드시트로 관리</li>
       </Bullets>
 
-      <SubHead>화면</SubHead>
+      <SubHead>만든 화면</SubHead>
       <Bullets>
         <li>요금제별 기능과 가격을 보여 주는 Pricing 페이지</li>
         <li>플랜 한도 대비 사용량과 초과량을 보여 주는 Admin Console 사용량 화면</li>

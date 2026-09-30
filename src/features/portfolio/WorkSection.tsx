@@ -105,9 +105,7 @@ export function WorkSection() {
         >
           작업
         </h2>
-        <p className="text-t2 text-mute">
-          CLO-SET 2022 – 2026 · 카드를 누르면 문제와 해결을 볼 수 있습니다
-        </p>
+        <p className="text-t2 text-mute">CLO-SET 2022 – 2026</p>
       </div>
 
       <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-16 max-page:grid-cols-1 max-page:gap-y-12">

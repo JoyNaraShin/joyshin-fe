@@ -10,7 +10,7 @@ export function Bullets({ children }: { children: ReactNode }) {
         [&>li]:relative [&>li]:mt-2.5 [&>li]:pl-5 [&>li]:text-t3 [&>li]:leading-[1.75] [&>li]:font-normal [&>li]:text-pretty
         [&>li]:before:absolute [&>li]:before:left-0 [&>li]:before:top-[0.88em] [&>li]:before:h-px [&>li]:before:w-2.5 [&>li]:before:bg-rule-3 [&>li]:before:content-['']
         [&_b]:font-semibold [&_b]:text-ink
-        [&_code]:bg-inset [&_code]:px-[3px] [&_code]:py-px [&_code]:font-mono [&_code]:text-[13px]"
+        [&_code]:bg-transparent [&_code]:px-0 [&_code]:font-mono [&_code]:text-[13px]"
     >
       {children}
     </ul>

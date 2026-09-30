@@ -11,7 +11,7 @@ export function Metrics() {
             <span>{k}</span>
             <span className="font-semibold text-ink">{pct}</span>
           </dt>
-          <dd className="mt-2 font-mono text-[clamp(34px,4.4vw,56px)] leading-none font-medium tracking-[-0.03em] text-deep">
+          <dd className="mt-2 text-[clamp(36px,4.6vw,60px)] leading-none font-bold tabular-nums tracking-[-0.04em] text-deep">
             {to}
             <span className="ml-3 align-middle text-t3 text-mute line-through decoration-1">
               {from}
