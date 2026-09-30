@@ -1,5 +1,9 @@
+import { Link } from "react-router-dom";
 import { LINKS, MAIL } from "./content/profile";
+import { PROJECTS } from "./content/projects";
 import { COLUMN } from "./layout/DocSection";
+
+const PROJECTS_COUNT = PROJECTS.length - 2;
 
 export function Hero() {
   return (
@@ -35,6 +39,15 @@ export function Hero() {
           </a>
         ))}
       </p>
+      <Link
+        className="mt-10 flex items-center justify-between rounded-md border border-rule px-5 py-4 text-t3 font-semibold text-ink no-underline hover:border-mark hover:text-mark"
+        to="/work"
+      >
+        작업 보기{" "}
+        <span className="text-t2 font-normal text-mute">
+          버추얼 쇼룸, 목록 렌더링 외 {PROJECTS_COUNT}건 →
+        </span>
+      </Link>
     </section>
   );
 }

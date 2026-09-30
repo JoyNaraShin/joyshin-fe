@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const LINKS = [
-  { to: "/#work", label: "작업" },
+  { to: "/work", label: "작업" },
   { to: "/#career", label: "경력" },
   { to: "/#ai", label: "AI" },
   { to: "/#contact", label: "연락처" },

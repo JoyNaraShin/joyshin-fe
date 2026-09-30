@@ -2,6 +2,7 @@ import { RootLayout } from "@/layouts/RootLayout";
 import { CasePage } from "@/pages/CasePage";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+import { WorkPage } from "@/pages/WorkPage";
 import { RouteError } from "@/routes/RouteError";
 import type { RouteObject } from "react-router-dom";
 
@@ -22,6 +23,7 @@ export const routes: RouteObject[] = [
     errorElement: <RouteError />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: "work", element: <WorkPage /> },
       { path: "work/:slug", element: <CasePage /> },
       { path: "*", element: <NotFoundPage /> },
     ],

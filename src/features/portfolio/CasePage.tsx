@@ -44,7 +44,7 @@ export function CasePage() {
 
   return (
     <main className={`${COLUMN} pt-12 pb-10`} id="main">
-      <Link className="text-t2 text-mute no-underline hover:text-mark" to="/#work">
+      <Link className="text-t2 text-mute no-underline hover:text-mark" to="/work">
         <span aria-hidden="true">←</span> 작업 목록
       </Link>
 

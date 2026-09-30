@@ -1,10 +1,9 @@
-import { AiSection, CareerSection, ContactSection, Hero, WorkSection } from "@/features/portfolio";
+import { AiSection, CareerSection, ContactSection, Hero } from "@/features/portfolio";
 
 export function HomePage() {
   return (
     <main id="main" className="w-full">
       <Hero />
-      <WorkSection />
       <CareerSection />
       <AiSection />
       <ContactSection />
