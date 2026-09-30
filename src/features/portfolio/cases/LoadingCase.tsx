@@ -34,6 +34,7 @@ export function LoadingCase() {
         <li>LCP 2.91s에서 1.64s로 44% 단축</li>
       </Bullets>
       <Figure
+        narrow="hide"
         caption="개선 전후 계측값. 막대 길이는 실제 초 단위"
         note="DCL은 DOMContentLoaded. Performance 패널과 Lighthouse로 측정"
       >

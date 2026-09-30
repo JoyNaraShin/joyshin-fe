@@ -76,8 +76,8 @@ export function CasePage() {
                 </div>
               ))}
             </dl>
-            <h2 className="mt-8 text-t2 font-semibold text-mark">맡은 일</h2>
-            <ul className="mt-3 list-none">
+            <h2 className="mt-8 text-t2 font-semibold text-mark max-page:hidden">맡은 일</h2>
+            <ul className="mt-3 list-none max-page:hidden">
               {p.mine.map((m) => (
                 <li
                   className="relative mt-2 pl-4 text-t3 text-pretty leading-[1.65] text-ink before:absolute before:top-[0.8em] before:left-0 before:h-1.5 before:w-1.5 before:rounded-full before:bg-mark before:content-['']"

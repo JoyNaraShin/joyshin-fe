@@ -137,7 +137,7 @@ export const MORE: Project[] = [
     title: "프론트엔드 배포 분리",
     when: "2026 상반기",
     role: "설계와 검증 리드",
-    result: "롤백을 index.html의 버전 참조만 되돌리는 작업으로 단순화한 배포 구조 설계",
+    result: "index.html의 버전 참조만 바꾸는 배포 구조 설계. 테스트 서버 검증까지 완료",
     summary: "프론트엔드만 바뀌어도 Next.js 서버 이미지를 다시 빌드하던 구조를 분리",
     stack: ["GitHub Actions", "Cloudflare Pages"],
     cover: { kind: "figure", figure: "deploy" },

@@ -48,6 +48,15 @@
   --color-mark-soft: #e8f0ef; /* 도판 안 선택된 항목의 지면 · 버튼 active */
   --color-warn: #c0554a; /* 도판에서 "이전/버려진 요청" 표시 */
 
+  /* ─── 어두운 지면. 히어로와 작업 타일처럼 캡처를 띄워야 하는 자리에만 쓴다.
+     흰 배경 캡처는 흰 지면 위에서 경계가 사라지지만, 어두운 지면 위에서는 화면으로 읽힌다. */
+  --color-night: #0f1215;
+  --color-night-2: #181c20;
+  --color-night-line: #2a3137;
+  --color-night-ink: #eef1f3;
+  --color-night-mute: #9aa4ad;
+  --color-mark-bright: #6fc7bd; /* 어두운 지면 위의 강조색. mark 는 어두운 지면에서 대비가 모자라다 */
+
   /* 밑줄·테두리로 쓰는 반투명 강조. 통합 전에는 .30 .32 .34 .35 .40 이 따로 돌았다. */
   --color-mark-line: rgba(10, 92, 92, 0.35);
   --color-mark-wash: rgba(10, 92, 92, 0.045);

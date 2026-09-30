@@ -33,7 +33,7 @@ export function DocSection({
       id={id}
       aria-labelledby={`${id}-title`}
       ref={ref}
-      className="relative pt-30 last-of-type:pb-32 max-page:pt-20
+      className="relative pt-30 last-of-type:pb-20 max-page:pt-20
         js:translate-y-3.5 js:transition-transform js:duration-600 js:ease-out js:revealed:translate-y-0
         motion-reduce:!translate-y-0 motion-reduce:!transition-none
         print:!translate-y-0 print:!transition-none print:pt-8"

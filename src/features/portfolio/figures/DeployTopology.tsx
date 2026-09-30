@@ -41,7 +41,7 @@ export function DeployTopology() {
           x2={296}
           y2={170}
         />
-        <text className="fill-mute text-t1" x={288} y={20} textAnchor="end">
+        <text className="fill-mute text-t1" x={16} y={20}>
           기존
         </text>
         <text className="fill-mark text-t1" x={304} y={20}>
@@ -74,7 +74,7 @@ export function DeployTopology() {
         <text className="fill-mute text-t1" x={44} y={122}>
           서버 이미지에 포함
         </text>
-        <text className="fill-mute text-t1" x={30} y={145}>
+        <text className="fill-mute text-t1" x={30} y={141}>
           번들 청크는 스토리지에 따로 업로드
         </text>
 

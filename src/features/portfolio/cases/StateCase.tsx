@@ -1,5 +1,4 @@
 import { Bullets } from "../components/Bullets";
-import { Overview } from "../components/Overview";
 import { SubHead } from "../components/SubHead";
 import { StateBoundary } from "../figures/StateBoundary";
 import { Figure } from "../layout/Figure";
@@ -14,6 +13,7 @@ export function StateCase() {
           MobX 싱글턴 스토어에 여러 화면의 상태가 한 인스턴스로 쌓이고, 화면을 벗어나도 상태가 남음
         </li>
         <li>스토어끼리 서로 참조해 화면 하나만 떼어내도 관련 없는 스토어까지 따라옴</li>
+        <li>서버 데이터가 스토어에도 복제돼 저장할 때마다 캐시와 스토어를 함께 수정</li>
         <li>observer 자동 구독 때문에 리렌더 원인 추적이 어려움</li>
         <li>컨테이너 컴포넌트가 비대해지고 props drilling이 늘어남</li>
       </Bullets>
@@ -54,7 +54,6 @@ export function StateCase() {
         <li>서버 상태는 TanStack Query 캐시, UI 상태는 Recoil로 나뉜 구조로 전환</li>
         <li>MobX는 전부 걷어내지 못하고 일부 화면에 남음</li>
       </Bullets>
-      <Overview why="서버 데이터가 스토어에도 복제돼 저장할 때마다 캐시와 스토어를 함께 수정해야 했음" />
     </Item>
   );
 }
