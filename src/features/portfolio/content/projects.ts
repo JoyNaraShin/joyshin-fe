@@ -94,7 +94,7 @@ export const MORE: Project[] = [
     slug: "pricing",
     title: "요금제 개편과 사용량 제한",
     when: "2024 하반기 – 2025 상반기",
-    role: "개발",
+    role: "개발, 사용량 제한은 추가 투입",
     result: "Free, Standard, Premium 요금제에 맞춘 화면과 한도, 백오피스",
     summary:
       "Pricing 페이지와 Admin Console 사용량 화면, 파일 업로드와 임베드 뷰의 플랜별 한도, BD 팀용 백오피스를 만들었습니다.",
@@ -109,6 +109,9 @@ export const MORE: Project[] = [
       "파일 업로드와 임베드 뷰의 플랜별 한도 적용",
       "한도 초과 시 권한별로 버튼이 달라지는 공통 안내 페이지",
       "BD 팀 백오피스의 요금 계산, 플랜 변경, 메모 기능",
+    ],
+    notMine: [
+      "사용량 제한은 원래 다른 담당자의 작업이었고, 일정을 맞추기 위해 중간에 추가로 투입됐습니다",
     ],
   },
   {
@@ -132,19 +135,19 @@ export const MORE: Project[] = [
     slug: "renewal",
     title: "1차 서비스 리뉴얼",
     when: "2023 하반기 – 2024 상반기",
-    role: "구조 결정",
-    result: "모노레포 도구와 패키지 구조, 상태 관리 방식을 직접 정했습니다",
+    role: "3인 공동 주도, 뷰어 담당",
+    result: "프론트엔드 세 명이 함께 주도했고, 저는 모든 뷰어를 설계하고 개발했습니다",
     summary:
-      "MobX 싱글턴 스토어에 쌓이던 상태를 서버 상태와 UI 상태로 나누고, Yarn workspaces로 패키지를 갈랐습니다.",
+      "MobX 싱글턴 스토어에 쌓이던 상태를 서버 상태와 UI 상태로 나누고, Yarn workspaces로 패키지를 갈랐습니다. 초기 설계는 셋이 함께 했습니다.",
     stack: ["Yarn workspaces", "TanStack Query", "Recoil"],
     cover: { kind: "figure", figure: "state" },
     mine: [
-      "Turborepo나 Nx 없이 Yarn workspaces만으로 모노레포 구성",
-      "앱, 공유 UI, API 클라이언트, 빌드 설정 패키지 분리",
-      "서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil로 분리",
-      "VAC 패턴과 커스텀 훅 기반 로직 분리 도입",
+      "모노레포 초기 설계에 참여 (Yarn workspaces, 관심사별 패키지 분리)",
+      "뷰어 담당으로 모든 뷰어의 설계와 개발",
+      "담당 페이지에 필요한 공유 패키지 추가",
     ],
     notMine: [
+      "리뉴얼 주도와 모노레포 초기 설계는 프론트엔드 세 명이 함께 했습니다",
       "빌드 도구, 린트와 커밋 규칙, App Router 구조, URL 설계는 제가 정하지 않았습니다",
       "2차 리뉴얼의 Recoil → Jotai 이전은 다른 팀원이 주도했습니다",
     ],

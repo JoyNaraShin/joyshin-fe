@@ -10,7 +10,7 @@ export function PricingCase() {
       <Overview
         lead="Free, Standard, Premium 요금제 도입에 맞춰 Pricing 페이지와 사용량 화면, 플랜별 한도, BD 팀 백오피스를 만들었습니다."
         situation="요금제가 생기면서 파일 업로드와 임베드 뷰에 플랜별 한도가 필요해졌습니다. BD 팀은 고객사 크레딧과 플랜을 스프레드시트로 관리하고 있었습니다."
-        task="2024 하반기부터 2025 상반기까지 Pricing 페이지, Admin Console 사용량 화면, 플랜별 사용량 제한, BD 팀용 백오피스 개발"
+        task="2024 하반기부터 2025 상반기까지 Pricing 페이지, Admin Console 사용량 화면, BD 팀용 백오피스 개발. 플랜별 사용량 제한은 일정을 맞추기 위해 중간에 추가 투입"
         action="사용량 조회 API로 한도 초과를 미리 판단, 서버 차단 응답에 따른 임베드 분기, 권한별 공통 안내 페이지, 백오피스 이관"
       />
       <SubHead>플랜별 한도</SubHead>
