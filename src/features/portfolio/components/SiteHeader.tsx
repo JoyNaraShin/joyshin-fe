@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Mark } from "./Mark";
 
 /** 페이지 링크는 NavLink 로 현재 위치를 표시하고, 홈 안의 앵커는 Link 로 둔다. */
@@ -18,8 +18,6 @@ const ITEM = "relative block rounded-sm px-3 py-2 text-t2 font-medium no-underli
  * 지금 보는 페이지는 글자를 진하게 하고 아래에 강조색 막대를 둔다. 작업 글(/work/:slug)도 작업으로 친다.
  */
 export function SiteHeader() {
-  /* 홈은 바로 아래 소개가 이름과 직무를 크게 보여 주므로 헤더에서는 직무를 뺀다 */
-  const onHome = useLocation().pathname === "/";
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-paper text-ink print:hidden">
       <div className="mx-auto flex h-16 w-[min(720px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(720px,100%-32px)]">
@@ -31,9 +29,7 @@ export function SiteHeader() {
           <Mark />
           <span className="flex items-baseline gap-2">
             <span className="text-t3 font-bold tracking-[-0.02em] text-ink">신나라</span>
-            {onHome ? null : (
-              <span className="text-t2 text-mute max-card:hidden">프론트엔드 개발자</span>
-            )}
+            <span className="text-t2 text-mute max-card:hidden">프론트엔드 개발자</span>
           </span>
         </Link>
         <nav aria-label="주 메뉴">
