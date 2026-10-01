@@ -60,7 +60,6 @@ export function WorkSection() {
             <Thumb alt="" src={thumb(c.thumb)} />
             <div className="min-w-0">
               <h3 className="text-t4 font-semibold tracking-[-0.02em] text-ink">{c.title}</h3>
-              <p className="mt-1 text-t2 text-mute">{c.tag}</p>
               <ul className="mt-2 list-none">
                 {c.body.map((b) => (
                   <li

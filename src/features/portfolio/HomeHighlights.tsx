@@ -114,7 +114,7 @@ export function HomeWork() {
             <h3 className="mt-1 text-t4 font-semibold tracking-[-0.02em] text-ink group-hover:text-mark group-hover:underline group-hover:underline-offset-4">
               {p.title}
             </h3>
-            <p className="mt-1.5 text-t3 text-pretty leading-[1.7] text-ink-2">{p.result}</p>
+            <p className="mt-1.5 text-t3 text-pretty leading-[1.7] text-ink-2">{p.summary}</p>
           </Link>
         ))}
       </div>

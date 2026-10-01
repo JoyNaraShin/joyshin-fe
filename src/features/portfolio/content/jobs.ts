@@ -22,7 +22,7 @@ export const JOBS: Job[] = [
     company: "클로버추얼패션",
     role: "CLO-SET · 프론트엔드 개발자",
     lead: "브랜드와 제조사가 3D 에셋을 관리하고 공유하는 글로벌 B2B 협업 플랫폼. 3D, 2D, 렌더 뷰어와 에셋 목록, 버추얼 쇼룸 개발",
-    projects: ["showroom", "list-rendering", "loading", "renewal", "pricing", "deploy"],
+    projects: ["showroom", "list-rendering", "renewal", "loading", "pricing", "deploy"],
     bullets: [
       "통합 검색 페이지와 검색어 자동완성 개발. 검색 조건은 URL 쿼리스트링으로 관리하고, 자동완성은 디바운스와 이전 요청 취소로 race condition 방지",
       "2차 리뉴얼(Vite, Jotai, Tailwind CSS)에서 임베드 뷰어 개발",

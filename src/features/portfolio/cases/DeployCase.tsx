@@ -8,8 +8,8 @@ export function DeployCase() {
         <Step label="문제">
           <ul>
             <li>
-              2차 리뉴얼의 React SPA(Vite)에 별도 배포 경로가 없어, 번들 청크는 스토리지에 올리고
-              진입점 <code>index.html</code>은 기존 Next.js 서버 Docker 이미지에 포함해 서빙
+              Vite로 만든 React SPA에 별도 배포 경로가 없어, 번들 청크는 스토리지에 올리고 진입점{" "}
+              <code>index.html</code>은 기존 Next.js 서버 Docker 이미지에 포함해 서빙
             </li>
             <li>
               프론트엔드만 변경돼도 서버 이미지 재빌드와 재배포 필요. 배포 시간과 롤백 단위가
@@ -17,7 +17,7 @@ export function DeployCase() {
             </li>
           </ul>
         </Step>
-        <Step label="호스팅">
+        <Step label="선택">
           <ul>
             <li>
               클라이언트 라우팅 경로는 서버에 대응 파일이 없어, 직접 접근이나 새로고침 시{" "}
@@ -47,7 +47,7 @@ export function DeployCase() {
         </Step>
         <Step label="현황">
           <ul>
-            <li>테스트 서버 단계별 검증까지 완료, 운영 반영 전 퇴사</li>
+            <li>테스트 서버 단계별 검증까지 완료. 운영 반영 전 퇴사</li>
           </ul>
         </Step>
       </Thread>

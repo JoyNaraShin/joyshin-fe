@@ -113,11 +113,34 @@ export function DeployTopology() {
           index.html만 배포
         </text>
 
+        <line
+          className="stroke-rule-2 [stroke-width:1]"
+          markerEnd="url(#dt-arrow)"
+          x1={442}
+          y1={80}
+          x2={468}
+          y2={122}
+        />
+        <rect
+          className="fill-none stroke-mark [stroke-width:1.2]"
+          height={40}
+          rx={3}
+          width={136}
+          x={470}
+          y={110}
+        />
+        <text className="fill-ink font-mono text-t1 font-medium" x={484} y={127}>
+          스토리지
+        </text>
+        <text className="fill-mark text-t1" x={484} y={142}>
+          청크 버전별 업로드
+        </text>
+
         <rect
           className="fill-none stroke-rule-2 [stroke-width:1]"
           height={40}
           rx={3}
-          width={186}
+          width={128}
           x={312}
           y={110}
         />

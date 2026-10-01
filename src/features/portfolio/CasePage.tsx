@@ -7,8 +7,8 @@ import { PricingCase } from "./cases/PricingCase";
 import { ShowroomCase } from "./cases/ShowroomCase";
 import { StateCase } from "./cases/StateCase";
 import { PROJECTS } from "./content/projects";
-import { DeployTopology } from "./figures/DeployTopology";
-import { StateBoundary } from "./figures/StateBoundary";
+import { DeployTopology, deployTopologyFallback } from "./figures/DeployTopology";
+import { StateBoundary, stateBoundaryFallback } from "./figures/StateBoundary";
 import { COLUMN } from "./layout/DocSection";
 import { BareItem } from "./layout/Item";
 
@@ -21,9 +21,10 @@ const BODIES: Record<string, ComponentType> = {
   renewal: StateCase,
 };
 
-const HEAD_FIGURES: Record<string, ComponentType> = {
-  state: StateBoundary,
-  deploy: DeployTopology,
+/* 도식은 좁은 폭에서 글자가 너무 작아져 숨기고, 같은 내용을 문단으로 대신 보여 준다 */
+const HEAD_FIGURES: Record<string, { Figure: ComponentType; fallback: string }> = {
+  state: { Figure: StateBoundary, fallback: stateBoundaryFallback },
+  deploy: { Figure: DeployTopology, fallback: deployTopologyFallback },
 };
 
 /** 작업 한 편을 블로그 글처럼 읽히게 둔다. 제목, 요약, 메타 한 줄, 대표 그림, 본문. */
@@ -54,9 +55,12 @@ export function CasePage() {
           {p.title}
         </h1>
         <p className="mt-4 text-t4 text-pretty leading-[1.6] text-ink-2">{p.result}</p>
-        <p className="mt-4 text-t2 text-mute">
-          {p.role} · {p.stack.join(", ")}
-        </p>
+        <dl className="mt-4 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-1 text-t2">
+          <dt className="text-mute">역할</dt>
+          <dd className="text-ink-2">{p.role}</dd>
+          <dt className="text-mute">스택</dt>
+          <dd className="text-ink-2">{p.stack.join(", ")}</dd>
+        </dl>
 
         {p.cover.kind === "shot" ? (
           <figure className="mt-8">
@@ -70,8 +74,13 @@ export function CasePage() {
             <figcaption className="mt-2 text-t2 text-mute">출처 CLO-SET 헬프센터</figcaption>
           </figure>
         ) : HeadFigure ? (
-          <figure className="mt-8 rounded-md border border-rule p-5 max-fig:hidden">
-            <HeadFigure />
+          <figure className="mt-8">
+            <div className="rounded-md border border-rule p-5 max-fig:hidden">
+              <HeadFigure.Figure />
+            </div>
+            <p className="hidden rounded-md bg-inset px-4 py-3 text-t2 leading-[1.7] text-ink-2 max-fig:block">
+              {HeadFigure.fallback}
+            </p>
           </figure>
         ) : null}
 

@@ -10,19 +10,13 @@ export function PricingCase() {
       <SubHead>범위</SubHead>
       <Bullets>
         <li>
-          Free, Standard, Premium 요금제 도입에 맞춰 Pricing 페이지, Admin Console 사용량 화면,
-          플랜별 사용량 제한, BD 팀용 백오피스 개발
+          Free, Standard, Premium 요금제 도입에 맞춘 요금제 화면, 플랜별 사용량 제한, BD 팀용
+          백오피스 개발
         </li>
+        <li>요금제별 기능과 가격을 비교하는 Pricing 페이지</li>
+        <li>플랜 한도 대비 사용량과 초과량을 표시하는 Admin Console 사용량 화면</li>
       </Bullets>
 
-      <Thread title="요금제 화면">
-        <Step label="개발">
-          <ul>
-            <li>요금제별 기능과 가격을 비교하는 Pricing 페이지</li>
-            <li>플랜 한도 대비 사용량과 초과량을 표시하는 Admin Console 사용량 화면</li>
-          </ul>
-        </Step>
-      </Thread>
       <Shot
         alt="User, Company, Workroom, File Upload, Rendering, Embed View, API Call 사용량과 초과량이 표로 정리된 Admin Console 화면"
         caption="Admin Console 사용량 화면"
@@ -32,7 +26,7 @@ export function PricingCase() {
       />
 
       <Thread title="플랜별 사용량 제한">
-        <Step label="문제">파일 업로드와 임베드 뷰에 플랜별 사용량 한도 적용 필요</Step>
+        <Step label="요구사항">파일 업로드와 임베드 뷰에 플랜별 사용량 한도 적용</Step>
         <Step label="해결">
           <ul>
             <li>사용량 조회 API로 한도 초과를 사전에 판단해 업로드 등 UI 동작 차단</li>
@@ -50,7 +44,6 @@ export function PricingCase() {
           고객사 크레딧, 플랜 관리 백오피스 개발. 요금 계산, 플랜 변경(추가, 취소, 업그레이드,
           다운그레이드), 메모 기능 구현
         </Step>
-        <Step label="결과">스프레드시트 기반 관리 업무를 백오피스로 이관</Step>
       </Thread>
     </Item>
   );

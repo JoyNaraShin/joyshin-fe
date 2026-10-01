@@ -9,8 +9,8 @@ export function ListRenderingCase() {
     <Item id="case-list" source="CLO-SET" title="목록 렌더링 성능 개선">
       <Thread title="1차 교체, VirtuosoGrid (2023 하반기)">
         <Step label="문제">
-          수만 건까지 늘어나는 에셋 목록. 유지보수가 중단된 무한 스크롤 라이브러리가 스크롤마다 전체
-          아이템 위치를 재계산해 강제 리플로우와 프레임 드롭 발생
+          수만 건까지 늘어나는 에셋 목록. 스크롤마다 아이템 위치를 계산하던 오래된 무한 스크롤
+          라이브러리 때문에 리플로우와 프레임 드롭 발생
         </Step>
         <Step label="해결">react-virtuoso의 VirtuosoGrid로 가상화 도입</Step>
         <Step label="한계">
@@ -27,7 +27,7 @@ export function ListRenderingCase() {
       <Thread title="2차 교체, TanStack Virtual (2025 상반기 – 하반기)">
         <Step label="선택">
           레이아웃 계산을 JS 레벨에서 제어할 수 있어 디버깅과 공통 모듈화에 유리한 headless
-          라이브러리. 사내 다른 팀에서 검증된 선택지로, 해당 팀 적용 사례 참고
+          라이브러리. 사내 다른 팀에서 이미 검증한 선택지
         </Step>
         <Step label="해결">
           <ul>
@@ -40,7 +40,7 @@ export function ListRenderingCase() {
         </Step>
         <Step label="결과">
           <ul>
-            <li>수만 건 목록에서도 렌더링 DOM 노드를 뷰포트에 보이는 행 수준으로 유지</li>
+            <li>수만 건 목록에서도 렌더링되는 DOM 노드를 화면에 보이는 행만큼으로 유지</li>
             <li>목록별로 분산된 가상화 구현을 공통 훅 하나로 통합</li>
             <li>적용 후 목록 성능 관련 사용자 리포트 감소</li>
           </ul>

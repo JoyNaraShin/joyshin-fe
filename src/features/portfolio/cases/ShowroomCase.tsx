@@ -23,20 +23,6 @@ const SCREENS = [
     alt: "쇼룸 편집 화면 오른쪽에 열린 환경 설정 패널. 이름, 로고, 링크 공유, 셀렉션, 이메일 문의 토글과 회사 정보 입력란",
   },
   {
-    src: "showroom-content-list.webp",
-    w: 1000,
-    h: 670,
-    caption: "편집. 3D, 2D, 기타, Navigation 유형별 콘텐츠 목록",
-    alt: "콘텐츠 목록 패널. 3D, 2D, Other, Navigation 탭과 배치된 콘텐츠별 Edit 버튼",
-  },
-  {
-    src: "showroom-upload.webp",
-    w: 1440,
-    h: 950,
-    caption: "편집. 공간 배경 이미지 업로드",
-    alt: "360° 배경 이미지를 끌어 놓거나 파일을 골라 올리는 창. 아래에 이미 올린 배경 두 개의 썸네일",
-  },
-  {
     src: "showroom-live-detail.webp",
     w: 1440,
     h: 810,
@@ -62,32 +48,8 @@ export function ShowroomCase() {
           360° 이미지나 2D 이미지 배경 위에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 쇼룸
           생성부터 공간과 콘텐츠 편집, 공개 설정, 라이브 화면까지 프론트엔드 단독 개발
         </li>
-        <li>
-          2022 하반기 초기 개발부터 2026 상반기 퇴사까지 기능 추가, 개선, 유지보수 단독 담당. 2D
-          배경, 업로드 진행률 등 운영 중 추가된 기능 포함
-        </li>
+        <li>2022 하반기 초기 개발부터 2026 상반기 퇴사까지 기능 추가, 개선, 유지보수 담당</li>
       </Bullets>
-      <FeatureMap />
-
-      <SubHead>화면</SubHead>
-      <div className="mt-6 grid grid-cols-2 gap-x-5 gap-y-6 max-card:grid-cols-1">
-        {SCREENS.map((sc) => (
-          <figure className={sc.wide ? "col-span-2 max-card:col-span-1" : ""} key={sc.src}>
-            <img
-              alt={sc.alt}
-              className="block h-auto w-full rounded-md border border-rule"
-              decoding="async"
-              height={sc.h}
-              loading="lazy"
-              src={`${import.meta.env.BASE_URL}work/${sc.src}`}
-              width={sc.w}
-            />
-            <figcaption className="mt-2 text-t2 text-mute">{sc.caption}</figcaption>
-          </figure>
-        ))}
-      </div>
-      <p className="mt-3 text-t1 text-faint">캡처 출처 CLO-SET 헬프센터</p>
-
       <Thread title="쇼룸 데이터와 상태">
         <Step label="문제">
           <ul>
@@ -107,11 +69,11 @@ export function ShowroomCase() {
             <li>MobX만 쓰던 코드베이스에 Recoil을 처음 도입</li>
             <li>
               진입 시 받은 문서를 엔티티 단위 atom으로 정규화. 저장 시 원래 스키마로 직렬화해야
-              하므로 atom 경계는 화면이 아닌 문서 구조 기준
+              하므로 atom 경계를 문서 구조에 맞춤
             </li>
             <li>
               화면용 파생 데이터는 상태 없는 selector로 계산. 여러 atom을 함께 갱신하는 동작은 액션
-              함수로 캡슐화해 호출부의 갱신 대상, 순서 의존 제거
+              함수로 묶어 호출부가 갱신 대상과 순서를 다루지 않도록 정리
             </li>
           </ul>
         </Step>
@@ -126,8 +88,7 @@ export function ShowroomCase() {
           <ul>
             <li>편집 페이지와 라이브 페이지 컴포넌트 분리</li>
             <li>
-              공유 범위를 도메인 모델과 순수 함수로 한정. 렌더 결과가 동일한 경우에만 컴포넌트
-              재사용
+              공유 코드는 도메인 모델과 순수 함수로 한정. 컴포넌트는 렌더 결과가 같은 경우에만 공유
             </li>
           </ul>
         </Step>
@@ -138,7 +99,8 @@ export function ShowroomCase() {
 
       <Thread title="배경 로딩">
         <Step label="문제">
-          고해상도 360° 배경 원본을 단일 요청으로 받는 구조. 중국 사용자로부터 로딩 10분 이상 리포트
+          고해상도 360° 배경 원본을 단일 요청으로 받는 구조. 중국 사용자에게서 배경 로딩이 10분 이상
+          걸린다는 리포트 접수
         </Step>
         <Step label="해결">
           <ul>
@@ -146,8 +108,30 @@ export function ShowroomCase() {
             <li>서버 타일 변환 완료 전까지 썸네일 노출, 완료 후 타일 배경으로 교체</li>
           </ul>
         </Step>
-        <Step label="결과">로컬 테스트 기준 배경 로딩 시간 약 80% 단축</Step>
+        <Step label="결과">타일 분할 로딩 전환 후 로컬 테스트 기준 배경 로딩 시간 약 80% 단축</Step>
       </Thread>
+
+      <SubHead>주요 화면</SubHead>
+      <div className="mt-6 grid grid-cols-2 gap-x-5 gap-y-6 max-card:grid-cols-1">
+        {SCREENS.map((sc) => (
+          <figure className={sc.wide ? "col-span-2 max-card:col-span-1" : ""} key={sc.src}>
+            <img
+              alt={sc.alt}
+              className="block h-auto w-full rounded-md border border-rule"
+              decoding="async"
+              height={sc.h}
+              loading="lazy"
+              src={`${import.meta.env.BASE_URL}work/${sc.src}`}
+              width={sc.w}
+            />
+            <figcaption className="mt-2 text-t2 text-mute">{sc.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p className="mt-3 text-t1 text-faint">캡처 출처 CLO-SET 헬프센터</p>
+
+      <SubHead>기능 범위</SubHead>
+      <FeatureMap />
     </Item>
   );
 }

@@ -10,18 +10,19 @@ export function LoadingCase() {
     <Item id="case-loading" source="CLO-SET" title="워크룸 초기 로딩 개선">
       <SubHead>계측과 제안</SubHead>
       <Bullets>
-        <li>에셋 목록이 있는 메인 작업 공간(워크룸)의 첫 화면 로딩 지연</li>
         <li>
-          Performance 패널 waterfall로 병목 구간 특정. 번들 분석기와 네트워크 탭으로 대형 청크와
-          호출 수 확인
+          에셋 목록이 있는 메인 작업 공간(워크룸)의 첫 화면 로딩 지연. 개선 전 LCP 2.91s,
+          DOMContentLoaded 2.47s
         </li>
-        <li>Performance 패널과 Lighthouse 계측 결과로 개선 과제 제안</li>
+        <li>
+          Performance 패널로 병목 구간 특정. 번들 분석기와 네트워크 탭으로 대형 청크와 호출 수 확인
+        </li>
+        <li>Performance 패널과 Lighthouse 계측 결과를 근거로 개선 과제 제안</li>
       </Bullets>
 
       <Thread title="번들과 초기화">
         <Step label="문제">
-          첫 화면에서 사용하지 않는 코드가 초기 번들에 포함. 당장 쓰지 않는 모듈까지 앱 초기화
-          시점에 로드
+          첫 화면에 쓰지 않는 코드가 초기 번들에 포함되고, 해당 모듈이 앱 시작 시점에 초기화됨
         </Step>
         <Step label="해결">
           <ul>
@@ -63,14 +64,15 @@ export function LoadingCase() {
 
       <SubHead>결과</SubHead>
       {/* 세 갈래를 함께 적용한 뒤 잰 값이라 결과는 따로 둔다 */}
+      <p className="mt-4 text-t2 text-mute">세 가지 개선을 함께 적용한 뒤 측정</p>
       <Bullets>
-        <li>DOMContentLoaded 2.47s에서 1.33s로 46% 단축</li>
         <li>LCP 2.91s에서 1.64s로 44% 단축</li>
-        <li>수치는 팀원 각자 PC에서 측정한 랩 데이터의 평균</li>
+        <li>DOMContentLoaded 2.47s에서 1.33s로 46% 단축</li>
+        <li>팀원 PC 여러 대에서 측정한 랩 수치의 평균</li>
       </Bullets>
       <Figure
         narrow="hide"
-        caption="개선 전후 계측값. 막대 길이는 실제 초 단위"
+        caption="개선 전후 계측값"
         note="DCL은 DOMContentLoaded. Performance 패널과 Lighthouse로 측정"
       >
         <LoadTimeChart />

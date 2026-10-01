@@ -8,10 +8,7 @@ export function FeatureMap() {
       className="mt-8 overflow-hidden rounded-lg bg-deep text-deep-ink"
     >
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 border-b border-deep-2 px-6 py-5 max-card:px-4">
-        <h3 className="text-t4 font-bold tracking-[-0.02em]">쇼룸 기능</h3>
-        <p className="text-t2 text-deep-mute tabular-nums">
-          2022 하반기 – 2026 상반기, 프론트엔드 단독 개발과 유지보수
-        </p>
+        <p className="text-t2 text-deep-mute">헬프센터 쇼룸 가이드 기준 기능 목록</p>
       </div>
       <div className="grid grid-cols-2 gap-px bg-deep-2 max-card:grid-cols-1">
         {SHOWROOM_FEATURES.map((g, i) => (
@@ -33,9 +30,6 @@ export function FeatureMap() {
           </div>
         ))}
       </div>
-      <p className="px-6 py-3 text-t1 text-deep-mute max-card:px-4">
-        기능 목록 출처 CLO-SET 헬프센터 쇼룸 가이드
-      </p>
     </section>
   );
 }

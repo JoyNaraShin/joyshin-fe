@@ -12,9 +12,9 @@ const ANCHORS = [
 ] as const;
 const ANCHOR_IDS = ANCHORS.map((a) => a.id);
 
-const ITEM = "relative block rounded-sm px-3 py-2 text-t2 font-medium no-underline max-card:px-2";
+const ITEM = "relative block rounded-sm px-3 py-2 text-t2 font-medium no-underline max-card:px-1.5";
 const ON =
-  "font-semibold text-ink after:absolute after:inset-x-3 after:-bottom-[13px] after:h-0.5 after:bg-mark after:content-[''] max-card:after:inset-x-2";
+  "font-semibold text-ink after:absolute after:inset-x-3 after:-bottom-[13px] after:h-0.5 after:bg-mark after:content-[''] max-card:after:inset-x-1.5";
 const OFF = "text-ink-3 hover:text-ink";
 
 /**
@@ -34,11 +34,11 @@ export function SiteHeader() {
         >
           <span className="flex items-baseline gap-2">
             <span className="text-t3 font-bold tracking-[-0.02em] text-ink">JoyNara</span>
-            <span className="text-t3 text-ink-3 max-card:hidden">신나라</span>
+            <span className="text-t3 text-ink-3">신나라</span>
           </span>
         </Link>
         <nav aria-label="주 메뉴">
-          <ul className="flex list-none gap-1">
+          <ul className="flex list-none gap-1 max-card:gap-0.5">
             {PAGES.map((l) => (
               <li key={l.to}>
                 <NavLink className={({ isActive }) => `${ITEM} ${isActive ? ON : OFF}`} to={l.to}>

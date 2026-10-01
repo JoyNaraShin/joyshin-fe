@@ -76,7 +76,11 @@ export function LoadTimeChart() {
               이전
             </text>
             <rect className="fill-rule-2" x={74} y={row.y} width={row.oldW} height={17} rx={1} />
-            <text className="fill-mute font-mono text-t2" x={74 + row.oldW + 9} y={row.y + 13}>
+            <text
+              className="fill-mute stroke-paper font-mono text-t2 [paint-order:stroke] [stroke-width:5px]"
+              x={74 + row.oldW + 9}
+              y={row.y + 13}
+            >
               {row.from.toFixed(2)}s
             </text>
             <text className="fill-mute text-t1 font-normal" x={32} y={row.y + 43}>

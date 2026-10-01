@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { EDUCATION, SKILLS } from "./content/education";
 import { JOBS } from "./content/jobs";
 import { PROJECTS } from "./content/projects";
 import { COLUMN, Hang } from "./layout/DocSection";
@@ -68,6 +69,28 @@ export function CareerSection() {
               ) : null}
               {/* 스택은 읽는 것이 아니라 훑는 것이라 한 줄로 흘린다 */}
               <p className="mt-4 text-t2 leading-[1.8] text-mute">{job.stack.join(", ")}</p>
+            </Hang>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="mt-16 text-t5 font-bold tracking-[-0.03em]">기술</h2>
+      <ul className="mt-4 list-none border-t border-rule">
+        {SKILLS.map((k) => (
+          <li className="border-b border-rule py-3" key={k.label}>
+            <Hang label={k.label}>
+              <p className="text-t3 leading-[1.7] text-ink-2">{k.items}</p>
+            </Hang>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="mt-16 text-t5 font-bold tracking-[-0.03em]">학력과 교육</h2>
+      <ul className="mt-4 list-none border-t border-rule">
+        {EDUCATION.map((e) => (
+          <li className="border-b border-rule py-3" key={e.text}>
+            <Hang label={<span className="tabular-nums">{e.when}</span>}>
+              <p className="text-t3 leading-[1.7] text-ink-2">{e.text}</p>
             </Hang>
           </li>
         ))}
