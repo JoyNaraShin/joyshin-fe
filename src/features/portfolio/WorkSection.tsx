@@ -23,7 +23,7 @@ function Thumb({ src, alt }: { src: string; alt: string }) {
 /** 작업 페이지. 블로그 글 목록처럼 썸네일, 제목, 기간과 역할, 결과 한 줄. */
 export function WorkSection() {
   return (
-    <main className={`${COLUMN} pt-16 max-page:pt-10`} id="main">
+    <main className={`${COLUMN} pt-16 max-page:pt-10`} id="main" tabIndex={-1}>
       <h1 className="text-t6 font-bold tracking-[-0.04em]">작업</h1>
       <p className="mt-2 text-t3 text-mute">CLO-SET, 2022 – 2026</p>
 

@@ -32,6 +32,8 @@
     word-break:keep-all;overflow-x:hidden}
   a{color:inherit}
   :focus-visible{outline:2px solid var(--color-mark);outline-offset:3px;border-radius:3px}
+  /* 본문 바로가기로 초점을 받는 main 은 테두리를 그리지 않는다. 초점 이동만 필요하다. */
+  main:focus,main:focus-visible{outline:none}
 
   /* 인쇄. 지면색은 화면에서 카드를 띄우는 장치라 종이에서는 할 일이 없다 —
      A4 열세 장을 회색으로 채우면 잉크만 먹는다. overflow-x:hidden 도 같이 푼다.

@@ -53,7 +53,7 @@ export function CasePage() {
   const HeadFigure = p.cover.kind === "figure" ? HEAD_FIGURES[p.cover.figure] : undefined;
 
   return (
-    <main className={`${COLUMN} pt-12 pb-10`} id="main">
+    <main className={`${COLUMN} pt-12 pb-10`} id="main" tabIndex={-1}>
       <Link className="text-t2 text-mute no-underline hover:text-mark" to="/work">
         <span aria-hidden="true">←</span> 작업 목록
       </Link>

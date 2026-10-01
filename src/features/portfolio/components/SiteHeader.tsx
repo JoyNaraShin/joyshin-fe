@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSectionInView } from "../hooks/useSectionInView";
 
 /** 페이지 링크는 NavLink 로 현재 위치를 표시하고, 홈 안의 앵커는 Link 로 둔다. */
@@ -24,7 +24,8 @@ const OFF = "text-ink-3 hover:text-ink";
  */
 export function SiteHeader() {
   /* AI, 연락처는 홈 안의 섹션이라 경로가 아니라 스크롤 위치로 현재 위치를 판단한다 */
-  const section = useSectionInView(SECTION_IDS, useLocation().pathname === "/");
+  const { pathname } = useLocation();
+  const section = useSectionInView(SECTION_IDS, pathname === "/");
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-paper text-ink print:hidden">
       <div className="mx-auto flex h-16 w-[min(720px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(720px,100%-32px)]">
@@ -38,19 +39,22 @@ export function SiteHeader() {
         </Link>
         <nav aria-label="주 메뉴">
           <ul className="flex list-none gap-1 max-card:gap-0.5">
-            {PAGES.map((l) => (
-              <li key={l.to}>
-                <NavLink
-                  aria-current={section === l.section ? "location" : undefined}
-                  className={({ isActive }) =>
-                    `${ITEM} ${isActive || section === l.section ? ON : OFF}`
-                  }
-                  to={l.to}
-                >
-                  {l.label}
-                </NavLink>
-              </li>
-            ))}
+            {PAGES.map((l) => {
+              /* NavLink 는 경로가 활성일 때만 aria-current 를 남기므로, 홈 구간 강조까지 직접 계산한다 */
+              const onPage = pathname === l.to || pathname.startsWith(`${l.to}/`);
+              const current = onPage ? "page" : section === l.section ? "location" : undefined;
+              return (
+                <li key={l.to}>
+                  <Link
+                    aria-current={current}
+                    className={`${ITEM} ${current ? ON : OFF}`}
+                    to={l.to}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              );
+            })}
             {ANCHORS.map((l) => (
               <li key={l.to}>
                 <Link

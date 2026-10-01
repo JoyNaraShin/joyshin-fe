@@ -12,6 +12,7 @@ export function NotFoundPage() {
   return (
     <main
       id="main"
+      tabIndex={-1}
       className="mx-auto w-[min(720px,100%-48px)] py-24 max-page:w-[min(720px,100%-32px)]"
     >
       <p className="font-mono text-t2 tracking-[0.08em] text-mark">404</p>

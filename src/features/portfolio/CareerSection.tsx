@@ -6,7 +6,7 @@ import { COLUMN, Hang } from "./layout/DocSection";
 
 export function CareerSection() {
   return (
-    <main className={`${COLUMN} pt-16 max-page:pt-10`} id="main">
+    <main className={`${COLUMN} pt-16 max-page:pt-10`} id="main" tabIndex={-1}>
       <h1 className="text-t6 font-bold tracking-[-0.04em]">경력</h1>
       <p className="mt-2 text-t3 text-mute">총 6년 11개월 · 3곳</p>
       <ul className="mt-10 list-none">

@@ -9,7 +9,7 @@ import {
 
 export function HomePage() {
   return (
-    <main id="main" className="w-full">
+    <main id="main" tabIndex={-1} className="w-full">
       <Hero />
       <HomeStats />
       <HomeWork />
