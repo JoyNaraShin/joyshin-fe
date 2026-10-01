@@ -14,7 +14,7 @@ const ANCHORS = [
 const ITEM = "relative block rounded-sm px-3 py-2 text-t2 font-medium no-underline max-card:px-2";
 
 /**
- * 상단 띠. 왼쪽은 표식과 이름, 직무. 오른쪽은 페이지 링크.
+ * 상단 띠. 왼쪽은 표식과 영문 이름 JoyNara(링크 아이디와 같은 표기), 한글 이름. 오른쪽은 페이지 링크.
  * 지금 보는 페이지는 글자를 진하게 하고 아래에 강조색 막대를 둔다. 작업 글(/work/:slug)도 작업으로 친다.
  */
 export function SiteHeader() {
@@ -28,8 +28,8 @@ export function SiteHeader() {
         >
           <Mark />
           <span className="flex items-baseline gap-2">
-            <span className="text-t3 font-bold tracking-[-0.02em] text-ink">신나라</span>
-            <span className="text-t2 text-mute max-card:hidden">프론트엔드 개발자</span>
+            <span className="text-t3 font-bold tracking-[-0.02em] text-ink">JoyNara</span>
+            <span className="text-t3 text-ink-3 max-card:hidden">신나라</span>
           </span>
         </Link>
         <nav aria-label="주 메뉴">

@@ -4,8 +4,10 @@ import { COLUMN } from "./layout/DocSection";
 export function Hero() {
   return (
     <section className={`${COLUMN} pt-20 max-page:pt-12`}>
-      {/* 이름과 직무는 헤더가 모든 페이지에서 보여 준다. 홈 첫 줄은 그 반복 대신 무엇을 잘하는지로 연다. */}
-      <p className="text-t2 font-medium text-mark tabular-nums">경력 6년 11개월</p>
+      {/* 이름은 헤더가 모든 페이지에서 보여 준다. 홈 첫 줄은 이름을 반복하지 않고 무엇을 잘하는지로 연다. */}
+      <p className="text-t2 font-medium text-mark tabular-nums">
+        프론트엔드 개발자 · 경력 6년 11개월
+      </p>
       <h1 className="mt-3 text-[clamp(26px,4.2vw,34px)] font-bold text-balance leading-[1.35] tracking-[-0.035em]">
         대량 목록 렌더링과 복잡한 클라이언트 상태 관리에 강점이 있습니다
       </h1>
