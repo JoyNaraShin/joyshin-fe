@@ -8,10 +8,7 @@ export function StateCase() {
     <Item id="case-state" source="CLO-SET" title="1차 서비스 리뉴얼">
       <SubHead>범위</SubHead>
       <Bullets>
-        <li>
-          서비스 확장에 맞춘 프론트엔드 구조 재설계. 모노레포 도구, 패키지 구조, 상태 관리 방식을
-          직접 결정
-        </li>
+        <li>모노레포 구성과 상태 관리 구조 재설계 주도</li>
         <li>리뉴얼 앱의 3D, 2D, 렌더 뷰어 전체 설계와 개발</li>
       </Bullets>
 
@@ -72,7 +69,7 @@ export function StateCase() {
 
       <Thread title="컴포넌트 구조">
         <Step label="문제">컨테이너 컴포넌트 비대화와 props drilling 증가</Step>
-        <Step label="해결">VAC 패턴과 커스텀 훅 기반 로직 분리 조사와 도입</Step>
+        <Step label="해결">VAC 패턴과 커스텀 훅으로 뷰와 로직 분리</Step>
       </Thread>
     </Item>
   );

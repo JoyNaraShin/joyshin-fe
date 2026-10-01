@@ -10,7 +10,7 @@ import { Frame } from "../layout/Frame";
  */
 /** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
 export const deployTopologyFallback =
-  "기존에는 번들 청크만 스토리지에 올리고 index.html은 Next.js 서버의 Docker 이미지에 포함해 배포. 제안한 구조에서는 GitHub Actions가 청크를 스토리지에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next.js 서버는 별도 배포.";
+  "기존에는 번들 청크만 Azure Storage에 올리고 index.html은 Next.js 서버의 Docker 이미지에 포함해 배포. 제안한 구조에서는 GitHub Actions가 청크를 Azure Storage에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next.js 서버는 별도 배포.";
 
 export function DeployTopology() {
   return (
@@ -18,7 +18,7 @@ export function DeployTopology() {
       <svg
         viewBox="0 0 620 180"
         role="img"
-        aria-label="기존에는 번들 청크만 스토리지에 올리고 index.html은 Next.js 서버의 Docker 이미지에 포함해 배포. 제안한 구조에서는 GitHub Actions가 청크를 스토리지에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next.js 서버는 별도 배포."
+        aria-label="기존에는 번들 청크만 Azure Storage에 올리고 index.html은 Next.js 서버의 Docker 이미지에 포함해 배포. 제안한 구조에서는 GitHub Actions가 청크를 Azure Storage에 버전별로 올리고 index.html만 Cloudflare Pages로 배포하며, Next.js 서버는 별도 배포."
       >
         <defs>
           <marker
@@ -75,7 +75,7 @@ export function DeployTopology() {
           서버 이미지에 포함
         </text>
         <text className="fill-mute text-t1" x={16} y={170}>
-          번들 청크는 스토리지에 따로 업로드
+          번들 청크는 Azure Storage에 따로 업로드
         </text>
 
         {/* 제안한 구조 — 정적 배포 한 줄, Next 는 따로 */}
@@ -130,7 +130,7 @@ export function DeployTopology() {
           y={110}
         />
         <text className="fill-ink font-mono text-t1 font-medium" x={484} y={127}>
-          스토리지
+          Azure Storage
         </text>
         <text className="fill-mark text-t1" x={484} y={142}>
           청크 버전별 업로드

@@ -14,8 +14,8 @@ type Row = {
 
 /** 눈금 0–3s 를 74–567px 에 맞춰 그린 값. 막대 길이는 실제 초 단위와 비례한다. */
 const ROWS: Row[] = [
-  { key: "DCL", y: 26, from: 2.47, to: 1.33, oldW: 406.0, newW: 218.6, ratio: 1.857 },
-  { key: "LCP", y: 108, from: 2.91, to: 1.64, oldW: 478.3, newW: 269.6, ratio: 1.774 },
+  { key: "LCP", y: 26, from: 2.91, to: 1.64, oldW: 478.3, newW: 269.6, ratio: 1.774 },
+  { key: "DCL", y: 108, from: 2.47, to: 1.33, oldW: 406.0, newW: 218.6, ratio: 1.857 },
 ];
 
 const DURATION = 900;
@@ -53,7 +53,7 @@ export function LoadTimeChart() {
       <svg
         viewBox="0 0 620 196"
         role="img"
-        aria-label="DCL은 2.47초에서 1.33초로, LCP는 2.91초에서 1.64초로 줄었습니다."
+        aria-label="LCP는 2.91초에서 1.64초로, DCL은 2.47초에서 1.33초로 단축."
       >
         {[0, 1, 2, 3].map((s) => {
           const x = 74 + s * 164.33;

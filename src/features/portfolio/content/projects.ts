@@ -57,7 +57,7 @@ export const FEATURED: Project[] = [
     when: "2023 하반기, 2025 상반기 – 하반기",
     role: "가상화 라이브러리 교체 주도",
     result:
-      "수만 건 목록에서도 렌더링되는 DOM 노드를 화면에 보이는 행만큼으로 유지. 적용 후 목록 성능 관련 사용자 리포트 감소",
+      "목록마다 흩어져 있던 가상화 구현을 공통 훅 하나로 통합해 CLO-SET 전체 목록에 적용. 적용 후 목록 성능 관련 사용자 리포트 감소",
     summary:
       "리플로우와 프레임 드롭을 일으키던 오래된 무한 스크롤 라이브러리를 VirtuosoGrid, TanStack Virtual 순으로 교체",
     stack: ["React", "TanStack Virtual", "react-virtuoso", "TanStack Query"],
@@ -73,8 +73,10 @@ export const FEATURED: Project[] = [
     title: "워크룸 초기 로딩 개선",
     when: "2024 하반기",
     role: "제안과 개발",
-    result: "LCP 44%, DOMContentLoaded 46% 단축",
-    summary: "워크룸 첫 화면 로딩 지연을 Performance 패널과 Lighthouse로 계측해 개선 과제로 제안",
+    result:
+      "계측으로 병목을 찾아 번들, API 호출, 이미지를 정리하고 워크룸 첫 화면 LCP 44%, DOMContentLoaded 46% 단축",
+    summary:
+      "워크룸 첫 화면 로딩 지연을 계측해 과제로 제안하고, 번들, API 호출, 이미지를 개선해 LCP 44% 단축",
     stack: ["Next.js", "TanStack Query", "Cloudflare 이미지 리사이징", "Lighthouse"],
     cover: {
       kind: "metric",
@@ -116,7 +118,8 @@ export const MORE: Project[] = [
     title: "요금제 개편과 사용량 제한",
     when: "2024 하반기 – 2025 상반기",
     role: "프론트엔드 개발",
-    result: "Pricing 페이지, Admin Console 사용량 화면, 플랜별 사용량 제한, BD 팀 백오피스 개발",
+    result:
+      "파일 업로드와 임베드 뷰에 플랜별 한도 적용. BD 팀이 스프레드시트로 관리하던 고객사 크레딧과 플랜을 백오피스로 이관",
     summary:
       "Free, Standard, Premium 요금제 도입에 맞춘 화면과 사용량 제한 개발. BD 팀이 스프레드시트로 관리하던 고객사 크레딧과 플랜을 백오피스로 이관",
     stack: ["Next.js", "TypeScript", "TanStack Query", "Recoil", "MobX"],

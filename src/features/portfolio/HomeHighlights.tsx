@@ -15,9 +15,9 @@ const STATS = [
     to: "/work/showroom",
   },
   {
-    value: "수만 건",
-    label: "에셋 목록 행 단위 가상화",
-    detail: "공통 훅으로 CLO-SET 전체 목록 적용",
+    value: "가상화",
+    label: "에셋 목록 렌더링 개선",
+    detail: "TanStack Virtual 공통 훅으로 전체 목록 적용",
     to: "/work/list-rendering",
   },
 ];

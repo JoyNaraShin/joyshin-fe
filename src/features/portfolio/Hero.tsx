@@ -8,13 +8,11 @@ export function Hero() {
         이력서 요약은 업무 성과로 쓰고, 이 첫 화면은 블로그의 소개 글처럼 쓴다.
         어떤 사람이고 무엇을 중요하게 여기는지. 성과 수치는 바로 아래 수치 띠와 작업 글이 맡는다.
       */}
+      <h1 className="sr-only">신나라, 프론트엔드 개발자</h1>
       <p className="text-t2 font-medium text-mark tabular-nums">
         프론트엔드 개발자 · 경력 6년 11개월
       </p>
-      <h1 className="mt-3 text-[clamp(26px,4.2vw,34px)] font-bold text-balance leading-[1.35] tracking-[-0.035em]">
-        안녕하세요, 나라입니다
-      </h1>
-      <div className="mt-6 space-y-4 text-t3 text-pretty leading-[1.85] text-ink-2">
+      <div className="mt-4 space-y-4 text-t3 text-pretty leading-[1.85] text-ink-2">
         <p>
           Java, Spring 풀스택 개발자로 시작해 프론트엔드로 전향했습니다. 기획한 기능이 사용자에게
           어떻게 전달될지는 화면에서 정해집니다. 같은 기능이라도 화면을 어떻게 설계하느냐에 따라
@@ -28,7 +26,7 @@ export function Hero() {
         </p>
         <p>
           문제를 풀 때는 같은 문제가 다시 생기지 않는 구조를 함께 고민합니다. CLO-SET에서는 서버
-          데이터와 화면 상태가 한 스토어에 섞여 있던 상태 관리를 다시 설계했고, 목록마다 따로 구현돼
+          상태와 UI 상태가 한 스토어에 섞여 있던 상태 관리를 다시 설계했고, 목록마다 따로 구현돼
           있던 가상화를 공통 훅으로 묶어 전체 목록에 적용했습니다.
         </p>
         <p>이곳에는 그동안의 작업과 그 과정에서 했던 고민을 정리해 두었습니다.</p>

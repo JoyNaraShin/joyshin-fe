@@ -23,14 +23,14 @@ export function CareerSection() {
                 </span>
               }
             >
-              <h3 className="text-t4 font-semibold tracking-[-0.025em]">{job.company}</h3>
+              <h2 className="text-t4 font-semibold tracking-[-0.025em]">{job.company}</h2>
               <p className="mt-1 text-t3 font-normal text-mute">{job.role}</p>
               <p className="mt-4 text-t3 font-normal text-pretty leading-[1.75] text-ink-2">
                 {job.lead}
               </p>
               {job.projects ? (
                 <>
-                  <h4 className="mt-6 text-t2 font-semibold text-ink-3">주요 작업</h4>
+                  <h3 className="mt-6 text-t2 font-semibold text-ink-3">주요 작업</h3>
                   <ul className="mt-2 list-none border-t border-rule">
                     {job.projects.map((slug) => {
                       const p = PROJECTS.find((x) => x.slug === slug);
@@ -52,7 +52,7 @@ export function CareerSection() {
                       );
                     })}
                   </ul>
-                  <h4 className="mt-6 text-t2 font-semibold text-ink-3">그 밖의 작업</h4>
+                  <h3 className="mt-6 text-t2 font-semibold text-ink-3">그 밖의 작업</h3>
                 </>
               ) : null}
               {job.bullets.length > 0 ? (

@@ -12,7 +12,7 @@ const PITCH = 9;
 
 const ROWS = [
   { key: "가상화 전", to: "track", note: "스크롤한 만큼 노드가 쌓임", y: 52 },
-  { key: "가상화 후", to: "view", note: "보이는 행만큼만 남음", y: 104 },
+  { key: "가상화 후", to: "view", note: "보이는 행 기준으로만 남음", y: 104 },
 ] as const;
 
 function ticks(width: number) {
@@ -22,7 +22,7 @@ function ticks(width: number) {
 
 /** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
 export const listDomGrowthFallback =
-  "가상화 전에는 스크롤한 만큼 DOM 노드가 쌓이고, 가상화 후에는 화면에 보이는 행만큼만 남음.";
+  "가상화 전에는 스크롤한 만큼 DOM 노드가 쌓이고, 가상화 후에는 화면에 보이는 행 기준으로만 남음.";
 
 export function ListDomGrowth() {
   return (
@@ -30,7 +30,7 @@ export function ListDomGrowth() {
       <svg
         viewBox="0 0 620 128"
         role="img"
-        aria-label="가상화 전에는 스크롤한 만큼 DOM 노드가 쌓이고, 가상화 후에는 화면에 보이는 행만큼만 남음."
+        aria-label="가상화 전에는 스크롤한 만큼 DOM 노드가 쌓이고, 가상화 후에는 화면에 보이는 행 기준으로만 남음."
       >
         {/* 화면에 실제로 보이는 구간 */}
         <line

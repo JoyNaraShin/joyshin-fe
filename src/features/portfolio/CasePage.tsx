@@ -82,6 +82,18 @@ export function CasePage() {
               {HeadFigure.fallback}
             </p>
           </figure>
+        ) : p.cover.kind === "metric" ? (
+          <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-md border border-rule bg-rule max-card:grid-cols-1">
+            {p.cover.items.map((m) => (
+              <div className="bg-paper px-5 py-4" key={m.label}>
+                <dt className="text-t2 text-mute">{m.label}</dt>
+                <dd className="mt-1 text-[28px] font-bold leading-tight tracking-[-0.03em] text-mark tabular-nums">
+                  {m.value}
+                </dd>
+                <dd className="mt-1 text-t2 text-ink-2 tabular-nums">{m.detail}</dd>
+              </div>
+            ))}
+          </dl>
         ) : null}
 
         <div className="mt-4 [&_figure]:ml-0">

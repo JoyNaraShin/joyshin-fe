@@ -45,10 +45,10 @@ export function ShowroomCase() {
       <SubHead>개발 범위</SubHead>
       <Bullets>
         <li>
-          360° 이미지나 2D 이미지 배경 위에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 쇼룸
-          생성부터 공간과 콘텐츠 편집, 공개 설정, 라이브 화면까지 프론트엔드 단독 개발
+          쇼룸 생성부터 공간과 콘텐츠 편집, 공개 설정, 라이브 화면까지 프론트엔드 단독 개발과
+          유지보수
         </li>
-        <li>2022 하반기 초기 개발부터 2026 상반기 퇴사까지 기능 추가, 개선, 유지보수 담당</li>
+        <li>스팟은 360° 공간 안에서 3D 콘텐츠를 띄우는 지점</li>
       </Bullets>
       <Thread title="쇼룸 데이터와 상태">
         <Step label="문제">
@@ -59,8 +59,8 @@ export function ShowroomCase() {
               단위
             </li>
             <li>
-              선택, 호버, 드래그 등 인터랙션 상태가 도메인 상태와 같은 트리에 있어 동작 하나에 여러
-              상태가 동시에 갱신
+              패널 열림, 스팟 선택과 편집 여부 같은 UI 상태가 공간, 스팟 데이터와 하나의 상태 객체에
+              섞여 있어, 스팟 하나를 편집해도 UI 상태와 문서 데이터를 함께 갱신해야 했음
             </li>
           </ul>
         </Step>
@@ -68,13 +68,14 @@ export function ShowroomCase() {
           <ul>
             <li>MobX만 쓰던 코드베이스에 Recoil을 처음 도입</li>
             <li>
-              진입 시 받은 문서를 엔티티 단위 atom으로 정규화. 저장 시 원래 스키마로 직렬화해야
-              하므로 atom 경계를 문서 구조에 맞춤
+              진입 시 받은 문서를 공간, 스팟 등 엔티티 단위 atom으로 정규화. 저장 시 원래 스키마로
+              다시 직렬화하므로 atom 단위를 문서의 엔티티 단위와 일치시킴
             </li>
             <li>
-              화면용 파생 데이터는 상태 없는 selector로 계산. 여러 atom을 함께 갱신하는 동작은 액션
-              함수로 묶어 호출부가 갱신 대상과 순서를 다루지 않도록 정리
+              패널 열림, 편집 중인 스팟 같은 UI 상태는 문서 데이터와 분리해 별도 atom으로 관리. 서로
+              영향을 주는 값은 selector로 파생해 직접 동기화하는 코드를 두지 않음
             </li>
+            <li>여러 atom을 함께 갱신하는 동작은 액션 함수로 묶고, 컴포넌트는 액션만 호출</li>
           </ul>
         </Step>
       </Thread>
@@ -82,7 +83,7 @@ export function ShowroomCase() {
       <Thread title="편집과 라이브 분리">
         <Step label="문제">
           초기 개발 속도를 위해 편집과 라이브의 공통 UI를 단일 컴포넌트에서 mode prop으로 분기.
-          요구사항 추가마다 조건 분기가 누적되어 유지보수 비용 증가
+          요구사항이 추가될 때마다 조건문이 쌓임
         </Step>
         <Step label="해결">
           <ul>
@@ -104,7 +105,9 @@ export function ShowroomCase() {
         </Step>
         <Step label="해결">
           <ul>
-            <li>배경 타일 분할 로딩(tiledMap) 전환에 맞춰 업로드와 수정 흐름 구현</li>
+            <li>
+              배경 타일 분할 로딩 전환(타일 변환은 서버 측 작업)에 맞춰 업로드와 수정 흐름 구현
+            </li>
             <li>서버 타일 변환 완료 전까지 썸네일 노출, 완료 후 타일 배경으로 교체</li>
           </ul>
         </Step>
@@ -128,7 +131,6 @@ export function ShowroomCase() {
           </figure>
         ))}
       </div>
-      <p className="mt-3 text-t1 text-faint">캡처 출처 CLO-SET 헬프센터</p>
 
       <SubHead>기능 범위</SubHead>
       <FeatureMap />
