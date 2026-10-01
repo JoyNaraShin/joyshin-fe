@@ -8,11 +8,13 @@ export function Hero() {
         이력서 요약은 업무 성과로 쓰고, 이 첫 화면은 블로그의 소개 글처럼 쓴다.
         어떤 사람이고 무엇을 중요하게 여기는지. 성과 수치는 바로 아래 수치 띠와 작업 글이 맡는다.
       */}
-      <h1 className="sr-only">신나라, 프론트엔드 개발자</h1>
-      <p className="text-t2 font-medium text-mark tabular-nums">
+      <h1 className="text-[clamp(30px,5vw,40px)] font-bold leading-tight tracking-[-0.04em]">
+        신나라
+      </h1>
+      <p className="mt-2 text-t3 font-medium text-mark tabular-nums">
         프론트엔드 개발자 · 경력 6년 11개월
       </p>
-      <div className="mt-4 space-y-4 text-t3 text-pretty leading-[1.85] text-ink-2">
+      <div className="mt-8 space-y-4 text-t3 text-pretty leading-[1.85] text-ink-2">
         <p>
           Java, Spring 풀스택 개발자로 시작해 프론트엔드로 전향했습니다. 기획한 기능이 사용자에게
           어떻게 전달될지는 화면에서 정해집니다. 같은 기능이라도 화면을 어떻게 설계하느냐에 따라

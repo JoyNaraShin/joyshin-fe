@@ -19,7 +19,7 @@ const ON =
 const OFF = "text-ink-3 hover:text-ink";
 
 /**
- * 상단 띠. 왼쪽은 영문 이름 JoyNara(링크 아이디와 같은 표기), 한글 이름. 오른쪽은 페이지 링크.
+ * 상단 띠. 왼쪽은 영문 이름 JoyNara(링크 아이디와 같은 표기). 한글 이름은 홈 소개 제목이 맡는다. 오른쪽은 페이지 링크.
  * 지금 보는 페이지(홈에서는 읽고 있는 섹션)는 글자를 진하게 하고 아래에 강조색 막대를 둔다. 작업 글(/work/:slug)도 작업으로 친다.
  */
 export function SiteHeader() {
@@ -29,14 +29,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-rule bg-paper text-ink print:hidden">
       <div className="mx-auto flex h-16 w-[min(720px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(720px,100%-32px)]">
         <Link
-          aria-label="신나라, 홈으로"
+          aria-label="JoyNara 신나라, 홈으로"
           className="-mx-2 flex items-baseline gap-2 rounded-md px-2 py-1.5 no-underline focus-visible:outline-offset-0"
           to="/"
         >
-          <span className="flex items-baseline gap-2">
-            <span className="text-t3 font-bold tracking-[-0.02em] text-ink">JoyNara</span>
-            <span className="text-t3 text-ink-3">신나라</span>
-          </span>
+          <span className="text-t3 font-bold tracking-[-0.02em] text-ink">JoyNara</span>
         </Link>
         <nav aria-label="주 메뉴">
           <ul className="flex list-none gap-1 max-card:gap-0.5">
