@@ -4,4 +4,5 @@
  */
 export const paths = {
   home: "/",
+  work: (slug: string) => `/work/${slug}`,
 } as const;

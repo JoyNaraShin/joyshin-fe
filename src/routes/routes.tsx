@@ -1,11 +1,14 @@
 import { RootLayout } from "@/layouts/RootLayout";
+import { CareerPage } from "@/pages/CareerPage";
+import { CasePage } from "@/pages/CasePage";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+import { WorkPage } from "@/pages/WorkPage";
 import { RouteError } from "@/routes/RouteError";
 import type { RouteObject } from "react-router-dom";
 
 /**
- * 라우트 트리. 화면이 하나뿐이라 코드 스플리팅을 걷어냈다.
+ * 라우트 트리. 홈과 케이스 페이지 둘뿐이고 둘 다 가벼워 코드 스플리팅을 두지 않는다.
  *
  * 홈을 lazy 로 두면 첫 방문자가 반드시 받는 청크를 굳이 한 왕복 뒤로 미루게 된다.
  * 그리고 `<ScrollRestoration>` 은 useLayoutEffect 한 번만 돌기 때문에, 그 시점에
@@ -21,6 +24,9 @@ export const routes: RouteObject[] = [
     errorElement: <RouteError />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: "work", element: <WorkPage /> },
+      { path: "career", element: <CareerPage /> },
+      { path: "work/:slug", element: <CasePage /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

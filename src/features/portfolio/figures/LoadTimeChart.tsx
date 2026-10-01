@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef } from "react";
-import { prefersReducedMotion, useReveal } from "../hooks/useReveal";
+import { useRef } from "react";
+import { useReveal } from "../hooks/useReveal";
 import { Frame } from "../layout/Frame";
 
 type Row = {
@@ -14,37 +14,14 @@ type Row = {
 
 /** 눈금 0–3s 를 74–567px 에 맞춰 그린 값. 막대 길이는 실제 초 단위와 비례한다. */
 const ROWS: Row[] = [
-  { key: "DCL", y: 26, from: 2.47, to: 1.33, oldW: 406.0, newW: 218.6, ratio: 1.857 },
-  { key: "LCP", y: 108, from: 2.91, to: 1.64, oldW: 478.3, newW: 269.6, ratio: 1.774 },
+  { key: "LCP", y: 26, from: 2.91, to: 1.64, oldW: 478.3, newW: 269.6, ratio: 1.774 },
+  { key: "DCL", y: 108, from: 2.47, to: 1.33, oldW: 406.0, newW: 218.6, ratio: 1.857 },
 ];
-
-const DURATION = 900;
 
 export function LoadTimeChart() {
   const ref = useRef<HTMLDivElement>(null);
-  const outs = useRef<(SVGTextElement | null)[]>([]);
-
-  // 언마운트 뒤에도 루프가 남지 않도록 프레임 번호를 들고 있다가 정리에서 끊는다.
-  const raf = useRef(0);
-  const countUp = useCallback(() => {
-    if (prefersReducedMotion()) return;
-    let t0: number | null = null;
-    const step = (t: number) => {
-      if (t0 === null) t0 = t;
-      const k = Math.min((t - t0) / DURATION, 1);
-      const eased = 1 - (1 - k) ** 3;
-      ROWS.forEach((row, i) => {
-        const el = outs.current[i];
-        if (el) el.textContent = `${(row.from + (row.to - row.from) * eased).toFixed(2)}s`;
-      });
-      if (k < 1) raf.current = requestAnimationFrame(step);
-    };
-    raf.current = requestAnimationFrame(step);
-  }, []);
-
-  useEffect(() => () => cancelAnimationFrame(raf.current), []);
-
-  useReveal(ref, countUp, "-14% 0px");
+  /* 막대만 움직인다. '이후' 값 라벨은 막대가 다 줄어든 뒤에 나타나므로 숫자를 세지 않는다. */
+  useReveal(ref, undefined, "-14% 0px");
 
   return (
     /* group + data-in 으로 막대 애니메이션을 건다. 기본 상태(애니메이션 없음)가 곧 정답이라
@@ -53,7 +30,7 @@ export function LoadTimeChart() {
       <svg
         viewBox="0 0 620 196"
         role="img"
-        aria-label="DCL은 2.47초에서 1.33초로, LCP는 2.91초에서 1.64초로 줄었습니다."
+        aria-label="LCP는 2.91초에서 1.64초로, DCL은 2.47초에서 1.33초로 단축."
       >
         {[0, 1, 2, 3].map((s) => {
           const x = 74 + s * 164.33;
@@ -67,7 +44,7 @@ export function LoadTimeChart() {
           );
         })}
 
-        {ROWS.map((row, i) => (
+        {ROWS.map((row) => (
           <g key={row.key}>
             <text className="fill-ink font-mono text-t2 font-medium" x={0} y={row.y + 22}>
               {row.key}
@@ -75,15 +52,12 @@ export function LoadTimeChart() {
             <text className="fill-mute text-t1 font-normal" x={32} y={row.y + 13}>
               이전
             </text>
-            <rect
-              className="fill-rule-2 [transform-box:fill-box] [transform-origin:left_center] group-data-[in]:animate-gbar motion-reduce:group-data-[in]:animate-none"
-              x={74}
-              y={row.y}
-              width={row.oldW}
-              height={17}
-              rx={1}
-            />
-            <text className="fill-mute font-mono text-t2" x={74 + row.oldW + 9} y={row.y + 13}>
+            <rect className="fill-rule-2" x={74} y={row.y} width={row.oldW} height={17} rx={1} />
+            <text
+              className="fill-mute stroke-paper font-mono text-t2 [paint-order:stroke] [stroke-width:5px]"
+              x={74 + row.oldW + 9}
+              y={row.y + 13}
+            >
               {row.from.toFixed(2)}s
             </text>
             <text className="fill-mute text-t1 font-normal" x={32} y={row.y + 43}>
@@ -103,12 +77,9 @@ export function LoadTimeChart() {
               rx={1}
             />
             <text
-              className="fill-mark font-mono text-[13px] font-medium"
+              className="fill-mark font-mono text-[13px] font-medium js:motion-safe:opacity-0 motion-safe:group-data-[in]:animate-label-in"
               x={74 + row.newW + 9}
               y={row.y + 43}
-              ref={(el) => {
-                outs.current[i] = el;
-              }}
             >
               {row.to.toFixed(2)}s
             </text>

@@ -1,64 +1,134 @@
 import { Bullets } from "../components/Bullets";
-import { Overview } from "../components/Overview";
 import { SubHead } from "../components/SubHead";
-import { StateBoundary, stateBoundaryFallback } from "../figures/StateBoundary";
-import { Figure } from "../layout/Figure";
+import { Step, Thread } from "../components/Thread";
 import { Item } from "../layout/Item";
 
 export function StateCase() {
   return (
-    <Item index="03" id="case-state" source="CLO-SET" title="서버 데이터와 화면 상태 분리">
-      <Overview
-        lead="1차 서비스 리뉴얼에서 서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil 로 나눴습니다."
-        situation="MobX 스토어가 커지면서 여러 도메인의 상태가 한 인스턴스에 누적됐습니다. 스토어마다 같은 보일러플레이트도 반복됐습니다."
-        task="1차 서비스 리뉴얼(2023 하반기부터 2024 상반기)의 모노레포 초기 설계, 상태 관리 방식, 뷰어 전체의 설계와 개발"
-        action="서버 상태는 TanStack Query 캐시 한 곳에, UI 상태는 atom 단위로 분리. 컨테이너 컴포넌트의 로직은 VAC 패턴과 커스텀 훅으로 분리"
-        why="서버 데이터를 스토어에도 복제해 두면 갱신할 때마다 두 곳을 같이 고쳐야 했습니다. 캐시를 한 곳으로 두면 남는 것은 화면이 스스로 가진 상태뿐입니다."
-        again="MobX 를 전부 걷어내지는 못했습니다."
-      />
-      {/* 사례 공통 형식 — SubHead 로 문제와 해결을 가르고, 항목은 <b>라벨</b> — 문장. */}
-      <SubHead>문제</SubHead>
+    <Item id="case-state" source="CLO-SET" title="1차 서비스 리뉴얼">
+      <SubHead>범위</SubHead>
       <Bullets>
-        <li>
-          <b>스토어 수명</b> — MobX 스토어가 모듈 스코프 싱글턴이라 인스턴스가 화면 단위로
-          생성·폐기되지 않고, 화면이 늘수록 서로 다른 도메인의 상태가 한 인스턴스에 누적됐습니다.
-        </li>
-        <li>
-          <b>암묵 구독</b> — <code>observer</code> 는 렌더 중 읽은 필드에 구독을 자동으로 겁니다.
-          구독을 손으로 관리하지 않아도 되는 대신, 어떤 필드가 어느 컴포넌트를 리렌더시키는지가
-          호출부에 드러나지 않습니다.
-        </li>
-        <li>
-          <b>양방향 결합</b> — 스토어가 서로를 참조하면 순환 의존이 생기고, 의존이 전이돼 한 화면만
-          떼어내도 관련 없는 스토어까지 함께 끌려옵니다. 화면 단위로 모듈 경계가 서지 않습니다.
-        </li>
+        <li>모노레포 구성과 상태 관리 구조 재설계 주도</li>
+        <li>3D, 2D, 렌더 뷰어 전체 설계와 개발</li>
       </Bullets>
 
-      <SubHead>해결</SubHead>
-      <Bullets>
-        <li>
-          <b>서버 상태</b> — TanStack Query 캐시 하나만 서버 데이터의 출처로 뒀습니다. 같은 데이터를
-          전역 스토어에도 담아 두면, 저장 뒤 <code>invalidateQueries</code> 로 캐시를 새로 받아와도
-          스토어 값은 그대로입니다. 갱신할 때마다 두 곳을 같이 고쳐야 하고, 한 곳을 빠뜨리면 그
-          데이터를 스토어에서 읽는 화면만 옛 값을 그립니다.
-        </li>
-        <li>
-          <b>화면 상태</b> — 남은 것은 Recoil atom 단위로 쪼갰습니다.{" "}
-          <code>useRecoilValue(atom)</code> 으로 무엇을 읽는지 호출부에 적히고, 리렌더는 그 atom 을
-          읽는 컴포넌트로만 갑니다. 파생 상태가 원본을 읽는 한 방향으로만 의존이 생깁니다.
-        </li>
-        <li>
-          <b>이후</b> — 2025년 Recoil 유지보수가 끊기면서, 2차 리뉴얼에서 다른 팀원이 주도해 Recoil
-          코드를 같은 atom 기반 모델인 Jotai 로 옮겼습니다.
-        </li>
-      </Bullets>
-      <Figure
-        index="그림 3"
-        caption="상태를 어디에 두었는지 그린 도식입니다."
-        fallback={stateBoundaryFallback}
-      >
-        <StateBoundary />
-      </Figure>
+      <Thread title="모노레포">
+        <Step label="결정">팀 학습 비용을 고려해 Turborepo, Nx 없이 Yarn workspaces로 구성</Step>
+        <Step label="구성">
+          <ul>
+            <li>앱, 공유 UI, 뷰어, API 클라이언트, 빌드 설정을 패키지로 분리</li>
+            <li>
+              의존 방향은 앱에서 뷰어, 공유 UI, API 클라이언트, 빌드 설정 쪽으로만 허용하고, 반대
+              방향 참조는 금지하는 것을 팀 규칙으로 정함
+            </li>
+            <li>
+              API 클라이언트는 axios 인스턴스를 한곳에 두고 API 버전별 factory로 나눈 뒤 TanStack
+              Query용 query, mutation 훅과 함께 독립 패키지로 제공. API 버전을 옮길 때 패키지 내부만
+              바꾸면 모든 앱에 반영되고, 사내 다른 서비스에서도 재사용
+            </li>
+          </ul>
+        </Step>
+      </Thread>
+
+      <Thread title="상태 관리">
+        <Step label="문제">
+          <ul>
+            <li>
+              MobX 스토어가 모듈 스코프 싱글턴이라 화면 단위로 생성, 해제되지 않음. 화면이 늘수록
+              여러 도메인의 상태가 한 인스턴스에 누적
+            </li>
+            <li>
+              스토어 간 상호 참조로 순환 의존 발생. 화면 하나를 분리해도 무관한 스토어까지 의존성에
+              포함
+            </li>
+            <li>
+              서버 데이터를 스토어에도 복제해, 저장 후 캐시를 갱신해도 스토어 값은 그대로 남음.
+              갱신마다 두 곳을 함께 수정해야 하는 구조
+            </li>
+            <li>
+              <code>observer</code>의 자동 구독으로 어떤 필드가 어느 컴포넌트를 리렌더하는지
+              호출부에서 파악하기 어려움
+            </li>
+          </ul>
+        </Step>
+        <Step label="해결">
+          <ul>
+            <li>
+              서버 데이터는 TanStack Query 캐시를 단일 출처로 두고 스토어 복제 제거. 저장 후{" "}
+              <code>invalidateQueries</code>로 재조회
+            </li>
+            <li>
+              UI 상태는 Recoil atom 단위로 분리. 구독 대상이 호출부에 명시되고, 리렌더 범위는 해당
+              atom을 읽는 컴포넌트로 한정
+            </li>
+            <li>파생 값은 selector로만 계산해 단방향 의존 유지</li>
+          </ul>
+        </Step>
+        <Step label="이후">
+          <ul>
+            <li>
+              2025년 Recoil 유지보수 중단에 따라 2차 리뉴얼에서 팀원 주도로 atom 기반 모델이 유사한
+              Jotai로 이전
+            </li>
+            <li>MobX는 완전히 제거하지 못해 일부 화면에 잔존</li>
+          </ul>
+        </Step>
+      </Thread>
+
+      <Thread title="뷰어">
+        <Step label="문제">
+          <ul>
+            <li>
+              3D 엔진 패키지는 초기화, 파일 로드, 뷰잉 옵션 적용을 개별 함수로만 제공. 화면마다 이
+              함수들을 직접 순서대로 호출해야 해서 같은 엔진 호출 코드가 여러 화면에 반복됨
+            </li>
+            <li>
+              뷰어 탭에서 3D 파일, 2D 패턴, 렌더 결과 등 콘텐츠 타입을 전환하는 구조. 타입마다
+              초기화와 렌더 방식이 달라, 한 컴포넌트에서 처리하면 분기가 계속 늘어남
+            </li>
+            <li>
+              아바타 표시, Strain Map 등 뷰잉 옵션마다 사용 가능 조건과 상태가 달라 툴바에 옵션별
+              분기 필요
+            </li>
+          </ul>
+        </Step>
+        <Step label="해결">
+          <ul>
+            <li>
+              엔진 호출 코드를 뷰어 패키지의 훅으로 옮김. 엔진 생성, canvas 연결, 파일 로드, 뷰어
+              크기 맞춤을 각각 훅으로 나누고 이를 묶은 훅 하나만 화면에 제공
+            </li>
+            <li>
+              최상위 뷰어는 콘텐츠 타입만 판별하고 렌더는 타입별 뷰어 컴포넌트에 위임. 타입별
+              컴포넌트는 lazy로 나누고 각자 에러 경계로 감싸 오류 범위를 해당 타입 뷰어로 한정
+            </li>
+            <li>
+              뷰잉 옵션마다 훅을 두고 반환값 구조를 통일. 모든 훅이 사용 가능 여부, 켜짐 상태,
+              비활성 상태와 toggle, reset 함수를 반환하고, 툴바는 옵션 종류와 상관없이 이 값만으로
+              버튼의 노출과 상태, 동작을 결정
+            </li>
+          </ul>
+        </Step>
+        <Step label="결과">
+          화면 코드는 엔진 API를 직접 다루지 않고, 새 뷰잉 옵션이나 뷰어 타입은 정해진 인터페이스만
+          맞추면 추가되는 구조
+        </Step>
+      </Thread>
+
+      <Thread title="컴포넌트 구조">
+        <Step label="문제">
+          상태, 데이터 처리 로직, 마크업이 한 컴포넌트에 섞여 컨테이너 컴포넌트가 비대해짐
+        </Step>
+        <Step label="해결">
+          <ul>
+            <li>
+              VAC(View Asset Component) 패턴 도입. 상태와 로직은 컨테이너와 커스텀 훅에, 렌더링은
+              props만 받는 뷰 컴포넌트에 두는 구조를 정하고 컨벤션 문서로 정리
+            </li>
+            <li>커스텀 훅은 도메인 하나의 로직만 담도록 분리</li>
+          </ul>
+        </Step>
+      </Thread>
     </Item>
   );
 }

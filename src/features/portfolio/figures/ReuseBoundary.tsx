@@ -9,17 +9,17 @@ import { Frame } from "../layout/Frame";
  */
 /** 좁은 폭에서 이 도식 대신 읽히는 문단. `Figure` 의 `fallback` 으로 넘긴다. */
 export const reuseBoundaryFallback =
-  "처음에는 편집·라이브·프리뷰·툴팁을 한 컴포넌트가 모드 분기로 처리했고, 요구가 늘 때마다 안에 분기가 쌓였습니다. 바꾼 뒤에는 편집 뷰와 라이브 뷰를 따로 두고, 공통에는 데이터와 계산 로직만 남겼습니다.";
+  "분리 전에는 편집과 라이브를 한 컴포넌트가 mode 분기로 처리해 기능이 늘 때마다 조건문이 쌓임. 분리 후에는 편집 페이지와 라이브 페이지를 별도 컴포넌트로 두고, 공유 코드는 도메인 모델과 순수 함수로 한정.";
 
 export function ReuseBoundary() {
-  const CHIPS = ["편집", "라이브", "프리뷰", "툴팁"];
+  const CHIPS = ["편집", "라이브"];
 
   return (
     <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full">
       <svg
-        viewBox="0 0 620 196"
+        viewBox="0 0 620 166"
         role="img"
-        aria-label="처음에는 편집·라이브·프리뷰·툴팁을 한 컴포넌트가 모드 분기로 처리했고, 요구가 늘 때마다 안에 분기가 쌓였습니다. 바꾼 뒤에는 편집 뷰와 라이브 뷰를 따로 두고, 공통에는 데이터와 계산 로직만 남겼습니다."
+        aria-label="분리 전에는 편집과 라이브를 한 컴포넌트가 mode 분기로 처리해 기능이 늘 때마다 조건문이 쌓임. 분리 후에는 편집 페이지와 라이브 페이지를 별도 컴포넌트로 두고, 공유 코드는 도메인 모델과 순수 함수로 한정."
       >
         <defs>
           <marker
@@ -40,27 +40,27 @@ export function ReuseBoundary() {
           x1={306}
           y1={8}
           x2={306}
-          y2={188}
+          y2={158}
         />
 
         <text className="fill-mute text-t1" x={8} y={16}>
-          처음
+          분리 전
         </text>
         <text className="fill-mark text-t1" x={340} y={16}>
-          바꾼 뒤
+          분리 후
         </text>
 
         {/* 처음 — 한 컴포넌트가 전부 떠안는다 */}
         <rect
           className="fill-none stroke-rule-2 [stroke-width:1.2]"
-          height={104}
+          height={86}
           rx={3}
           width={276}
           x={8}
           y={30}
         />
         <text className="fill-ink text-t2 font-medium" x={24} y={52}>
-          한 컴포넌트 · 모드 분기
+          한 컴포넌트, mode 분기
         </text>
         {CHIPS.map((c, i) => (
           <g key={c}>
@@ -82,14 +82,14 @@ export function ReuseBoundary() {
             </text>
           </g>
         ))}
-        <text className="fill-mute text-t1" x={8} y={156}>
-          요구가 늘 때마다 안에 분기가 쌓인다
+        <text className="fill-mute text-t1" x={8} y={150}>
+          기능이 늘 때마다 조건문이 쌓임
         </text>
 
         {/* 바꾼 뒤 — 뷰를 갈라 두고 공통은 최소 */}
         {[
-          { x: 340, t: "편집 뷰" },
-          { x: 480, t: "라이브 뷰" },
+          { x: 340, t: "편집 페이지" },
+          { x: 480, t: "라이브 페이지" },
         ].map((b) => (
           <g key={b.t}>
             <rect
@@ -125,10 +125,10 @@ export function ReuseBoundary() {
           공통
         </text>
         <text className="fill-mute text-t1" x={356} y={128}>
-          데이터 · 계산 로직
+          도메인 모델, 순수 함수
         </text>
-        <text className="fill-mute text-t1" x={340} y={156}>
-          중복이 반복될 때만 공통으로 올린다
+        <text className="fill-mute text-t1" x={340} y={150}>
+          렌더 결과가 같을 때만 공유
         </text>
       </svg>
     </Frame>

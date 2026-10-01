@@ -2,13 +2,12 @@ import type { ReactNode } from "react";
 
 /* note 는 측정 조건·한계처럼 본문에 섞으면 흐름을 끊는 것만 받는다. 캡션과 다른 칸이다. */
 export function Figure({
-  index,
   caption,
   note,
   fallback,
+  narrow,
   children,
 }: {
-  index: string;
   caption: string;
   note?: ReactNode;
   /*
@@ -16,6 +15,8 @@ export function Figure({
    * 그림을 접는다 — 채우지 않은 도판(계측 막대)은 좁은 폭에서도 그대로 그린다.
    */
   fallback?: ReactNode;
+  /** 좁은 폭에서 대체 문단 없이 그림과 캡션을 통째로 숨긴다. 본문 불릿과 같은 말을 되풀이할 때 쓴다. */
+  narrow?: "hide";
   children: ReactNode;
 }) {
   return (
@@ -33,7 +34,9 @@ export function Figure({
      * 번호와 캡션은 그림을 가리키는 말이라 그림과 같이 접는다. note 는 측정 조건·한계라
      * 그림 유무와 무관하게 남는다.
      */
-    <figure className="-ml-[148px] mt-12 max-page:mt-9 max-page:ml-0 print:break-inside-avoid">
+    <figure
+      className={`mt-8 print:break-inside-avoid ${narrow === "hide" ? "max-fig:hidden" : ""}`}
+    >
       <div className={`min-w-0 ${fallback ? "max-fig:hidden" : ""}`}>{children}</div>
       {fallback ? (
         <p className="hidden border-l-2 border-rule pl-[13px] text-[13px] font-normal leading-[1.75] text-mute max-fig:block">
@@ -46,11 +49,7 @@ export function Figure({
           fallback && !note ? "max-fig:hidden" : ""
         }`}
       >
-        <span className={fallback ? "max-fig:hidden" : ""}>
-          <b className="font-normal text-mute">{index}</b>
-          <span aria-hidden="true"> · </span>
-          {caption}
-        </span>
+        <span className={fallback ? "max-fig:hidden" : ""}>{caption}</span>
         {note ? (
           <span
             className={`mt-2 block border-t border-rule pt-2 text-[11.5px] leading-[1.6] ${

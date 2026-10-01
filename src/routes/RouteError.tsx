@@ -18,7 +18,7 @@ export function RouteError() {
   }, [error]);
 
   return (
-    <main id="main" className="mx-auto w-[min(860px,100%-48px)] py-24">
+    <main id="main" tabIndex={-1} className="mx-auto w-[min(860px,100%-48px)] py-24">
       <p className="font-mono text-t2 tracking-[0.08em] text-mark">{status ?? "오류"}</p>
       <h1 className="mt-2 text-t6 font-bold tracking-[-0.035em]">문제가 발생했습니다.</h1>
       <p className="mt-3 max-w-[46ch] text-t3 text-mute">

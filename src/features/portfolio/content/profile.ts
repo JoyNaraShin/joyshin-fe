@@ -13,6 +13,6 @@ export const LINKS = [
   {
     href: "https://joyshin-proto-lab.vercel.app/",
     label: "프로토타입 모음",
-    desc: "직접 만든 웹앱 프로토타입을 한 곳에 모아 배포해 둔 자리입니다.",
+    desc: "AI 워크플로로 만든 웹앱 프로토타입 모음",
   },
 ] as const;

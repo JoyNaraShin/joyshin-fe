@@ -1,71 +1,86 @@
 import { Bullets } from "../components/Bullets";
 import { Overview } from "../components/Overview";
 import { SubHead } from "../components/SubHead";
+import { Step, Thread } from "../components/Thread";
 import { LoadTimeChart } from "../figures/LoadTimeChart";
 import { Figure } from "../layout/Figure";
 import { Item } from "../layout/Item";
 
 export function LoadingCase() {
   return (
-    <Item index="01" id="case-loading" source="CLO-SET" title="메인 화면 로딩 속도 개선">
-      <Overview
-        lead={
-          <>
-            첫 화면이 뜨기까지 <b className="num">DCL 2.47s → 1.33s</b>,{" "}
-            <b className="num">LCP 2.91s → 1.64s</b> 로 줄었습니다.
-          </>
-        }
-        situation="에셋 목록을 한 번에 다 보여주는 화면이 처음 뜰 때 느렸습니다."
-        task="워크룸(에셋 목록이 있는 메인 작업 공간)의 첫 화면. 2024 하반기, Performance 패널과 Lighthouse 로 계측해 과제로 제안"
-        action="코드 스플리팅과 모듈 초기화 지연, 이미지 리사이징 공통 적용, 쓰지 않는 응답 필드 제거"
-      />
-      {/* 사례 공통 형식 — SubHead 로 문제와 해결을 가르고, 항목은 <b>라벨</b> — 문장. */}
-      <SubHead>문제</SubHead>
+    <Item id="case-loading" source="CLO-SET" title="워크룸 초기 로딩 개선">
+      <SubHead>계측과 제안</SubHead>
       <Bullets>
         <li>
-          <b>초기 번들</b> — 첫 화면에서 쓰지 않는 코드가 초기 번들에 함께 실려 있었습니다.
+          에셋 목록이 있는 메인 작업 공간(워크룸)의 첫 화면 로딩 지연. 개선 전 LCP 2.91s,
+          DOMContentLoaded 2.47s
         </li>
         <li>
-          <b>초기 호출</b> — 첫 렌더에 필요 없는 API 호출이 함께 나가고 중복 호출도 있었습니다.
-          응답에는 목록이 읽지 않는 필드도 들어 있었습니다.
+          Performance 패널로 병목 구간 특정. 번들 분석기와 네트워크 탭으로 대형 청크와 API 호출 수
+          확인
         </li>
-        <li>
-          <b>부팅 시점</b> — 당장 쓰지 않는 모듈이 앱 초기화 때 함께 올라왔습니다.
-        </li>
-        <li>
-          <b>원본 이미지</b> — 백엔드 응답의 원본 이미지 URL 을 그대로 써서, 작은 썸네일 영역에도 큰
-          원본이 내려왔습니다.
-        </li>
+        <li>계측 결과를 근거로 개선 과제 제안</li>
       </Bullets>
 
-      <SubHead>해결</SubHead>
+      <Thread title="번들과 초기화">
+        <Step label="문제">
+          첫 화면에 쓰지 않는 컴포넌트와 라이브러리가 초기 번들에 포함되고, 앱 시작 시점에 함께
+          초기화
+        </Step>
+        <Step label="해결">
+          <ul>
+            <li>
+              첫 화면에 쓰지 않는 대형 컴포넌트와 라이브러리를 next/dynamic과 dynamic import로 분리
+            </li>
+            <li>첫 화면에 불필요한 모듈은 실제 사용 시점에 초기화</li>
+          </ul>
+        </Step>
+      </Thread>
+
+      <Thread title="API 호출">
+        <Step label="문제">
+          <ul>
+            <li>첫 렌더에 불필요한 API 호출과 중복 호출. 응답에 목록에서 쓰지 않는 필드 포함</li>
+            <li>Next.js SSR 단계에서 첫 화면 렌더에 필요 없는 API까지 호출</li>
+          </ul>
+        </Step>
+        <Step label="해결">
+          <ul>
+            <li>첫 렌더 이후에 필요한 호출은 지연하고 중복 호출 제거</li>
+            <li>
+              인증, 권한 검증 등 서버에서 처리해야 하는 호출만 SSR에 남기고, 첫 화면 렌더에 필요
+              없는 호출은 클라이언트 페칭으로 이전
+            </li>
+            <li>프론트엔드 참조처 전수 조사로 미사용 응답 필드를 추려 백엔드와 협의해 제거</li>
+          </ul>
+        </Step>
+      </Thread>
+
+      <Thread title="이미지">
+        <Step label="문제">
+          백엔드 응답의 원본 이미지 URL을 그대로 사용해 작은 썸네일 영역에도 원본 크기 이미지를
+          다운로드
+        </Step>
+        <Step label="해결">
+          Next.js Image 커스텀 로더로 Cloudflare 이미지 리사이징 공통 적용. 표시 크기에 맞는
+          이미지만 요청
+        </Step>
+      </Thread>
+
+      <SubHead>결과</SubHead>
+      {/* 세 갈래를 함께 적용한 뒤 잰 값이라 결과는 따로 둔다 */}
+      <p className="mt-4 text-t2 text-mute">
+        세 가지 개선을 함께 적용해 개발 서버에 배포한 뒤 측정. 팀원 PC 여러 대에서 Performance
+        패널과 Lighthouse로 잰 랩 수치의 평균
+      </p>
       <Bullets>
-        <li>
-          <b>병목 특정</b> — Performance 패널 waterfall로 오래 걸리는 구간을 좁히고, 번들 분석기와
-          네트워크 탭으로 큰 청크와 호출 수를 확인했습니다.
-        </li>
-        <li>
-          <b>코드 분할</b> — 큰 청크를 라우트·컴포넌트 단위로 다이나믹 임포트했습니다.
-        </li>
-        <li>
-          <b>호출 정리</b> — 필요 없는 호출을 지연시키고 중복을 없앴으며, 응답 필드는 프론트 코드의
-          참조처를 전수 조사해 목록이 읽지 않는 것을 추려 백엔드와 줄였습니다.
-        </li>
-        <li>
-          <b>지연 초기화</b> — 첫 화면에 필요 없는 모듈의 초기화를 실제 쓰는 시점으로 미뤘습니다.
-        </li>
-        <li>
-          <b>이미지 리사이징</b> — Next.js Image 커스텀 로더를 만들어 Cloudflare 이미지 리사이징을
-          공통으로 적용했습니다. 표시 영역에 맞는 크기의 이미지가 내려옵니다.
-        </li>
+        <li>LCP 2.91s에서 1.64s로 44% 단축</li>
+        <li>DOMContentLoaded 2.47s에서 1.33s로 46% 단축</li>
       </Bullets>
-      <Figure
-        index="그림 1"
-        caption="개선 전후의 로딩 계측값입니다. 막대는 실제 초 단위에 맞춰 그렸습니다."
-        note="Performance 패널과 Lighthouse로 측정했습니다."
-      >
+      <Figure narrow="hide" caption="개선 전후 계측값" note="DCL은 DOMContentLoaded">
         <LoadTimeChart />
       </Figure>
+      <Overview regret="개선 효과를 개발 서버 배포 후 수동 측정으로만 비교. 운영 중이던 Datadog RUM은 배포 후 오류 모니터링에만 써서 전후 지표를 따로 남기지 않음. 뒤늦게 확인했을 때는 RUM 보존 기간(2주) 안에 남은 배포 후 데이터가 하루이틀 치뿐이었고, 그 범위에서 사용자 성능 분포의 p70 구간 기준 약 44% 개선은 확인했지만 정확한 수치로 남기지 못함" />
     </Item>
   );
 }
