@@ -46,7 +46,7 @@ export function LoadingCase() {
         </Step>
         <Step label="해결">
           <ul>
-            <li>첫 렌더에 불필요한 호출은 지연하고 중복 호출 제거</li>
+            <li>첫 렌더 이후에 필요한 호출은 지연하고 중복 호출 제거</li>
             <li>
               인증, 권한 검증 등 서버에서 처리해야 하는 호출만 SSR에 남기고, 첫 화면 렌더에 필요
               없는 호출은 클라이언트 페칭으로 이전
@@ -80,7 +80,7 @@ export function LoadingCase() {
       <Figure narrow="hide" caption="개선 전후 계측값" note="DCL은 DOMContentLoaded">
         <LoadTimeChart />
       </Figure>
-      <Overview regret="개선 효과를 개발 서버 배포 후 수동 측정으로만 비교. 운영 중이던 Datadog RUM은 배포 후 오류 모니터링에만 써서 전후 지표를 따로 남기지 않음. 뒤늦게 확인했을 때는 RUM 데이터 보존 기간이 2주라 하루이틀 치만 볼 수 있었고, 그 범위에서 p70 기준 약 44% 수준의 개선은 확인했지만 정확한 수치로 남기지 못함" />
+      <Overview regret="개선 효과를 개발 서버 배포 후 수동 측정으로만 비교. 운영 중이던 Datadog RUM은 배포 후 오류 모니터링에만 써서 전후 지표를 따로 남기지 않음. 뒤늦게 확인했을 때는 RUM 보존 기간(2주) 안에 남은 배포 후 데이터가 하루이틀 치뿐이었고, 그 범위에서 p70 기준 약 44% 개선은 확인했지만 정확한 수치로 남기지 못함" />
     </Item>
   );
 }

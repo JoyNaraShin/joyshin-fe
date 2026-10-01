@@ -7,7 +7,6 @@ const reduced = () => mq()?.matches === true;
 /**
  * 화면에 들어올 때 한 번 `data-in` 을 붙이고 콜백을 부른다.
  * 클래스가 아니라 데이터 속성인 것은 Tailwind 의 `revealed:` / `group-data-[in]:` 로 받기 위해서다.
-
  */
 export function useReveal(
   ref: RefObject<HTMLElement | null>,

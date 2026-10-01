@@ -105,6 +105,16 @@
       transform: none;
     }
   }
+  /* 그림 1 '이후' 라벨. 막대가 줄어드는 동안에는 막대 아래에 가려지므로 다 줄어든 뒤에 나타난다. */
+  --animate-label-in: label-in 0.3s ease-out 0.85s both;
+  @keyframes label-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   @keyframes gbar {
     from {
       transform: scaleX(var(--from, 0));

@@ -100,7 +100,7 @@ export function LoadTimeChart() {
               rx={1}
             />
             <text
-              className="fill-mark font-mono text-[13px] font-medium"
+              className="fill-mark font-mono text-[13px] font-medium js:motion-safe:opacity-0 motion-safe:group-data-[in]:animate-label-in"
               x={74 + row.newW + 9}
               y={row.y + 43}
               ref={(el) => {

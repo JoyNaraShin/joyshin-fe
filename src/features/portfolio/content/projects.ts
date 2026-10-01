@@ -142,7 +142,7 @@ export const MORE: Project[] = [
     role: "설계와 검증 리드",
     result: "index.html의 버전 참조만 바꾸는 배포 구조 설계. 테스트 서버 검증까지 완료",
     summary: "프론트엔드 변경에도 Next.js 서버 이미지를 재빌드해야 하던 배포 구조 분리",
-    stack: ["GitHub Actions", "Cloudflare Pages"],
+    stack: ["GitHub Actions", "Cloudflare Pages", "Azure Storage"],
     cover: { kind: "figure", figure: "deploy" },
     mine: [
       "Cloudflare Pages 선택과 GitHub Actions 파이프라인 설계",

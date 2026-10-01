@@ -3,14 +3,15 @@ import { useSectionInView } from "../hooks/useSectionInView";
 
 /** 페이지 링크는 NavLink 로 현재 위치를 표시하고, 홈 안의 앵커는 Link 로 둔다. */
 const PAGES = [
-  { to: "/work", label: "작업" },
-  { to: "/career", label: "경력" },
+  { to: "/work", label: "작업", section: "home-work" },
+  { to: "/career", label: "경력", section: "home-career" },
 ] as const;
 const ANCHORS = [
   { id: "ai", to: "/#ai", label: "AI" },
   { id: "contact", to: "/#contact", label: "연락처" },
 ] as const;
-const ANCHOR_IDS = ANCHORS.map((a) => a.id);
+/* 홈에서는 대표 작업과 경력 요약 구간도 같은 규칙으로 해당 메뉴를 켠다 */
+const SECTION_IDS = [...PAGES.map((p) => p.section), ...ANCHORS.map((a) => a.id)];
 
 const ITEM = "relative block rounded-sm px-3 py-2 text-t2 font-medium no-underline max-card:px-1.5";
 const ON =
@@ -23,7 +24,7 @@ const OFF = "text-ink-3 hover:text-ink";
  */
 export function SiteHeader() {
   /* AI, 연락처는 홈 안의 섹션이라 경로가 아니라 스크롤 위치로 현재 위치를 판단한다 */
-  const section = useSectionInView(ANCHOR_IDS, useLocation().pathname === "/");
+  const section = useSectionInView(SECTION_IDS, useLocation().pathname === "/");
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-paper text-ink print:hidden">
       <div className="mx-auto flex h-16 w-[min(720px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(720px,100%-32px)]">
@@ -41,7 +42,12 @@ export function SiteHeader() {
           <ul className="flex list-none gap-1 max-card:gap-0.5">
             {PAGES.map((l) => (
               <li key={l.to}>
-                <NavLink className={({ isActive }) => `${ITEM} ${isActive ? ON : OFF}`} to={l.to}>
+                <NavLink
+                  className={({ isActive }) =>
+                    `${ITEM} ${isActive || section === l.section ? ON : OFF}`
+                  }
+                  to={l.to}
+                >
                   {l.label}
                 </NavLink>
               </li>

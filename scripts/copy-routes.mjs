@@ -1,16 +1,26 @@
 // GitHub Pages 는 SPA 폴백이 없어, 없는 경로는 404.html 로 열리면서 HTTP 404 를 돌려준다.
 // 링크 미리보기 크롤러는 404 응답을 버리므로 케이스 페이지마다 index.html 사본을 둔다.
 // 슬러그는 content/projects.ts 한 곳에서 읽는다.
-import { copyFileSync, mkdirSync, readFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const src = readFileSync("src/features/portfolio/content/projects.ts", "utf8");
 const slugs = [...src.matchAll(/slug: "([^"]+)"/g)].map((m) => m[1]);
-for (const slug of slugs) {
-  mkdirSync(`dist/work/${slug}`, { recursive: true });
-  copyFileSync("dist/index.html", `dist/work/${slug}/index.html`);
-}
-copyFileSync("dist/index.html", "dist/work/index.html");
-mkdirSync("dist/career", { recursive: true });
-copyFileSync("dist/index.html", "dist/career/index.html");
+const ORIGIN = "https://joynarashin.github.io/joyshin-fe/";
+const html = readFileSync("dist/index.html", "utf8");
+// 사본마다 canonical 과 og:url 을 그 경로로 바꾼다. 그대로 두면 검색엔진이 하위 페이지를 홈의 중복으로 본다.
+const emit = (route) => {
+  mkdirSync(`dist/${route}`, { recursive: true });
+  const url = `${ORIGIN}${route}/`;
+  const out = html
+    .replace(`<link rel="canonical" href="${ORIGIN}" />`, `<link rel="canonical" href="${url}" />`)
+    .replace(
+      `<meta property="og:url" content="${ORIGIN}" />`,
+      `<meta property="og:url" content="${url}" />`,
+    );
+  writeFileSync(`dist/${route}/index.html`, out);
+};
+for (const slug of slugs) emit(`work/${slug}`);
+emit("work");
+emit("career");
 copyFileSync("dist/index.html", "dist/404.html");
 console.log(`routes: ${slugs.join(", ")}`);
