@@ -22,13 +22,6 @@ const SCREENS = [
     alt: "쇼룸 편집 화면 오른쪽에 열린 환경 설정 패널. 이름, 로고, 링크 공유, 셀렉션, 이메일 문의 토글과 회사 정보 입력란",
   },
   {
-    src: "showroom-view-constraints.webp",
-    w: 1381,
-    h: 704,
-    caption: "편집. 회전 범위와 기본 FOV로 시점 제한",
-    alt: "시점 제한 패널. 가로 회전, 세로 회전 슬라이더와 기본 FOV, 왼쪽 아래에 제한 범위를 보여 주는 가이드",
-  },
-  {
     src: "showroom-content-list.webp",
     w: 1000,
     h: 670,

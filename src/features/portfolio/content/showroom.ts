@@ -1,7 +1,7 @@
 /**
  * 버추얼 쇼룸 기능 지도. 출처는 CLO-SET 헬프센터의 쇼룸 가이드.
  * 쇼룸 프론트엔드는 초기 개발부터 퇴사 시점까지 혼자 개발하고 유지보수했다.
- * VR 모드는 프론트엔드 작업 범위가 확인되지 않아 넣지 않는다.
+ * VR 모드와 시점 제한은 본인 작업이 아니라 넣지 않는다.
  */
 export const SHOWROOM_FEATURES = [
   {
@@ -39,7 +39,6 @@ export const SHOWROOM_FEATURES = [
   {
     group: "설정과 공개",
     items: [
-      "시점 제한(회전 범위, 기본 FOV)",
       "링크 공유 켜기",
       "셀렉션 담기 켜기",
       "이메일 문의 켜기",
@@ -63,5 +62,3 @@ export const SHOWROOM_FEATURES = [
     ],
   },
 ];
-
-export const SHOWROOM_FEATURE_COUNT = SHOWROOM_FEATURES.reduce((n, g) => n + g.items.length, 0);

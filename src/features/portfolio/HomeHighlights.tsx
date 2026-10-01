@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { JOBS } from "./content/jobs";
 import { PROJECTS } from "./content/projects";
-import { SHOWROOM_FEATURES } from "./content/showroom";
 import { COLUMN } from "./layout/DocSection";
 
 const BASE = import.meta.env.BASE_URL;
@@ -97,16 +96,6 @@ export function HomeWork() {
           {lead.title}
         </h3>
         <p className="mt-2 text-t3 text-pretty leading-[1.75] text-ink-2">{lead.summary}</p>
-        <ul className="mt-4 flex list-none flex-wrap gap-2">
-          {SHOWROOM_FEATURES.map((g) => (
-            <li
-              className="rounded-full bg-mark-soft px-3 py-1 text-t2 font-medium text-mark"
-              key={g.group}
-            >
-              {g.group} <span className="tabular-nums">{g.items.length}</span>
-            </li>
-          ))}
-        </ul>
       </Link>
 
       <div className="mt-10 grid grid-cols-2 gap-6 max-card:grid-cols-1 max-card:gap-10">
