@@ -26,8 +26,7 @@
   html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 16px)}
   /* 앵커로 뛰면 sticky 헤더가 섹션 제목을 덮는다. 목적지마다 헤더 높이만큼 여유를 준다. */
   [id]{scroll-margin-top:calc(var(--header-h) + 16px)}
-  /* 긴 거리 스무스 스크롤은 전정기관 장애에서 가장 문제가 되는 모션이다. 끄기를 택한 사람에게는 걸지 않는다. */
-  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+  /* smooth scroll 은 두지 않는다. 페이지 이동과 뒤로 가기 복원 때 화면이 미끄러지듯 움직여 거슬린다. */
   body{background:var(--color-paper);color:var(--color-ink);font-family:var(--font-sans);font-weight:400;
     font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased;
     word-break:keep-all;overflow-x:hidden}
