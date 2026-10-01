@@ -6,6 +6,8 @@
  *
  * 문장은 확정 이력서(2026-09)에 있는 사실만 쓴다.
  */
+import { SHOWROOM_FEATURE_COUNT } from "./showroom";
+
 export type Cover =
   | { kind: "shot"; src: string; alt: string; fit?: "contain" }
   | { kind: "figure"; figure: "load" | "list" | "state" | "deploy" }
@@ -38,11 +40,10 @@ export const FEATURED: Project[] = [
     title: "버추얼 쇼룸",
     when: "2022 하반기 – 2026 상반기",
     role: "프론트엔드 단독 담당",
-    result:
-      "JSON 문서 하나로 오가던 쇼룸 데이터를 엔티티 단위 atom으로 정규화하고, 편집과 라이브를 페이지별 컴포넌트로 분리",
+    result: `쇼룸 생성부터 편집, 공개 설정, 라이브 화면까지 기능 ${SHOWROOM_FEATURE_COUNT}개의 프론트엔드를 2022년부터 퇴사 시점까지 혼자 개발하고 유지보수`,
     summary:
       "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 쇼룸 생성부터 편집, 미리보기, 라이브 공개까지 프론트엔드를 단독으로 개발하고 퇴사 시점까지 기능 추가와 개선을 담당",
-    stack: ["React", "Recoil", "MobX", "TypeScript"],
+    stack: ["React", "TypeScript", "Recoil"],
     cover: shot("showroom-editor.webp", "공간 목록과 360° 매장 공간이 보이는 쇼룸 편집 페이지"),
     mine: [
       "쇼룸 생성, 편집, 라이브 페이지 프론트엔드 전체",
