@@ -16,15 +16,6 @@ export function ListRenderingCase() {
         </li>
       </Bullets>
 
-      <SubHead>IntersectionObserver 방식 개선</SubHead>
-      <Bullets>
-        <li>IntersectionObserver로 옮겨 스크롤마다 하던 위치 재계산은 없앰</li>
-        <li>
-          화면 크기에 따라 한 줄의 아이템 수와 크기가 달라지는 대응을 목록마다 따로 구현해야 했고,
-          DOM 노드가 줄지 않아 스크롤한 만큼 쌓임
-        </li>
-      </Bullets>
-
       <SubHead>1차 교체, VirtuosoGrid (2023 하반기)</SubHead>
       <Bullets>
         <li>react-virtuoso의 VirtuosoGrid로 가상화 도입</li>
