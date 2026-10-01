@@ -17,7 +17,7 @@ export function ReuseBoundary() {
   return (
     <Frame className="[&_svg]:mx-auto [&_svg]:block [&_svg]:h-auto [&_svg]:w-full">
       <svg
-        viewBox="0 0 620 196"
+        viewBox="0 0 620 166"
         role="img"
         aria-label="분리 전에는 편집과 라이브를 한 컴포넌트가 mode 분기로 처리해 기능이 늘 때마다 조건문이 쌓임. 분리 후에는 편집 페이지와 라이브 페이지를 별도 컴포넌트로 두고, 공유 코드는 도메인 모델과 순수 함수로 한정."
       >
@@ -40,7 +40,7 @@ export function ReuseBoundary() {
           x1={306}
           y1={8}
           x2={306}
-          y2={188}
+          y2={158}
         />
 
         <text className="fill-mute text-t1" x={8} y={16}>
@@ -53,7 +53,7 @@ export function ReuseBoundary() {
         {/* 처음 — 한 컴포넌트가 전부 떠안는다 */}
         <rect
           className="fill-none stroke-rule-2 [stroke-width:1.2]"
-          height={104}
+          height={86}
           rx={3}
           width={276}
           x={8}
@@ -82,7 +82,7 @@ export function ReuseBoundary() {
             </text>
           </g>
         ))}
-        <text className="fill-mute text-t1" x={8} y={156}>
+        <text className="fill-mute text-t1" x={8} y={150}>
           기능이 늘 때마다 조건문이 쌓임
         </text>
 
@@ -127,7 +127,7 @@ export function ReuseBoundary() {
         <text className="fill-mute text-t1" x={356} y={128}>
           도메인 모델, 순수 함수
         </text>
-        <text className="fill-mute text-t1" x={340} y={156}>
+        <text className="fill-mute text-t1" x={340} y={150}>
           렌더 결과가 같을 때만 공유
         </text>
       </svg>

@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef } from "react";
-import { prefersReducedMotion, useReveal } from "../hooks/useReveal";
+import { useRef } from "react";
+import { useReveal } from "../hooks/useReveal";
 import { Frame } from "../layout/Frame";
 
 type Row = {
@@ -18,33 +18,10 @@ const ROWS: Row[] = [
   { key: "DCL", y: 108, from: 2.47, to: 1.33, oldW: 406.0, newW: 218.6, ratio: 1.857 },
 ];
 
-const DURATION = 900;
-
 export function LoadTimeChart() {
   const ref = useRef<HTMLDivElement>(null);
-  const outs = useRef<(SVGTextElement | null)[]>([]);
-
-  // 언마운트 뒤에도 루프가 남지 않도록 프레임 번호를 들고 있다가 정리에서 끊는다.
-  const raf = useRef(0);
-  const countUp = useCallback(() => {
-    if (prefersReducedMotion()) return;
-    let t0: number | null = null;
-    const step = (t: number) => {
-      if (t0 === null) t0 = t;
-      const k = Math.min((t - t0) / DURATION, 1);
-      const eased = 1 - (1 - k) ** 3;
-      ROWS.forEach((row, i) => {
-        const el = outs.current[i];
-        if (el) el.textContent = `${(row.from + (row.to - row.from) * eased).toFixed(2)}s`;
-      });
-      if (k < 1) raf.current = requestAnimationFrame(step);
-    };
-    raf.current = requestAnimationFrame(step);
-  }, []);
-
-  useEffect(() => () => cancelAnimationFrame(raf.current), []);
-
-  useReveal(ref, countUp, "-14% 0px");
+  /* 막대만 움직인다. '이후' 값 라벨은 막대가 다 줄어든 뒤에 나타나므로 숫자를 세지 않는다. */
+  useReveal(ref, undefined, "-14% 0px");
 
   return (
     /* group + data-in 으로 막대 애니메이션을 건다. 기본 상태(애니메이션 없음)가 곧 정답이라
@@ -67,7 +44,7 @@ export function LoadTimeChart() {
           );
         })}
 
-        {ROWS.map((row, i) => (
+        {ROWS.map((row) => (
           <g key={row.key}>
             <text className="fill-ink font-mono text-t2 font-medium" x={0} y={row.y + 22}>
               {row.key}
@@ -103,9 +80,6 @@ export function LoadTimeChart() {
               className="fill-mark font-mono text-[13px] font-medium js:motion-safe:opacity-0 motion-safe:group-data-[in]:animate-label-in"
               x={74 + row.newW + 9}
               y={row.y + 43}
-              ref={(el) => {
-                outs.current[i] = el;
-              }}
             >
               {row.to.toFixed(2)}s
             </text>

@@ -43,6 +43,7 @@ export function SiteHeader() {
             {PAGES.map((l) => (
               <li key={l.to}>
                 <NavLink
+                  aria-current={section === l.section ? "location" : undefined}
                   className={({ isActive }) =>
                     `${ITEM} ${isActive || section === l.section ? ON : OFF}`
                   }

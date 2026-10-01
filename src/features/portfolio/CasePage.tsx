@@ -1,4 +1,4 @@
-import { type ComponentType, useEffect } from "react";
+import { type ComponentType, useEffect, useLayoutEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { DeployCase } from "./cases/DeployCase";
 import { ListRenderingCase } from "./cases/ListRenderingCase";
@@ -33,6 +33,15 @@ export function CasePage() {
   const i = PROJECTS.findIndex((p) => p.slug === slug);
   const p = PROJECTS[i];
   const Body = BODIES[slug];
+  /*
+   * 작업 글은 항상 맨 위에서 시작한다. 스크롤 복원이나 html 의 smooth scroll 이 끼어들면
+   * 글을 열 때 화면이 미끄러지듯 움직여 거슬린다. 페인트 전에 즉시 맨 위로 보낸다.
+   */
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 같은 컴포넌트로 다음 글로 넘어갈 때도 slug 가 바뀌면 다시 맨 위로 보낸다
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [slug]);
+
   useEffect(() => {
     if (p) document.title = `${p.title} — 신나라`;
     return () => {
