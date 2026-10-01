@@ -100,7 +100,7 @@ export const FEATURED: Project[] = [
       "MobX 싱글턴 스토어에 쌓이던 상태를 서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil로 분리",
     summary:
       "서비스 확장에 맞춘 프론트엔드 구조 재설계. 모노레포 도구, 패키지 구조, 상태 관리 방식을 직접 결정",
-    stack: ["Yarn workspaces", "TanStack Query", "Recoil"],
+    stack: ["Next.js", "TypeScript", "Yarn workspaces", "TanStack Query", "Recoil"],
     cover: { kind: "figure", figure: "state" },
     mine: [
       "Yarn workspaces 모노레포 구성과 패키지 분리",
