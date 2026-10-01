@@ -41,7 +41,7 @@ export const FEATURED: Project[] = [
     result:
       "JSON 문서 하나로 오가던 쇼룸 데이터를 엔티티 단위 atom으로 정규화하고, 편집과 라이브를 페이지별 컴포넌트로 분리",
     summary:
-      "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 쇼룸 생성부터 편집, 미리보기, 라이브 공개까지 프론트엔드 단독 개발, 퇴사 시점까지 기능 추가와 개선 담당",
+      "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 쇼룸 생성부터 편집, 미리보기, 라이브 공개까지 프론트엔드를 단독 개발하고 퇴사 시점까지 기능 추가와 개선 담당",
     stack: ["Next.js", "TypeScript", "TanStack Query", "Recoil", "Emotion"],
     cover: shot("showroom-editor.webp", "공간 목록과 360° 매장 공간이 보이는 쇼룸 편집 페이지"),
     mine: [
@@ -98,7 +98,7 @@ export const FEATURED: Project[] = [
     when: "2023 하반기 – 2024 상반기",
     role: "리뉴얼 주도, 뷰어 설계와 개발",
     result:
-      "MobX 싱글턴 스토어의 상태를 TanStack Query 캐시와 Recoil로 나누고, 3D 엔진 API를 훅으로 감싼 뷰어 패키지 설계",
+      "MobX 싱글턴 스토어의 서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil로 옮기고, 3D 엔진 API를 훅으로 감싼 뷰어 패키지 설계",
     summary:
       "서비스 확장에 맞춘 프론트엔드 구조 재설계. 모노레포와 상태 관리 방식을 직접 결정하고, 3D 엔진 API를 훅으로 감싼 뷰어 패키지 설계",
     stack: ["Next.js", "TypeScript", "Yarn workspaces", "TanStack Query", "Recoil"],

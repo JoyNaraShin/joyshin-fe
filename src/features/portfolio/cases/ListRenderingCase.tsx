@@ -9,8 +9,8 @@ export function ListRenderingCase() {
     <Item id="case-list" source="CLO-SET" title="목록 렌더링 성능 개선">
       <Thread title="1차 교체, VirtuosoGrid (2023 하반기)">
         <Step label="문제">
-          건수가 계속 늘어나는 에셋 목록. 스크롤마다 아이템 위치를 계산하던 오래된 무한 스크롤
-          라이브러리 때문에 리플로우와 프레임 드롭 발생
+          건수가 계속 늘어나는 에셋 목록. 스크롤한 만큼 DOM 노드가 쌓이고, 스크롤마다 아이템 위치를
+          계산하던 오래된 무한 스크롤 라이브러리 때문에 리플로우와 프레임 드롭 발생
         </Step>
         <Step label="해결">
           react-virtuoso의 VirtuosoGrid로 가상화 도입. 렌더링되는 DOM 노드를 화면에 보이는 행

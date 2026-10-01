@@ -70,8 +70,8 @@ export function LoadingCase() {
       <SubHead>결과</SubHead>
       {/* 세 갈래를 함께 적용한 뒤 잰 값이라 결과는 따로 둔다 */}
       <p className="mt-4 text-t2 text-mute">
-        세 가지 개선을 함께 적용한 뒤 개발 서버에서 측정. 팀원 PC 여러 대에서 Performance 패널과
-        Lighthouse로 잰 랩 수치의 평균
+        세 가지 개선을 함께 적용해 개발 서버에 배포한 뒤 측정. 팀원 PC 여러 대에서 Performance
+        패널과 Lighthouse로 잰 랩 수치의 평균
       </p>
       <Bullets>
         <li>LCP 2.91s에서 1.64s로 44% 단축</li>
@@ -80,7 +80,7 @@ export function LoadingCase() {
       <Figure narrow="hide" caption="개선 전후 계측값" note="DCL은 DOMContentLoaded">
         <LoadTimeChart />
       </Figure>
-      <Overview regret="개선 효과를 개발 서버 배포 후 수동 측정으로만 비교. 운영 중이던 Datadog RUM은 배포 후 오류 모니터링에만 써서 전후 지표를 따로 남기지 않음. 뒤늦게 확인했을 때는 RUM 보존 기간(2주) 안에 남은 배포 후 데이터가 하루이틀 치뿐이었고, 그 범위에서 p70 기준 약 44% 개선은 확인했지만 정확한 수치로 남기지 못함" />
+      <Overview regret="개선 효과를 개발 서버 배포 후 수동 측정으로만 비교. 운영 중이던 Datadog RUM은 배포 후 오류 모니터링에만 써서 전후 지표를 따로 남기지 않음. 뒤늦게 확인했을 때는 RUM 보존 기간(2주) 안에 남은 배포 후 데이터가 하루이틀 치뿐이었고, 그 범위에서 사용자 성능 분포의 p70 구간 기준 약 44% 개선은 확인했지만 정확한 수치로 남기지 못함" />
     </Item>
   );
 }

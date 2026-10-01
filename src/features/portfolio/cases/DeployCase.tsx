@@ -31,7 +31,7 @@ export function DeployCase() {
           <ul>
             <li>
               GitHub Actions 파이프라인 설계. 청크는 Azure Storage에 버전별 업로드,{" "}
-              <code>index.html</code>만 Pages로 배포. Next.js 서버는 독립 배포
+              <code>index.html</code>만 Pages로 배포. Next.js 서버는 별도 배포
             </li>
             <li>
               버전별 청크를 덮어쓰지 않고 새 버전을 올린 뒤 <code>index.html</code>의 버전 참조만

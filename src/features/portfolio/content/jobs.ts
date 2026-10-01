@@ -47,6 +47,7 @@ export const JOBS: Job[] = [
       "Vite",
       "GitHub Actions",
       "Cloudflare",
+      "Azure Storage",
       "Datadog RUM",
     ],
   },
