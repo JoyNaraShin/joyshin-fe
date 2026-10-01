@@ -1,31 +1,54 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { Mark } from "./Mark";
 
-const LINKS = [
+/** 페이지 링크는 NavLink 로 현재 위치를 표시하고, 홈 안의 앵커는 Link 로 둔다. */
+const PAGES = [
   { to: "/work", label: "작업" },
   { to: "/career", label: "경력" },
+] as const;
+const ANCHORS = [
   { to: "/#ai", label: "AI" },
   { to: "/#contact", label: "연락처" },
 ] as const;
 
+const ITEM = "relative block rounded-sm px-3 py-2 text-t2 font-medium no-underline max-card:px-2";
+
 /**
- * 상단 띠 하나. 케이스 페이지가 생기면서 왼쪽 레일(한 페이지 안의 앵커 목차)은 할 일을 잃었다 —
- * 이제 필요한 것은 목차가 아니라 "어느 페이지에서든 목록으로 돌아가는 길"이다.
+ * 상단 띠. 왼쪽은 표식과 이름, 직무. 오른쪽은 페이지 링크.
+ * 지금 보는 페이지는 글자를 진하게 하고 아래에 강조색 막대를 둔다. 작업 글(/work/:slug)도 작업으로 친다.
  */
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-paper text-ink print:hidden">
       <div className="mx-auto flex h-16 w-[min(720px,100%-48px)] items-center justify-between gap-6 max-page:w-[min(720px,100%-32px)]">
-        <Link className="text-t3 font-bold tracking-[-0.02em] no-underline" to="/">
-          신나라
+        <Link aria-label="신나라, 홈으로" className="flex items-center gap-2.5 no-underline" to="/">
+          <Mark />
+          <span className="flex items-baseline gap-2">
+            <span className="text-t3 font-bold tracking-[-0.02em] text-ink">신나라</span>
+            <span className="text-t2 text-mute max-card:hidden">프론트엔드 개발자</span>
+          </span>
         </Link>
         <nav aria-label="주 메뉴">
           <ul className="flex list-none gap-1">
-            {LINKS.map((l) => (
+            {PAGES.map((l) => (
               <li key={l.to}>
-                <Link
-                  className="rounded-sm px-3 py-2 text-t2 font-medium text-ink-3 no-underline hover:text-ink max-card:px-2"
+                <NavLink
+                  className={({ isActive }) =>
+                    `${ITEM} ${
+                      isActive
+                        ? "font-semibold text-ink after:absolute after:inset-x-3 after:-bottom-[13px] after:h-0.5 after:bg-mark after:content-[''] max-card:after:inset-x-2"
+                        : "text-ink-3 hover:text-ink"
+                    }`
+                  }
                   to={l.to}
                 >
+                  {l.label}
+                </NavLink>
+              </li>
+            ))}
+            {ANCHORS.map((l) => (
+              <li key={l.to}>
+                <Link className={`${ITEM} text-ink-3 hover:text-ink`} to={l.to}>
                   {l.label}
                 </Link>
               </li>
