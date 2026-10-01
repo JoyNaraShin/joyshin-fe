@@ -41,6 +41,7 @@ export const JOBS: Job[] = [
       "MobX",
       "Tailwind CSS",
       "styled-components",
+      "Emotion",
       "SCSS",
       "Yarn workspaces",
       "Vite",
