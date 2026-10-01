@@ -4,6 +4,7 @@
  */
 export { SiteHeader } from "./components/SiteHeader";
 export { Hero } from "./Hero";
+export { HomeCareer, HomeStats, HomeWork } from "./HomeHighlights";
 export { WorkSection } from "./WorkSection";
 export { CasePage } from "./CasePage";
 export { AiSection } from "./AiSection";

@@ -1,58 +1,79 @@
 /**
- * 경력 — 사실 층. 무엇을 어떻게 했는지는 주요 작업 섹션이 진다.
- * 여기 남는 것은 기간·회사·역할·한 줄 요약·일하는 방식·스택뿐이다.
+ * 경력. 회사마다 기간, 역할, 한 줄 소개, 한 일, 스택.
+ * CLO-SET 은 작업 글이 따로 있어 `projects` 로 글 목록을 잇는다.
+ * 문장은 확정 이력서와 기존 포트폴리오에 본인이 쓴 내용에서만 가져온다.
  */
-export const JOBS = [
+export type Job = {
+  when: string;
+  span: string;
+  company: string;
+  role: string;
+  lead: string;
+  /** 케이스 글로 이어지는 작업. slug 는 projects.ts 의 것 */
+  projects?: string[];
+  bullets: string[];
+  stack: string[];
+};
+
+export const JOBS: Job[] = [
   {
     when: "2022.04 – 2026.04",
+    span: "4년 1개월",
     company: "클로버추얼패션",
     role: "CLO-SET · 프론트엔드 개발자",
-    // 서비스 설명의 출처 = style.clo-set.com (aboutus · For Brands, 2026-08 확인).
-    // 「Fashion Collaboration Platform」「from planning to production」「3D assets」가
-    // 공식 표기라 한국어도 그 어휘를 따른다.
-    // 서비스 규모 수치는 서비스의 것이지 개인 실적이 아니다 — 50개국 한 개만 둔다.
-    // 뷰어 담당 범위 = 뷰어 기능 전체와 툴바, 뷰어 내부 상태. 주변 패널은 범위 밖이다.
     lead: "브랜드와 제조사가 3D 에셋을 관리하고 공유하는 글로벌 B2B 협업 플랫폼. 3D, 2D, 렌더 뷰어와 에셋 목록, 버추얼 쇼룸 개발",
-    bullets: ["Datadog RUM으로 배포 후 프론트엔드 오류 모니터링과 대응"],
+    projects: ["showroom", "list-rendering", "loading", "renewal", "pricing", "deploy"],
+    bullets: [
+      "통합 검색 페이지와 검색어 자동완성 개발. 검색 조건은 URL 쿼리스트링으로 관리하고, 자동완성은 디바운스와 이전 요청 취소로 race condition 방지",
+      "2차 리뉴얼(Vite, Jotai, Tailwind CSS)에서 임베드 뷰어 개발",
+      "디자인 시스템 v1부터 v3까지 세 버전을 병행 유지보수하며 v2와 v3 컴포넌트 개발",
+      "Datadog RUM으로 배포 후 프론트엔드 오류 모니터링과 대응",
+    ],
     stack: [
       "Next.js",
       "React",
       "TypeScript",
       "TanStack Query",
-      "Tailwind CSS",
       "TanStack Virtual",
       "react-virtuoso",
       "Recoil",
       "Jotai",
+      "MobX",
+      "Tailwind CSS",
       "styled-components",
       "SCSS",
-      "MobX",
       "Yarn workspaces",
       "Vite",
+      "GitHub Actions",
+      "Cloudflare",
       "Datadog RUM",
     ],
   },
   {
     when: "2021.07 – 2022.04",
+    span: "10개월",
     company: "쓰리아이",
     role: "프론트엔드 개발자",
     lead: "디지털트윈과 3D 공간 기술 기업",
     bullets: [
-      "Pivo(미디어 클라우드와 3D 도면 투어 웹 서비스) 신규 기능 개발, 유지보수, 다국어 대응",
-      "Beamo(3D 도면 솔루션)에서 3D 공간에 스팟을 배치하는 기능 개발과 버그 수정 (Vue, lerna 멀티 패키지)",
+      "Pivo(미디어 클라우드와 3D 도면 투어 웹 서비스)에서 Vuex 기반 상태 관리 위에 신규 기능 개발과 유지보수. vue-i18n으로 다국어 대응",
+      "Beamo(3D 도면 솔루션)에서 3D 공간에 스팟을 배치하는 기능 개발과 버그 수정. lerna로 app, viewer, editor가 나뉜 멀티 패키지 구조",
     ],
     stack: ["Vue 3", "TypeScript", "Tailwind CSS", "Vuex", "lerna"],
   },
   {
     when: "2019.05 – 2021.05",
+    span: "2년 1개월",
     company: "노스스타컨설팅",
     role: "풀스택 개발자",
     lead: "기업 고객 대상 SI 컨설팅 기업, 솔루션사업부",
     bullets: [
       "KT, 로레알 등 고객사 시스템을 Java, Spring 기반 풀스택으로 개발하며 JSP, jQuery 화면 담당",
-      "선진 직원 성과 관리 시스템에서 Vue.js로 화면을 개발하고 오픈 후 유지보수 담당. 이 경험으로 프론트엔드로 전향",
+      "KT GEPP. 사용자 위치를 기준으로 감염병 정보를 전달하고, 자가 진단부터 병원 전달과 진단 예약까지 잇는 프로그램",
+      "로레알 통합 회원 사이트. 구매 내용별 스탬프 적립과 사은품 증정 관리",
+      "선진 직원 성과 관리 시스템(HMS)에서 Vue.js로 화면을 개발하고 오픈 후 유지보수 담당. 이 경험으로 프론트엔드로 전향",
       "AWS(EC2, RDS, Route 53, CloudFront)로 프로덕션 환경 구축",
     ],
-    stack: ["Java", "Spring", "Vue.js", "JSP", "jQuery", "AWS"],
+    stack: ["Java", "Spring", "Vue.js", "JSP", "jQuery", "PostgreSQL", "AWS"],
   },
 ];

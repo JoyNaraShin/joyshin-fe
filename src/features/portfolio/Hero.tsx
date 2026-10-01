@@ -1,9 +1,5 @@
-import { Link } from "react-router-dom";
 import { LINKS, MAIL } from "./content/profile";
-import { PROJECTS } from "./content/projects";
 import { COLUMN } from "./layout/DocSection";
-
-const PROJECTS_COUNT = PROJECTS.length - 2;
 
 export function Hero() {
   return (
@@ -39,21 +35,6 @@ export function Hero() {
           </a>
         ))}
       </p>
-      <nav aria-label="페이지" className="mt-10 grid gap-3">
-        {[
-          { to: "/work", label: "작업", desc: `버추얼 쇼룸, 목록 렌더링 외 ${PROJECTS_COUNT}건` },
-          { to: "/career", label: "경력", desc: "클로버추얼패션, 쓰리아이, 노스스타컨설팅" },
-        ].map((l) => (
-          <Link
-            className="flex items-center justify-between gap-4 rounded-md border border-rule px-5 py-4 text-t3 font-semibold text-ink no-underline hover:border-mark hover:text-mark"
-            key={l.to}
-            to={l.to}
-          >
-            {l.label}
-            <span className="text-t2 font-normal text-mute">{l.desc} →</span>
-          </Link>
-        ))}
-      </nav>
     </section>
   );
 }

@@ -11,10 +11,10 @@ function Thumb({ src, alt }: { src: string; alt: string }) {
       alt={alt}
       className="block aspect-[16/10] h-auto w-[200px] shrink-0 self-start rounded-md border border-rule object-cover max-card:w-[120px]"
       decoding="async"
-      height={400}
+      height={600}
       loading="lazy"
       src={src}
-      width={640}
+      width={960}
     />
   );
 }
@@ -61,9 +61,16 @@ export function WorkSection() {
             <div className="min-w-0">
               <h3 className="text-t4 font-semibold tracking-[-0.02em] text-ink">{c.title}</h3>
               <p className="mt-1 text-t2 text-mute">{c.tag}</p>
-              <p className="mt-2 text-t3 text-pretty leading-[1.7] text-ink-2 max-card:text-t2">
-                {c.body}
-              </p>
+              <ul className="mt-2 list-none">
+                {c.body.map((b) => (
+                  <li
+                    className="relative mt-1.5 pl-4 text-t3 text-pretty leading-[1.7] text-ink-2 before:absolute before:top-[0.85em] before:left-0 before:h-px before:w-2 before:bg-rule-3 before:content-[''] max-card:text-t2"
+                    key={b}
+                  >
+                    {b}
+                  </li>
+                ))}
+              </ul>
             </div>
           </li>
         ))}
