@@ -18,8 +18,8 @@ export function PricingCase() {
       <Thread title="요금제 화면">
         <Step label="개발">
           <ul>
-            <li>요금제별 기능과 가격을 보여 주는 Pricing 페이지</li>
-            <li>플랜 한도 대비 사용량과 초과량을 보여 주는 Admin Console 사용량 화면</li>
+            <li>요금제별 기능과 가격을 비교하는 Pricing 페이지</li>
+            <li>플랜 한도 대비 사용량과 초과량을 표시하는 Admin Console 사용량 화면</li>
           </ul>
         </Step>
       </Thread>
@@ -32,13 +32,13 @@ export function PricingCase() {
       />
 
       <Thread title="플랜별 사용량 제한">
-        <Step label="문제">파일 업로드와 임베드 뷰에 플랜별 한도가 필요</Step>
+        <Step label="문제">파일 업로드와 임베드 뷰에 플랜별 사용량 한도 적용 필요</Step>
         <Step label="해결">
           <ul>
-            <li>사용량 조회 API로 한도 초과를 미리 판단해 업로드 같은 UI 동작을 막음</li>
-            <li>임베드 페이지는 서버의 차단 응답에 따라 분기</li>
+            <li>사용량 조회 API로 한도 초과를 사전에 판단해 업로드 등 UI 동작 차단</li>
+            <li>임베드 페이지는 서버 차단 응답에 따라 분기</li>
             <li>
-              초과 시 공통 안내 페이지에서 권한별로 업그레이드 버튼 또는 관리자 요청 버튼 노출
+              한도 초과 시 공통 안내 페이지에서 권한별로 업그레이드 또는 관리자 요청 버튼 노출
             </li>
           </ul>
         </Step>
@@ -47,10 +47,10 @@ export function PricingCase() {
       <Thread title="BD 팀 백오피스">
         <Step label="문제">BD 팀이 고객사 크레딧과 플랜을 스프레드시트로 관리</Step>
         <Step label="해결">
-          고객사 크레딧과 플랜 관리 화면 개발. 요금 계산, 플랜 변경(추가, 취소, 업그레이드,
+          고객사 크레딧, 플랜 관리 백오피스 개발. 요금 계산, 플랜 변경(추가, 취소, 업그레이드,
           다운그레이드), 메모 기능 구현
         </Step>
-        <Step label="결과">스프레드시트로 하던 관리를 백오피스로 이관</Step>
+        <Step label="결과">스프레드시트 기반 관리 업무를 백오피스로 이관</Step>
       </Thread>
     </Item>
   );

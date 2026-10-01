@@ -11,13 +11,13 @@ const STATS = [
   {
     value: "약 80%",
     label: "쇼룸 배경 로딩 시간 단축",
-    detail: "타일 분할 로딩 전환 후, 로컬 테스트",
+    detail: "타일 분할 로딩 전환 후, 로컬 테스트 기준",
     to: "/work/showroom",
   },
   {
     value: "수만 건",
-    label: "보이는 행만 렌더링하는 목록",
-    detail: "가상화 공통 훅으로 전체 목록 적용",
+    label: "에셋 목록 행 단위 가상화",
+    detail: "공통 훅으로 CLO-SET 전체 목록 적용",
     to: "/work/list-rendering",
   },
 ];

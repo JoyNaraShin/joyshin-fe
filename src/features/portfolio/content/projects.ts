@@ -41,7 +41,7 @@ export const FEATURED: Project[] = [
     result:
       "JSON 문서 하나로 오가던 쇼룸 데이터를 엔티티 단위 atom으로 정규화하고, 편집과 라이브를 페이지별 컴포넌트로 분리",
     summary:
-      "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 쇼룸 생성부터 편집, 미리보기, 라이브 공개까지 프론트엔드를 단독으로 개발하고 퇴사 시점까지 기능 추가와 개선을 담당",
+      "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 쇼룸 생성부터 편집, 미리보기, 라이브 공개까지 프론트엔드 단독 개발, 퇴사 시점까지 기능 추가와 개선 담당",
     stack: ["Next.js", "TypeScript", "TanStack Query", "Recoil", "Emotion"],
     cover: shot("showroom-editor.webp", "공간 목록과 360° 매장 공간이 보이는 쇼룸 편집 페이지"),
     mine: [
@@ -57,7 +57,7 @@ export const FEATURED: Project[] = [
     when: "2023 하반기, 2025 상반기 – 하반기",
     role: "교체 주도",
     result:
-      "수만 건 목록에서도 화면에 보이는 행만 DOM에 렌더링. 적용 후 목록 성능 관련 사용자 리포트 감소",
+      "수만 건 목록에서도 렌더링 DOM 노드를 보이는 행 수준으로 유지. 적용 후 목록 성능 관련 사용자 리포트 감소",
     summary:
       "리플로우와 프레임 드롭을 일으키던 오래된 무한 스크롤 라이브러리를 VirtuosoGrid, TanStack Virtual 순으로 교체",
     stack: ["React", "TanStack Virtual", "react-virtuoso", "TanStack Query"],
@@ -74,7 +74,7 @@ export const FEATURED: Project[] = [
     when: "2024 하반기",
     role: "제안과 개발",
     result: "LCP 44%, DOMContentLoaded 46% 단축",
-    summary: "워크룸 첫 화면이 느린 문제를 Performance 패널과 Lighthouse로 계측해 과제로 제안",
+    summary: "워크룸 첫 화면 로딩 지연을 Performance 패널과 Lighthouse로 계측해 개선 과제로 제안",
     stack: ["Next.js", "TanStack Query", "Cloudflare 이미지 리사이징", "Lighthouse"],
     cover: {
       kind: "metric",
@@ -87,7 +87,7 @@ export const FEATURED: Project[] = [
       "계측과 과제 제안",
       "코드 스플리팅과 모듈 초기화 지연",
       "Next.js Image 커스텀 로더로 이미지 리사이징 공통 적용",
-      "쓰지 않는 응답 필드를 추려 백엔드와 협의해 제거",
+      "SSR 단계 API 호출 정리와 미사용 응답 필드 제거",
     ],
   },
   {
@@ -116,7 +116,7 @@ export const MORE: Project[] = [
     title: "요금제 개편과 사용량 제한",
     when: "2024 하반기 – 2025 상반기",
     role: "개발",
-    result: "BD 팀이 스프레드시트로 하던 고객사 크레딧과 플랜 관리를 백오피스로 이관",
+    result: "BD 팀의 스프레드시트 기반 고객사 크레딧, 플랜 관리를 백오피스로 이관",
     summary:
       "Free, Standard, Premium 요금제 도입에 맞춰 Pricing 페이지, 사용량 화면, 플랜별 한도, 백오피스 개발",
     stack: ["Next.js", "TypeScript", "TanStack Query", "Recoil", "MobX"],
@@ -138,7 +138,7 @@ export const MORE: Project[] = [
     when: "2026 상반기",
     role: "설계와 검증 리드",
     result: "index.html의 버전 참조만 바꾸는 배포 구조 설계. 테스트 서버 검증까지 완료",
-    summary: "프론트엔드만 바뀌어도 Next.js 서버 이미지를 다시 빌드하던 구조를 분리",
+    summary: "프론트엔드 변경에도 Next.js 서버 이미지를 재빌드해야 하던 배포 구조 분리",
     stack: ["GitHub Actions", "Cloudflare Pages"],
     cover: { kind: "figure", figure: "deploy" },
     mine: [
