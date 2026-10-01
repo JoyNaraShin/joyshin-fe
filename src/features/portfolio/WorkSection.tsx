@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Reveal } from "./components/Reveal";
 import { CARDS } from "./content/moreWork";
 import { PROJECTS } from "./content/projects";
 import { COLUMN } from "./layout/DocSection";
@@ -9,7 +10,7 @@ function Thumb({ src, alt }: { src: string; alt: string }) {
   return (
     <img
       alt={alt}
-      className="block aspect-[16/10] h-auto w-[200px] shrink-0 self-start rounded-md border border-rule object-cover max-card:w-[120px]"
+      className="block aspect-[16/10] h-auto w-[200px] shrink-0 self-start rounded-md border border-rule object-cover transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)] max-card:w-[120px]"
       decoding="async"
       height={600}
       loading="lazy"
@@ -27,25 +28,27 @@ export function WorkSection() {
       <p className="mt-2 text-t3 text-mute">CLO-SET, 2022 – 2026</p>
 
       <ul className="mt-10 list-none">
-        {PROJECTS.map((p) => (
+        {PROJECTS.map((p, i) => (
           <li className="border-t border-rule first:border-t-0" key={p.slug}>
-            <Link
-              className="group flex gap-6 py-6 no-underline max-card:gap-4"
-              to={`/work/${p.slug}`}
-            >
-              <Thumb alt="" src={thumb(p.slug)} />
-              <div className="min-w-0">
-                <h2 className="text-t4 font-semibold tracking-[-0.02em] text-ink group-hover:text-mark group-hover:underline group-hover:underline-offset-4">
-                  {p.title}
-                </h2>
-                <p className="mt-1 text-t2 text-mute">
-                  {p.when} · {p.role}
-                </p>
-                <p className="mt-2 text-t3 text-pretty leading-[1.7] text-ink-2 max-card:text-t2">
-                  {p.result}
-                </p>
-              </div>
-            </Link>
+            <Reveal delay={Math.min(i, 3) * 70}>
+              <Link
+                className="group flex gap-6 py-6 no-underline max-card:gap-4"
+                to={`/work/${p.slug}`}
+              >
+                <Thumb alt="" src={thumb(p.slug)} />
+                <div className="min-w-0">
+                  <h2 className="text-t4 font-semibold tracking-[-0.02em] text-ink group-hover:text-mark group-hover:underline group-hover:underline-offset-4">
+                    {p.title}
+                  </h2>
+                  <p className="mt-1 text-t2 text-mute">
+                    {p.when} · {p.role}
+                  </p>
+                  <p className="mt-2 text-t3 text-pretty leading-[1.7] text-ink-2 max-card:text-t2">
+                    {p.result}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
           </li>
         ))}
       </ul>
