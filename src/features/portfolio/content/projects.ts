@@ -43,7 +43,7 @@ export const FEATURED: Project[] = [
     result: `쇼룸 생성부터 편집, 공개 설정, 라이브 화면까지 기능 ${SHOWROOM_FEATURE_COUNT}개의 프론트엔드를 2022년부터 퇴사 시점까지 혼자 개발하고 유지보수`,
     summary:
       "360° 공간에 3D 콘텐츠를 배치해 바이어에게 공개하는 쇼룸. 쇼룸 생성부터 편집, 미리보기, 라이브 공개까지 프론트엔드를 단독으로 개발하고 퇴사 시점까지 기능 추가와 개선을 담당",
-    stack: ["Next.js", "TypeScript", "Recoil", "Emotion"],
+    stack: ["Next.js", "TypeScript", "TanStack Query", "Recoil", "Emotion"],
     cover: shot("showroom-editor.webp", "공간 목록과 360° 매장 공간이 보이는 쇼룸 편집 페이지"),
     mine: [
       "쇼룸 생성, 편집, 라이브 페이지 프론트엔드 전체",
@@ -61,7 +61,7 @@ export const FEATURED: Project[] = [
       "수만 건 목록에서도 화면에 보이는 행만 DOM에 렌더링. 적용 후 목록 성능 관련 사용자 리포트 감소",
     summary:
       "리플로우와 프레임 드롭을 일으키던 오래된 무한 스크롤 라이브러리를 VirtuosoGrid, TanStack Virtual 순으로 교체",
-    stack: ["TanStack Virtual", "react-virtuoso", "React"],
+    stack: ["React", "TanStack Virtual", "react-virtuoso", "TanStack Query"],
     cover: shot("workroom-grid.webp", "에셋 카드가 격자로 늘어선 CLO-SET 워크룸 목록"),
     mine: [
       "1차 VirtuosoGrid 도입, 2차 TanStack Virtual 교체",
@@ -76,7 +76,7 @@ export const FEATURED: Project[] = [
     role: "제안과 개발",
     result: "LCP 44%, DOMContentLoaded 46% 단축",
     summary: "워크룸 첫 화면이 느린 문제를 Performance 패널과 Lighthouse로 계측해 과제로 제안",
-    stack: ["Next.js", "Cloudflare 이미지 리사이징", "Lighthouse"],
+    stack: ["Next.js", "TanStack Query", "Cloudflare 이미지 리사이징", "Lighthouse"],
     cover: {
       kind: "metric",
       items: [
@@ -120,7 +120,7 @@ export const MORE: Project[] = [
     result: "BD 팀이 스프레드시트로 하던 고객사 크레딧과 플랜 관리를 백오피스로 이관",
     summary:
       "Free, Standard, Premium 요금제 도입에 맞춰 Pricing 페이지, 사용량 화면, 플랜별 한도, 백오피스 개발",
-    stack: ["Next.js", "TypeScript", "Recoil", "MobX"],
+    stack: ["Next.js", "TypeScript", "TanStack Query", "Recoil", "MobX"],
     cover: shot(
       "pricing-plans.webp",
       "Free, Standard, Premium 세 요금제 카드가 놓인 Pricing 페이지",
