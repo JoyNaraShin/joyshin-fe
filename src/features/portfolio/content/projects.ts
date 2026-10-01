@@ -6,8 +6,6 @@
  *
  * 문장은 확정 이력서(2026-09)에 있는 사실만 쓴다.
  */
-import { SHOWROOM_FEATURE_COUNT } from "./showroom";
-
 export type Cover =
   | { kind: "shot"; src: string; alt: string; fit?: "contain" }
   | { kind: "figure"; figure: "load" | "list" | "state" | "deploy" }

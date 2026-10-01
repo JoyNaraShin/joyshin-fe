@@ -96,7 +96,7 @@ export function HomeWork() {
         <h3 className="mt-1 text-t5 font-bold tracking-[-0.03em] text-ink group-hover:text-mark group-hover:underline group-hover:underline-offset-4">
           {lead.title}
         </h3>
-        <p className="mt-2 text-t3 text-pretty leading-[1.75] text-ink-2">{lead.result}</p>
+        <p className="mt-2 text-t3 text-pretty leading-[1.75] text-ink-2">{lead.summary}</p>
         <ul className="mt-4 flex list-none flex-wrap gap-2">
           {SHOWROOM_FEATURES.map((g) => (
             <li
