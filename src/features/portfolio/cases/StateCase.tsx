@@ -127,10 +127,6 @@ export function StateCase() {
               props만 받는 뷰 컴포넌트에 두는 구조를 정하고 컨벤션 문서로 정리
             </li>
             <li>커스텀 훅은 도메인 하나의 로직만 담도록 분리</li>
-            <li>
-              데이터 패칭이 필요한 부분은 별도 컴포넌트로 분리하고, 그 바깥을 Suspense와 에러 경계로
-              감쌈
-            </li>
           </ul>
         </Step>
       </Thread>
