@@ -19,7 +19,7 @@ const ON =
 const OFF = "text-ink-3 hover:text-ink";
 
 /**
- * 상단 띠. 왼쪽은 영문 이름 JoyNara(링크 아이디와 같은 표기). 한글 이름은 홈 소개 제목이 맡는다. 오른쪽은 페이지 링크.
+ * 상단 띠. 왼쪽은 영문 이름 JoyNara(링크 아이디와 같은 표기)와 직무. 좁은 폭에서는 직무를 숨긴다. 한글 이름은 홈 소개 제목이 맡는다. 오른쪽은 페이지 링크.
  * 지금 보는 페이지(홈에서는 읽고 있는 섹션)는 글자를 진하게 하고 아래에 강조색 막대를 둔다. 작업 글(/work/:slug)도 작업으로 친다.
  */
 export function SiteHeader() {
@@ -34,6 +34,7 @@ export function SiteHeader() {
           to="/"
         >
           <span className="text-t3 font-bold tracking-[-0.02em] text-ink">JoyNara</span>
+          <span className="text-t2 text-mute max-card:hidden">Frontend Developer</span>
         </Link>
         <nav aria-label="주 메뉴">
           <ul className="flex list-none gap-1 max-card:gap-0.5">
