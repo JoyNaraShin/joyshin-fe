@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useSectionInView } from "../hooks/useSectionInView";
 
-/** 페이지 링크는 NavLink 로 현재 위치를 표시하고, 홈 안의 앵커는 Link 로 둔다. */
+/** 페이지 링크와 홈 안의 앵커 모두 Link 로 두고 aria-current 는 직접 계산한다. */
 const PAGES = [
   { to: "/work", label: "작업", section: "home-work" },
   { to: "/career", label: "경력", section: "home-career" },
@@ -40,9 +40,15 @@ export function SiteHeader() {
         <nav aria-label="주 메뉴">
           <ul className="flex list-none gap-1 max-card:gap-0.5">
             {PAGES.map((l) => {
-              /* NavLink 는 경로가 활성일 때만 aria-current 를 남기므로, 홈 구간 강조까지 직접 계산한다 */
-              const onPage = pathname === l.to || pathname.startsWith(`${l.to}/`);
-              const current = onPage ? "page" : section === l.section ? "location" : undefined;
+              /* 목록 페이지는 page, 그 아래 글은 true, 홈 구간은 location */
+              const current =
+                pathname === l.to
+                  ? "page"
+                  : pathname.startsWith(`${l.to}/`)
+                    ? "true"
+                    : section === l.section
+                      ? "location"
+                      : undefined;
               return (
                 <li key={l.to}>
                   <Link

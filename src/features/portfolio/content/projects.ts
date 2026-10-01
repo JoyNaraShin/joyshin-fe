@@ -98,7 +98,7 @@ export const FEATURED: Project[] = [
     when: "2023 하반기 – 2024 상반기",
     role: "리뉴얼 주도, 뷰어 설계와 개발",
     result:
-      "MobX 싱글턴 스토어에 쌓이던 상태를 서버 상태는 TanStack Query 캐시로, UI 상태는 Recoil로 분리",
+      "MobX 싱글턴 스토어의 상태를 TanStack Query 캐시와 Recoil로 나누고, 3D 엔진 API를 훅으로 감싼 뷰어 패키지 설계",
     summary:
       "서비스 확장에 맞춘 프론트엔드 구조 재설계. 모노레포와 상태 관리 방식을 직접 결정하고, 3D 엔진 API를 훅으로 감싼 뷰어 패키지 설계",
     stack: ["Next.js", "TypeScript", "Yarn workspaces", "TanStack Query", "Recoil"],
