@@ -179,7 +179,7 @@ export function SvgEditorPage() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [doc.selected]);
-  const point = (event: ReactPointerEvent<SVGSVGElement>) => {
+  const point = (event: ReactPointerEvent<SVGElement>) => {
     const ctm = svg.current?.getScreenCTM();
     if (!ctm) return null;
     const xy = new DOMPoint(event.clientX, event.clientY).matrixTransform(ctm.inverse());
