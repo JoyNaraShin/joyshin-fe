@@ -174,7 +174,15 @@ export function SvgEditorPage() {
       ctx.fillStyle = shape.fill;
       if (shape.kind === "circle") {
         ctx.beginPath();
-        ctx.ellipse(shape.x + shape.w / 2, shape.y + shape.h / 2, shape.w / 2, shape.h / 2, 0, 0, Math.PI * 2);
+        ctx.ellipse(
+          shape.x + shape.w / 2,
+          shape.y + shape.h / 2,
+          shape.w / 2,
+          shape.h / 2,
+          0,
+          0,
+          Math.PI * 2,
+        );
         ctx.fill();
       } else {
         ctx.beginPath();
@@ -277,7 +285,7 @@ export function SvgEditorPage() {
           ↷ 다시 실행
         </ActionButton>
         <ActionButton onClick={exportPng}>PNG 내보내기</ActionButton>
-      <ActionButton onClick={() => dispatch({ type: "add" })}>+ 도형 추가</ActionButton>
+        <ActionButton onClick={() => dispatch({ type: "add" })}>+ 도형 추가</ActionButton>
         <ActionButton disabled={!selected} onClick={() => dispatch({ type: "remove" })}>
           선택 도형 삭제
         </ActionButton>
@@ -399,9 +407,10 @@ export function SvgEditorPage() {
           SVG의 getScreenCTM 역행렬로 변환하므로 반응형 크기 변화에도 드래그 동작이 유지됩니다.
         </p>
         <p className="mt-3 text-t3 leading-[1.8] text-ink-2">
-          편집 상호작용은 SVG 기반이며, PNG 내보내기는 Canvas 2D API로 문서 데이터를 별도로 렌더링합니다. Fabric.js 사용 경험이나 복잡한 제작 도구 전체 구현을 증명하는
-          것으로 소개하지 않습니다. 추후 확장할 지점은 크기 조절 핸들, 스냅·정렬 가이드, 문서
-          직렬화, 키보드 접근성 강화, 자동화 테스트입니다.
+          편집 상호작용은 SVG 기반이며, PNG 내보내기는 Canvas 2D API로 문서 데이터를 별도로
+          렌더링합니다. Fabric.js 사용 경험이나 복잡한 제작 도구 전체 구현을 증명하는 것으로
+          소개하지 않습니다. 추후 확장할 지점은 크기 조절 핸들, 스냅·정렬 가이드, 문서 직렬화,
+          키보드 접근성 강화, 자동화 테스트입니다.
         </p>
       </section>
     </main>
