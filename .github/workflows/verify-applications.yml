@@ -1,0 +1,23 @@
+name: Verify targeted portfolio
+on:
+  push:
+    branches: [feat/targeted-applications-2026-10]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm build
+      - run: test -f dist/apply/clipy/index.html
+      - run: test -f dist/apply/orinu/index.html
+      - run: test -f dist/apply/orinu/editor/index.html
