@@ -43,3 +43,33 @@ emit("work", "작업");
 emit("career", "경력");
 copyFileSync("dist/index.html", "dist/404.html");
 console.log(`routes: ${slugs.join(", ")}`);
+
+// Each employer version has its own entry and case URLs, with no change to the general site.
+const application = JSON.parse(readFileSync("src/features/applications/content.json", "utf8"));
+for (const [key, profile] of Object.entries(application.profiles)) {
+  for (const section of ["", ...profile.cases, "demo"]) {
+    const route = `apply/${key}${section ? `/${section}` : ""}`;
+    const title =
+      section === "demo"
+        ? profile.demoTitle
+        : section
+          ? application.cases[section].title
+          : profile.company;
+    emit(route, title);
+    const path = `dist/${route}/index.html`;
+    let page = readFileSync(path, "utf8").replace(
+      /<title>.*?<\/title>/,
+      `<title>${title} — 신나라</title>`,
+    );
+    page = page.replace(
+      /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/,
+      `<meta name="description" content="${profile.summary}" />`,
+    );
+    page = page.replace(
+      /<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/,
+      `<meta property="og:description" content="${profile.summary}" />`,
+    );
+    page = page.replace("</head>", '<meta name="robots" content="noindex,follow" /></head>');
+    writeFileSync(path, page);
+  }
+}
