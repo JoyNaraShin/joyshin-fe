@@ -112,8 +112,10 @@ export function SvgEditorPage() {
     const p = point(event);
     if (!p) return;
     const d = drag.current;
-    const x = Math.round(Math.max(0, Math.min(520 - d.original.shapes.find((s) => s.id === d.id)!.w, d.x + p.x - d.pointerX)));
-    const y = Math.round(Math.max(0, Math.min(360 - d.original.shapes.find((s) => s.id === d.id)!.h, d.y + p.y - d.pointerY)));
+    const movingShape = d.original.shapes.find((s) => s.id === d.id);
+    if (!movingShape) return;
+    const x = Math.round(Math.max(0, Math.min(520 - movingShape.w, d.x + p.x - d.pointerX)));
+    const y = Math.round(Math.max(0, Math.min(360 - movingShape.h, d.y + p.y - d.pointerY)));
     dispatch({ type: "move", id: d.id, x, y, commit: false });
   };
   const onUp = (event: ReactPointerEvent<SVGSVGElement>) => {
