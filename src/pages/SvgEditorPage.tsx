@@ -185,7 +185,7 @@ export function SvgEditorPage() {
     const xy = new DOMPoint(event.clientX, event.clientY).matrixTransform(ctm.inverse());
     return { x: xy.x, y: xy.y };
   };
-  const onDown = (event: ReactPointerEvent<SVGSVGElement>, shape: Shape) => {
+  const onDown = (event: ReactPointerEvent<SVGGElement>, shape: Shape) => {
     if (shape.hidden || event.button !== 0) return;
     const p = point(event);
     if (!p) return;
