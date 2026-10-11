@@ -2,6 +2,8 @@ import { RootLayout } from "@/layouts/RootLayout";
 import { CareerPage } from "@/pages/CareerPage";
 import { CasePage } from "@/pages/CasePage";
 import { HomePage } from "@/pages/HomePage";
+import { TargetedApplicationPage } from "@/pages/TargetedApplicationPage";
+import { SvgEditorPage } from "@/pages/SvgEditorPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { WorkPage } from "@/pages/WorkPage";
 import { RouteError } from "@/routes/RouteError";
@@ -26,6 +28,8 @@ export const routes: RouteObject[] = [
       { index: true, element: <HomePage /> },
       { path: "work", element: <WorkPage /> },
       { path: "career", element: <CareerPage /> },
+      { path: "apply/:target", element: <TargetedApplicationPage /> },
+      { path: "apply/orinu/editor", element: <SvgEditorPage /> },
       { path: "work/:slug", element: <CasePage /> },
       { path: "*", element: <NotFoundPage /> },
     ],
