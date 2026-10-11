@@ -41,5 +41,8 @@ for (const slug of slugs) {
 }
 emit("work", "작업");
 emit("career", "경력");
+emit("apply/clipy", "Vue·SI 서비스 개선 | CLIPy 지원 포트폴리오");
+emit("apply/orinu", "React·시각 편집 UI | 오리누 지원 포트폴리오");
+emit("apply/orinu/editor", "SVG 레이어 에디터 데모");
 copyFileSync("dist/index.html", "dist/404.html");
 console.log(`routes: ${slugs.join(", ")}`);
