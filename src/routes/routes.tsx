@@ -1,4 +1,5 @@
 import { ApplicationPage } from "@/features/applications/ApplicationPage";
+import { AnalyticsLayout } from "@/layouts/AnalyticsLayout";
 import { RootLayout } from "@/layouts/RootLayout";
 import { CareerPage } from "@/pages/CareerPage";
 import { CasePage } from "@/pages/CasePage";
@@ -18,7 +19,7 @@ import type { RouteObject } from "react-router-dom";
  *
  * errorElement: 루트에 단 1개. 자식 렌더 예외는 여기로 버블링된다.
  */
-export const routes: RouteObject[] = [
+const pageRoutes: RouteObject[] = [
   { path: "/apply/:employer", element: <ApplicationPage />, errorElement: <RouteError /> },
   { path: "/apply/:employer/:section", element: <ApplicationPage />, errorElement: <RouteError /> },
   {
@@ -34,3 +35,5 @@ export const routes: RouteObject[] = [
     ],
   },
 ];
+
+export const routes: RouteObject[] = [{ element: <AnalyticsLayout />, children: pageRoutes }];
