@@ -10,8 +10,11 @@
    **브라우저 방문 기록 이벤트를 기반으로 한 페이지 변경**을 끈다.
    이 앱은 첫 접속과 SPA 이동 모두 `page_view`를 직접 보낸다.
    코드의 `send_page_view: false`만으로 향상된 측정의 방문 기록 기반 수집까지 꺼지지는 않는다.
-4. GitHub 저장소 Settings → Secrets and variables → Actions → Variables에
-   `VITE_GA_MEASUREMENT_ID`를 추가하고 측정 ID를 입력한다. 측정 ID는 공개 식별자이며 비밀 키가 아니다.
+4. 운영 배포 기본 측정 ID는 `G-VBHQ0LRQ7G`로 연결되어 있다. 측정 ID는 공개 식별자이며 비밀 키가 아니다.
+   다른 스트림으로 변경하려면 GitHub 저장소 Settings → Secrets and variables → Actions → Variables에
+   `VITE_GA_MEASUREMENT_ID`를 설정한다. 이 값이 배포 기본값보다 우선한다.
+   수집을 끄려면 이 변수에 `disabled`를 설정하고 재배포한다(유효한 측정 ID가 아니므로 태그가 로드되지 않음).
+   Google에서 제공하는 설치 스크립트를 HTML에 별도로 추가하지 않는다. 앱이 태그를 로드하므로 중복될 수 있다.
 5. 변경사항을 main에 병합한 뒤 배포한다. 이미 병합했다면 Actions → Deploy to GitHub Pages → Run workflow로 다시 빌드한다.
    GitHub 변수 변경만으로는 기존 배포가 바뀌지 않는다.
 
