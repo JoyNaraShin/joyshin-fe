@@ -85,3 +85,7 @@ IBM Plex — SIL Open Font License 1.1 (`public/fonts/OFL.txt`).
 
 키보드로 전 구간을 이동할 수 있고, `prefers-reduced-motion` 에서는 모션이 멈춘다.
 도판은 `role="img"` 와 `aria-label` 을 갖고, 좁은 폭에서 접힐 때는 같은 내용의 문단이 대신 뜬다.
+
+## 방문 통계
+
+GA4 연결과 참여 시간·재방문 확인 방법은 [방문 통계 설정](ANALYTICS.md)을 참고하세요.
