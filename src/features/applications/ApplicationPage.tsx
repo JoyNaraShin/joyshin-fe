@@ -14,7 +14,7 @@ export function ApplicationPage() {
     if (profile)
       document.title = `신나라 | ${profile.company} | ${caseStudy?.title ?? profile.label}`;
     window.scrollTo(0, 0);
-  }, [profile, caseStudy, section]);
+  }, [profile, caseStudy]);
   if (!profile || (section && !caseStudy)) {
     return (
       <main className="application">
