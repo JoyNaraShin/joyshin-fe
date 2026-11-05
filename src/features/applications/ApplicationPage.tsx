@@ -1,10 +1,8 @@
-import { Suspense, lazy, useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import content from "./content.json";
 import "./applications.css";
 
-const VideoEditor = lazy(() => import("../samples/VideoEditor"));
-const CanvasEditor = lazy(() => import("../samples/CanvasEditor"));
 export type Employer = keyof typeof content.profiles;
 export type CaseId = keyof typeof content.cases;
 export function ApplicationPage() {
@@ -14,10 +12,10 @@ export function ApplicationPage() {
   const base = `/apply/${employer}`;
   useEffect(() => {
     if (profile)
-      document.title = `신나라 | ${profile.company} | ${section === "demo" ? profile.demoTitle : (caseStudy?.title ?? profile.label)}`;
+      document.title = `신나라 | ${profile.company} | ${caseStudy?.title ?? profile.label}`;
     window.scrollTo(0, 0);
   }, [profile, caseStudy, section]);
-  if (!profile || (section && section !== "demo" && !caseStudy)) {
+  if (!profile || (section && !caseStudy)) {
     return (
       <main className="application">
         <h1>페이지를 찾을 수 없습니다.</h1>
@@ -37,49 +35,12 @@ export function ApplicationPage() {
         </Link>
         <nav aria-label="지원 포트폴리오">
           <Link to={`${base}#work`}>주요 작업</Link>
-          <Link to={`${base}/demo`}>구현 샘플</Link>
+          <a href={`${base}#career`}>경력</a>
           <a href="mailto:joyshin.dev@gmail.com">연락</a>
         </nav>
       </header>
       <main id="application-main">
-        {section === "demo" ? (
-          <>
-            <Link className="back-link" to={base}>
-              ← 포트폴리오
-            </Link>
-            <p className="eyebrow">지원 준비 프로젝트 · 2026.10 · AI 보조 구현</p>
-            <h1>{profile.demoTitle}</h1>
-            <p className="lede">{profile.demoIntro}</p>
-            <p className="scope-note">{profile.demoLimits}</p>
-            <Suspense fallback={<output>편집기 불러오는 중…</output>}>
-              {employer === "clipy" ? <VideoEditor /> : <CanvasEditor />}
-            </Suspense>
-            <section className="app-section">
-              <h2>구현을 검토하려면</h2>
-              <p>
-                편집 결과는 문서 데이터로 저장하고, 선택·확대·재생 위치처럼 일시적인 화면 상태는
-                실행 취소 이력에서 분리했습니다. 같은 문서 모델을 기준으로 수정과 복원을 처리합니다.
-              </p>
-              <p>
-                <a
-                  href="https://github.com/JoyNaraShin/joyshin-fe/tree/main/src/features/samples"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  소스 코드와 데이터 모델
-                </a>{" "}
-                ·{" "}
-                <a
-                  href="https://github.com/JoyNaraShin/joyshin-fe/tree/main/tests"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  상태 전이 테스트
-                </a>
-              </p>
-            </section>
-          </>
-        ) : caseStudy ? (
+        {caseStudy ? (
           <>
             <Link className="back-link" to={`${base}#work`}>
               ← 주요 작업
@@ -140,7 +101,6 @@ export function ApplicationPage() {
                 <a className="primary-link" href="#work">
                   주요 작업 보기 ↓
                 </a>
-                <Link to={`${base}/demo`}>구현 샘플 열기 →</Link>
               </div>
             </section>
             <section id="work" className="app-section">
@@ -167,15 +127,6 @@ export function ApplicationPage() {
                   );
                 })}
               </div>
-            </section>
-            <section className="app-section sample-teaser">
-              <p className="eyebrow">별도 구현 샘플 · 2026.10</p>
-              <h2>{profile.demoTitle}</h2>
-              <p>{profile.demoIntro}</p>
-              <Link to={`${base}/demo`}>직접 실행하고 코드 보기 →</Link>
-              <p className="scope-note">
-                AI 보조로 제작한 지원 준비 프로젝트이며, 기존 회사의 상용 실무 경력과 구분합니다.
-              </p>
             </section>
             <section id="career" className="app-section">
               <p className="eyebrow">EXPERIENCE</p>

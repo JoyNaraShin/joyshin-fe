@@ -47,14 +47,9 @@ console.log(`routes: ${slugs.join(", ")}`);
 // Each employer version has its own entry and case URLs, with no change to the general site.
 const application = JSON.parse(readFileSync("src/features/applications/content.json", "utf8"));
 for (const [key, profile] of Object.entries(application.profiles)) {
-  for (const section of ["", ...profile.cases, "demo"]) {
+  for (const section of ["", ...profile.cases]) {
     const route = `apply/${key}${section ? `/${section}` : ""}`;
-    const title =
-      section === "demo"
-        ? profile.demoTitle
-        : section
-          ? application.cases[section].title
-          : profile.company;
+    const title = section ? application.cases[section].title : profile.company;
     emit(route, title);
     const path = `dist/${route}/index.html`;
     let page = readFileSync(path, "utf8").replace(
