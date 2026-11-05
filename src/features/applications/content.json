@@ -5,8 +5,8 @@
       "label": "프론트엔드 개발",
       "headline": "콘텐츠 편집 화면과 서비스 성능을 다뤄 왔습니다.",
       "summary": "CLO-SET에서 360° 쇼룸의 생성·편집·공개 화면을 단독 개발했습니다. 3D·2D 뷰어의 웹 UI 연동, 수만 건 목록의 가상화, 첫 화면 로딩 개선과 상태관리 구조 개편에도 참여했습니다.",
-      "focus": ["360° 공간 편집 UI","목록 렌더링·초기 로딩","React 상태관리·API 연동"],
-      "cases": ["showroom","viewer","performance","operations"]
+      "focus": ["360° 공간 편집 UI", "목록 렌더링·초기 로딩", "React 상태관리·API 연동"],
+      "cases": ["showroom", "viewer", "performance", "operations"]
     }
   },
   "cases": {
